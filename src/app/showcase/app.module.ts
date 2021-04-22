@@ -32,6 +32,7 @@ import { AppConfigComponent } from './app.config.component';
 import { AppFooterComponent } from './app.footer.component';
 import { AppInputStyleSwitchModule } from './app.inputstyleswitch.component';
 import { AppDemoActionsModule } from './app.demoactions.component';
+import { DropdownModule } from '../components/dropdown/dropdown';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,7 @@ import { AppDemoActionsModule } from './app.demoactions.component';
         AppTopBarComponent,
         AppMenuComponent,
         AppConfigComponent,
-        AppFooterComponent
+        AppFooterComponent,
     ],
     imports: [
         FormsModule,
@@ -56,6 +57,7 @@ import { AppDemoActionsModule } from './app.demoactions.component';
         TooltipModule,
         AppInputStyleSwitchModule,
         AppDemoActionsModule,
+        DropdownModule,
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

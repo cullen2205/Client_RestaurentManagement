@@ -1,11 +1,19 @@
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './components/home/home.component';
+import { AccountLogin } from '../account-login/account-login';
+import { AccountForgotPassword } from '../account-forgot-password/account-forgot-password.component';
+import { HomePageComponent } from '../home-page/home-page.component';
+import { BookTableComponent } from '../book-table/book-table.component';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
-            {path: '', component: HomeComponent},
+            {path: '', component: HomePageComponent},
+            {path: 'homeshowcase', component: HomeComponent},
+            {path: 'book', component: BookTableComponent},
+            {path: 'forgot', loadChildren: () => import('../account-forgot-password/account-forgot-password.module').then(m => m.AccountForgotPasswordModule)},
+            {path: 'login', loadChildren: () => import('../account-login/account-login.module').then(m => m.AccountLoginModule)},
             {path: 'setup', loadChildren: () => import('./components/setup/setup.module').then(m => m.SetupModule)},
             {path: 'theming', loadChildren: () => import('./components/theming/theming.module').then(m => m.ThemingModule)},
             {path: 'icons', loadChildren: () => import('./components/icons/icons.module').then(m => m.IconsModule)},
@@ -106,7 +114,7 @@ import { HomeComponent } from './components/home/home.component';
             {path: 'treetable', loadChildren: () => import('./components/treetable/treetabledemo.module').then(m => m.TreeTableDemoModule)},
             {path: 'tristatecheckbox', loadChildren: () => import('./components/tristatecheckbox/tristatecheckboxdemo.module').then(m => m.TriStateCheckboxDemoModule)},
             {path: 'virtualscroller', loadChildren: () => import('./components/virtualscroller/virtualscrollerdemo.module').then(m => m.VirtualScrollerDemoModule)}
-        ], {scrollPositionRestoration: 'enabled'})    
+        ], {scrollPositionRestoration: 'enabled'})
     ],
     exports: [RouterModule]
 })
