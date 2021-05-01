@@ -332,11 +332,14 @@ export class TreeDemoComponent implements OnInit &#123;
                 <i>expandedIcon</i> and <i>collapsedIcon</i> instead.</p>
 
             <h5>Sections</h5>
-            <p>Header and Footers sections can be customized using <i>header</i> and <i>footer</i> templates.</p>
+            <p>Sections can be customized using <i>header</i>, <i>footer</i> and <i>empty</i> templates.</p>
 <app-code lang="markup" ngNonBindable ngPreserveWhitespaces>
 &lt;p-tree [value]="files"&gt;
     &lt;ng-template pTemplate="header"&gt;
         Header Content
+    &lt;/ng-template&gt;
+    &lt;ng-template pTemplate="empty"&gt;
+        No records found
     &lt;/ng-template&gt;
     &lt;ng-template pTemplate="footer"&gt;
         Footer Content
@@ -788,6 +791,32 @@ onDrop(event) &#123;
                             <td>Callback to invoke when data is filtered.</td>
                         </tr>
                     </tbody>
+                </table>
+            </div>
+
+            <h5>Templates</h5>
+            <div class="doc-tablewrapper">
+                <table class="doc-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Parameters</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>header</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>empty</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>footer</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
                 </table>
             </div>
 

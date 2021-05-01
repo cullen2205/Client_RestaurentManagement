@@ -78,6 +78,7 @@ export class DropdownItem {
                 <span class="p-dropdown-trigger-icon" [ngClass]="dropdownIcon"></span>
             </div>
             <div *ngIf="overlayVisible" [ngClass]="'p-dropdown-panel p-component'" [@overlayAnimation]="{value: 'visible', params: {showTransitionParams: showTransitionOptions, hideTransitionParams: hideTransitionOptions}}" (@overlayAnimation.start)="onOverlayAnimationStart($event)" [ngStyle]="panelStyle" [class]="panelStyleClass">
+                <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
                 <div class="p-dropdown-header" *ngIf="filter" >
                     <div class="p-dropdown-filter-container" (click)="$event.stopPropagation()">
                         <input #filter type="text" autocomplete="off" [value]="filterValue||''" class="p-dropdown-filter p-inputtext p-component" [attr.placeholder]="filterPlaceholder"
@@ -117,9 +118,15 @@ export class DropdownItem {
                                 </cdk-virtual-scroll-viewport>
                             </ng-template>
                         </ng-template>
-                        <li *ngIf="filter && (!optionsToDisplay || (optionsToDisplay && optionsToDisplay.length === 0))" class="p-dropdown-empty-message">{{emptyFilterMessage}}</li>
+                        <li *ngIf="filter && (!optionsToDisplay || (optionsToDisplay && optionsToDisplay.length === 0))" class="p-dropdown-empty-message">
+                            <ng-container *ngIf="!emptyFilterTemplate; else emptyFilter">
+                                {{emptyFilterMessage}}
+                            </ng-container>
+                            <ng-container #emptyFilter *ngTemplateOutlet="emptyFilterTemplate"></ng-container>
+                        </li>
                     </ul>
                 </div>
+                <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
             </div>
         </div>
     `,
@@ -135,7 +142,7 @@ export class DropdownItem {
         ])
     ],
     host: {
-        '[class.p-inputwrapper-filled]': 'filled',
+        '[class.p-inputwrapper-filled]': 'value',
         '[class.p-inputwrapper-focus]': 'focused || overlayVisible'
     },
     providers: [DROPDOWN_VALUE_ACCESSOR],
@@ -293,6 +300,12 @@ export class Dropdown implements OnInit,AfterViewInit,AfterContentInit,AfterView
 
     selectedItemTemplate: TemplateRef<any>;
 
+    headerTemplate: TemplateRef<any>;
+
+    footerTemplate: TemplateRef<any>;
+
+    emptyFilterTemplate: TemplateRef<any>;
+
     selectedOption: any;
 
     _options: any[];
@@ -308,8 +321,6 @@ export class Dropdown implements OnInit,AfterViewInit,AfterContentInit,AfterView
     hover: boolean;
 
     focused: boolean;
-
-    filled: boolean;
 
     overlayVisible: boolean;
 
@@ -362,6 +373,18 @@ export class Dropdown implements OnInit,AfterViewInit,AfterContentInit,AfterView
                     this.selectedItemTemplate = item.template;
                 break;
 
+                case 'header':
+                    this.headerTemplate = item.template;
+                break;
+
+                case 'footer':
+                    this.footerTemplate = item.template;
+                break;
+
+                case 'emptyfilter':
+                    this.emptyFilterTemplate = item.template;
+                break;
+
                 case 'group':
                     this.groupTemplate = item.template;
                 break;
@@ -387,7 +410,6 @@ export class Dropdown implements OnInit,AfterViewInit,AfterContentInit,AfterView
         this.optionsToDisplay = this._options;
         this.updateSelectedOption(this.value);
         this.optionsChanged = true;
-        this.updateFilledState();
 
         if (this._filterValue && this._filterValue.length) {
             this.activateFilter();
@@ -456,7 +478,6 @@ export class Dropdown implements OnInit,AfterViewInit,AfterContentInit,AfterView
         if (this.selectedOption != option) {
             this.selectedOption = option;
             this.value = this.getOptionValue(option);
-            this.filled = true;
 
             this.onModelChange(this.value);
             this.updateEditableLabel();
@@ -514,7 +535,6 @@ export class Dropdown implements OnInit,AfterViewInit,AfterContentInit,AfterView
         this.value = value;
         this.updateSelectedOption(value);
         this.updateEditableLabel();
-        this.updateFilledState();
         this.cd.markForCheck();
     }
 
@@ -1142,10 +1162,6 @@ export class Dropdown implements OnInit,AfterViewInit,AfterContentInit,AfterView
         }
     }
 
-    updateFilledState() {
-        this.filled = (this.selectedOption != null);
-    }
-
     clear(event: Event) {
         this.value = null;
         this.onModelChange(this.value);
@@ -1155,7 +1171,6 @@ export class Dropdown implements OnInit,AfterViewInit,AfterContentInit,AfterView
         });
         this.updateSelectedOption(this.value);
         this.updateEditableLabel();
-        this.updateFilledState();
     }
 
     onOverlayHide() {
