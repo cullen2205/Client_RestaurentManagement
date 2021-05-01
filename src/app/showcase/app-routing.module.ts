@@ -1,18 +1,15 @@
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './components/home/home.component';
-import { AccountLogin } from '../account-login/account-login';
-import { AccountForgotPassword } from '../account-forgot-password/account-forgot-password.component';
-import { HomePageComponent } from '../home-page/home-page.component';
-import { BookTableComponent } from '../book-table/book-table.component';
+import { HomePage } from '../home-page/home-page.component';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
-            {path: '', component: HomePageComponent},
+            {path: '', component: HomePage},
             {path: 'homeshowcase', component: HomeComponent},
-            {path: 'book', component: BookTableComponent},
             {path: 'forgot', loadChildren: () => import('../account-forgot-password/account-forgot-password.module').then(m => m.AccountForgotPasswordModule)},
+            {path: 'book', loadChildren: () => import('../order-table/order-table.module').then(m => m.OrderTableModule)},
             {path: 'login', loadChildren: () => import('../account-login/account-login.module').then(m => m.AccountLoginModule)},
             {path: 'setup', loadChildren: () => import('./components/setup/setup.module').then(m => m.SetupModule)},
             {path: 'theming', loadChildren: () => import('./components/theming/theming.module').then(m => m.ThemingModule)},
@@ -116,6 +113,6 @@ import { BookTableComponent } from '../book-table/book-table.component';
             {path: 'virtualscroller', loadChildren: () => import('./components/virtualscroller/virtualscrollerdemo.module').then(m => m.VirtualScrollerDemoModule)}
         ], {scrollPositionRestoration: 'enabled'})
     ],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
 export class AppRoutingModule {}
