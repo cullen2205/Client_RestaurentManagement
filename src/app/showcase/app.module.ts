@@ -41,7 +41,16 @@ import { AppDemoActionsModule } from './app.demoactions.component';
         AppTopBarComponent,
         AppMenuComponent,
         AppConfigComponent,
-        AppFooterComponent
+        AppFooterComponent,
+    ],
+    exports: [
+        AppComponent,
+        HomeComponent,
+        AppNewsComponent,
+        AppTopBarComponent,
+        AppMenuComponent,
+        AppConfigComponent,
+        AppFooterComponent,
     ],
     imports: [
         FormsModule,

@@ -19,6 +19,7 @@ body {
     background-color: var(--surface-a);
     font-family: var(--font-family);
     font-weight: normal;
+    font-size: initial;
     color: var(--text-color);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -38,6 +39,15 @@ h1, h2, h3, h4, h5, h6 {
     &:first-child {
         margin-top: 0;
     }
+}
+
+.center-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
 }
 
 h1 {
@@ -95,7 +105,7 @@ input[type="number"] {
 pre[class*="language-"] {
     &:before, &:after {
         display: none !important;
-    } 
+    }
 
     code {
         border-left: 10px solid var(--surface-d) !important;
@@ -104,26 +114,26 @@ pre[class*="language-"] {
         margin: 1em 0;
         color: var(--text-color);
         font-size: 14px;
-    
+
         .token {
             &.tag,
             &.keyword {
                 color: #2196F3 !important;
             }
-    
+
             &.attr-name,
             &.attr-string {
                 color: #2196F3 !important;
             }
-    
+
             &.attr-value {
                 color: #4CAF50 !important;
             }
-    
+
             &.punctuation {
                 color: var(--text-color);
             }
-    
+
             &.operator,
             &.string {
                 background: transparent;
