@@ -19,8 +19,9 @@ import {CdkDragDrop, DragDropModule, moveItemInArray} from '@angular/cdk/drag-dr
                 <button type="button" pButton pRipple icon="pi pi-angle-double-down" (click)="moveBottom()"></button>
             </div>
             <div class="p-orderlist-list-container">
-                <div class="p-orderlist-header" *ngIf="header">
-                    <div class="p-orderlist-title">{{header}}</div>
+                <div class="p-orderlist-header" *ngIf="header || headerTemplate">
+                    <div class="p-orderlist-title" *ngIf="!headerTemplate">{{header}}</div>
+                    <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
                 </div>
                 <div class="p-orderlist-filter-container" *ngIf="filterBy">
                     <div class="p-orderlist-filter">
@@ -36,9 +37,12 @@ import {CdkDragDrop, DragDropModule, moveItemInArray} from '@angular/cdk/drag-dr
                             <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item, index: i}"></ng-container>
                         </li>
                     </ng-template>
-                    <ng-container *ngIf="isEmpty() && emptyMessageTemplate">
-                        <li class="p-orderlist-empty-message">
+                    <ng-container *ngIf="isEmpty() && (emptyMessageTemplate || emptyFilterMessageTemplate)">
+                        <li *ngIf="!filterValue || !emptyFilterMessageTemplate" class="p-orderlist-empty-message">
                             <ng-container *ngTemplateOutlet="emptyMessageTemplate"></ng-container>
+                        </li>
+                        <li *ngIf="filterValue" class="p-orderlist-empty-message">
+                            <ng-container *ngTemplateOutlet="emptyFilterMessageTemplate"></ng-container>
                         </li>
                     </ng-container>
                 </ul>
@@ -94,8 +98,12 @@ export class OrderList implements AfterViewChecked,AfterContentInit {
     @ContentChildren(PrimeTemplate) templates: QueryList<any>;
 
     public itemTemplate: TemplateRef<any>;
+
+    public headerTemplate: TemplateRef<any>;
     
     public emptyMessageTemplate: TemplateRef<any>;
+
+    public emptyFilterMessageTemplate: TemplateRef<any>;
 
     _selection: any[];
 
@@ -140,6 +148,14 @@ export class OrderList implements AfterViewChecked,AfterContentInit {
 
                 case 'empty':
                     this.emptyMessageTemplate = item.template;
+                break;
+
+                case 'emptyfilter':
+                    this.emptyFilterMessageTemplate = item.template;
+                break;
+
+                case 'header':
+                    this.headerTemplate = item.template;
                 break;
 
                 default:

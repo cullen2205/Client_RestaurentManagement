@@ -18,8 +18,9 @@ import {ObjectUtils, UniqueComponentId} from 'primeng/utils';
                 <button type="button" pButton pRipple icon="pi pi-angle-double-down" [disabled]="disabled" (click)="moveBottom(sourcelist,source,selectedItemsSource,onSourceReorder,SOURCE_LIST)"></button>
             </div>
             <div class="p-picklist-list-wrapper p-picklist-source-wrapper">
-                <div class="p-picklist-header" *ngIf="sourceHeader">
-                    <div class="p-picklist-title">{{sourceHeader}}</div>
+                <div class="p-picklist-header" *ngIf="sourceHeader || sourceHeaderTemplate">
+                    <div class="p-picklist-title" *ngIf="!sourceHeaderTemplate">{{sourceHeader}}</div>
+                    <ng-container *ngTemplateOutlet="sourceHeaderTemplate"></ng-container>
                 </div>
                 <div class="p-picklist-filter-container" *ngIf="filterBy && showSourceFilter !== false">
                     <div class="p-picklist-filter">
@@ -37,9 +38,12 @@ import {ObjectUtils, UniqueComponentId} from 'primeng/utils';
                             <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item, index: i}"></ng-container>
                         </li>
                     </ng-template>
-                    <ng-container *ngIf="isEmpty(SOURCE_LIST) && emptyMessageSourceTemplate">
-                        <li class="p-picklist-empty-message">
+                    <ng-container *ngIf="isEmpty(SOURCE_LIST) && (emptyMessageSourceTemplate || emptyFilterMessageSourceTemplate)">
+                        <li class="p-picklist-empty-message" *ngIf="!filterValueSource || !emptyFilterMessageSourceTemplate">
                             <ng-container *ngTemplateOutlet="emptyMessageSourceTemplate"></ng-container>
+                        </li>
+                        <li class="p-picklist-empty-message" *ngIf="filterValueSource">
+                            <ng-container *ngTemplateOutlet="emptyFilterMessageSourceTemplate"></ng-container>
                         </li>
                     </ng-container>
                 </ul>
@@ -51,8 +55,9 @@ import {ObjectUtils, UniqueComponentId} from 'primeng/utils';
                 <button type="button" pButton pRipple icon="pi pi-angle-double-left" [disabled]="disabled" (click)="moveAllLeft()"></button>
             </div>
             <div class="p-picklist-list-wrapper p-picklist-target-wrapper">
-                <div class="p-picklist-header" *ngIf="targetHeader">
-                    <div class="p-picklist-title" *ngIf="targetHeader">{{targetHeader}}</div>
+                <div class="p-picklist-header" *ngIf="targetHeader || targetHeaderTemplate">
+                    <div class="p-picklist-title" *ngIf="!targetHeaderTemplate">{{targetHeader}}</div>
+                    <ng-container *ngTemplateOutlet="targetHeaderTemplate"></ng-container>
                 </div>
                 <div class="p-picklist-filter-container" *ngIf="filterBy && showTargetFilter !== false">
                     <div class="p-picklist-filter">
@@ -69,9 +74,12 @@ import {ObjectUtils, UniqueComponentId} from 'primeng/utils';
                             <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item, index: i}"></ng-container>
                         </li>
                     </ng-template>
-                    <ng-container *ngIf="isEmpty(TARGET_LIST) && emptyMessageTargetTemplate">
-                        <li class="p-picklist-empty-message">
+                    <ng-container *ngIf="isEmpty(TARGET_LIST) && (emptyMessageTargetTemplate || emptyFilterMessageTargetTemplate)">
+                        <li class="p-picklist-empty-message" *ngIf="!filterValueTarget || !emptyFilterMessageTargetTemplate">
                             <ng-container *ngTemplateOutlet="emptyMessageTargetTemplate"></ng-container>
+                        </li>
+                        <li class="p-picklist-empty-message" *ngIf="filterValueTarget">
+                            <ng-container *ngTemplateOutlet="emptyFilterMessageTargetTemplate"></ng-container>
                         </li>
                     </ng-container>
                 </ul>
@@ -204,7 +212,15 @@ export class PickList implements AfterViewChecked,AfterContentInit {
 
     emptyMessageSourceTemplate: TemplateRef<any>;
 
+    emptyFilterMessageSourceTemplate: TemplateRef<any>;
+
     emptyMessageTargetTemplate: TemplateRef<any>;
+
+    emptyFilterMessageTargetTemplate: TemplateRef<any>;
+
+    sourceHeaderTemplate: TemplateRef<any>;
+
+    targetHeaderTemplate: TemplateRef<any>;
 
     readonly SOURCE_LIST = -1;
 
@@ -226,13 +242,29 @@ export class PickList implements AfterViewChecked,AfterContentInit {
                     this.itemTemplate = item.template;
                 break;
 
+                case 'sourceHeader':
+                    this.sourceHeaderTemplate = item.template;
+                break;
+
+                case 'targetHeader':
+                    this.targetHeaderTemplate = item.template;
+                break;
+
                 case 'emptymessagesource':
                     this.emptyMessageSourceTemplate = item.template;
                 break;
 
+                case 'emptyfiltermessagesource':
+                    this.emptyFilterMessageSourceTemplate = item.template;
+                break;
+
                 case 'emptymessagetarget':
                     this.emptyMessageTargetTemplate = item.template;
-                    break;
+                break;
+
+                case 'emptyfiltermessagetarget':
+                    this.emptyFilterMessageTargetTemplate = item.template;
+                break;
 
                 default:
                     this.itemTemplate = item.template;
@@ -480,6 +512,9 @@ export class PickList implements AfterViewChecked,AfterContentInit {
                 let selectedItem = this.selectedItemsSource[i];
                 if (ObjectUtils.findIndexInList(selectedItem, this.target) == -1) {
                     this.target.push(this.source.splice(ObjectUtils.findIndexInList(selectedItem, this.source),1)[0]);
+
+                    if (this.visibleOptionsSource)
+                        this.visibleOptionsSource.splice(ObjectUtils.findIndexInList(selectedItem, this.visibleOptionsSource),1);
                 }
             }
             this.onMoveToTarget.emit({
@@ -515,6 +550,8 @@ export class PickList implements AfterViewChecked,AfterContentInit {
             if (this.filterValueTarget) {
                 this.filter(this.target, this.TARGET_LIST);
             }
+
+            this.visibleOptionsSource = [];
         }
     }
 
@@ -524,6 +561,9 @@ export class PickList implements AfterViewChecked,AfterContentInit {
                 let selectedItem = this.selectedItemsTarget[i];
                 if (ObjectUtils.findIndexInList(selectedItem, this.source) == -1) {
                     this.source.push(this.target.splice(ObjectUtils.findIndexInList(selectedItem, this.target),1)[0]);
+
+                    if (this.visibleOptionsTarget)
+                        this.visibleOptionsTarget.splice(ObjectUtils.findIndexInList(selectedItem, this.visibleOptionsTarget),1)[0]
                 }
             }
             this.onMoveToSource.emit({
@@ -560,6 +600,8 @@ export class PickList implements AfterViewChecked,AfterContentInit {
             if (this.filterValueSource) {
                 this.filter(this.source, this.SOURCE_LIST);
             }
+
+            this.visibleOptionsTarget = [];
         }
     }
 

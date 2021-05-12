@@ -1,10 +1,11 @@
-import { NgModule, Component, ElementRef, Input, Output, EventEmitter, AfterContentInit, ContentChildren, ContentChild, QueryList, TemplateRef,forwardRef, ChangeDetectorRef, ViewChild, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { NgModule, Component, ElementRef, Input, Output, EventEmitter, AfterContentInit, ContentChildren, ContentChild, QueryList, TemplateRef,forwardRef, ChangeDetectorRef, ViewChild, ChangeDetectionStrategy, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule, PrimeTemplate, Footer, Header, FilterService } from 'primeng/api';
+import { SharedModule, PrimeTemplate, Footer, Header, FilterService, TranslationKeys, PrimeNGConfig } from 'primeng/api';
 import { DomHandler } from 'primeng/dom';
 import { ObjectUtils } from 'primeng/utils';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { RippleModule } from 'primeng/ripple';  
+import { Subscription } from 'rxjs';
 
 export const LISTBOX_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -60,11 +61,17 @@ export const LISTBOX_VALUE_ACCESSOR: any = {
                     <span *ngIf="!itemTemplate">{{getOptionLabel(option)}}</span>
                     <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: option, index: i}"></ng-container>
                 </li>
-                <li *ngIf="filter && (!optionsToDisplay || (optionsToDisplay && optionsToDisplay.length === 0))" class="p-listbox-empty-message">
-                    <ng-container *ngIf="!emptyFilterTemplate; else emptyFilter">
-                        {{emptyFilterMessage}}
+                <li *ngIf="hasFilter() && isEmpty(optionsToDisplay)" class="p-listbox-empty-message">
+                    <ng-container *ngIf="!emptyFilterTemplate && !emptyTemplate; else emptyFilter">
+                        {{emptyFilterMessageLabel}}
                     </ng-container>
-                    <ng-container #emptyFilter *ngTemplateOutlet="emptyFilterTemplate"></ng-container>
+                    <ng-container #emptyFilter *ngTemplateOutlet="emptyFilterTemplate || emptyTemplate"></ng-container>
+                </li>
+                <li *ngIf="!hasFilter() && isEmpty(optionsToDisplay)" class="p-listbox-empty-message">
+                    <ng-container *ngIf="!emptyTemplate; else empty">
+                        {{emptyMessageLabel}}
+                    </ng-container>
+                    <ng-container #empty *ngTemplateOutlet="emptyTemplate"></ng-container>
                 </li>
             </ng-template>
         </ul>
@@ -80,7 +87,7 @@ export const LISTBOX_VALUE_ACCESSOR: any = {
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./listbox.css']
 })
-export class Listbox implements AfterContentInit, ControlValueAccessor {
+export class Listbox implements AfterContentInit, OnInit, ControlValueAccessor, OnDestroy {
 
     @Input() multiple: boolean;
 
@@ -124,7 +131,9 @@ export class Listbox implements AfterContentInit, ControlValueAccessor {
 
     @Input() filterPlaceHolder: string;
 
-    @Input() emptyFilterMessage: string = 'No results found';
+    @Input() emptyFilterMessage: string;
+
+    @Input() emptyMessage: string;
 
     @Input() group: boolean;
 
@@ -154,6 +163,8 @@ export class Listbox implements AfterContentInit, ControlValueAccessor {
 
     public emptyFilterTemplate: TemplateRef<any>;
 
+    public emptyTemplate: TemplateRef<any>;
+
     public _filterValue: string;
 
     public _filteredOptions: any[];
@@ -172,7 +183,9 @@ export class Listbox implements AfterContentInit, ControlValueAccessor {
 
     public headerCheckboxFocus: boolean;
 
-    constructor(public el: ElementRef, public cd: ChangeDetectorRef, public filterService: FilterService) { }
+    translationSubscription: Subscription;
+
+    constructor(public el: ElementRef, public cd: ChangeDetectorRef, public filterService: FilterService, public config: PrimeNGConfig) { }
 
     @Input() get options(): any[] {
         return this._options;
@@ -180,6 +193,9 @@ export class Listbox implements AfterContentInit, ControlValueAccessor {
 
     set options(val: any[]) {
         this._options = val;
+        
+        if (this.hasFilter())
+            this.activateFilter();
     }
 
     @Input() get filterValue(): string {
@@ -189,6 +205,12 @@ export class Listbox implements AfterContentInit, ControlValueAccessor {
     set filterValue(val: string) {
         this._filterValue = val;
         this.activateFilter();
+    }
+
+    ngOnInit() {
+        this.translationSubscription = this.config.translationObserver.subscribe(() => {
+            this.cd.markForCheck();
+        });
     }
 
     ngAfterContentInit() {
@@ -208,6 +230,10 @@ export class Listbox implements AfterContentInit, ControlValueAccessor {
 
                 case 'footer':
                     this.footerTemplate = item.template;
+                break;
+
+                case 'empty':
+                    this.emptyTemplate = item.template;
                 break;
 
                 case 'emptyfilter':
@@ -487,8 +513,21 @@ export class Listbox implements AfterContentInit, ControlValueAccessor {
         return this._filteredOptions || this.options;
     }
 
+
+    get emptyMessageLabel(): string {
+        return this.emptyMessage || this.config.getTranslation(TranslationKeys.EMPTY_MESSAGE);
+    }
+
+    get emptyFilterMessageLabel(): string {
+        return this.emptyFilterMessage || this.config.getTranslation(TranslationKeys.EMPTY_FILTER_MESSAGE);
+    }
+
     hasFilter() {
         return this._filterValue && this._filterValue.trim().length > 0; 
+    }
+
+    isEmpty(optionsToDisplay) {
+        return !optionsToDisplay || (optionsToDisplay && optionsToDisplay.length === 0);
     }
 
     onFilter(event: KeyboardEvent) {
@@ -666,6 +705,12 @@ export class Listbox implements AfterContentInit, ControlValueAccessor {
 
     onHeaderCheckboxBlur() {
         this.headerCheckboxFocus = false;
+    }
+
+    ngOnDestroy() {
+        if (this.translationSubscription) {
+            this.translationSubscription.unsubscribe();
+        }
     }
 }
 
