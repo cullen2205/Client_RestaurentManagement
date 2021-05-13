@@ -1,8 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { MessageService, MenuItem } from "primeng/api";
-
-declare let $: any;
-
 @Component({
     providers: [MessageService],
     templateUrl: "./home-page.component.html",
