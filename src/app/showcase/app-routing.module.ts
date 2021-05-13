@@ -9,7 +9,7 @@ import { HomePage } from '../home-page/home-page.component';
             {path: '', component: HomePage},
             {path: 'homeshowcase', component: HomeComponent},
             {path: 'forgot', loadChildren: () => import('../account-forgot-password/account-forgot-password.module').then(m => m.AccountForgotPasswordModule)},
-            {path: 'book', loadChildren: () => import('../order-table/order-table.module').then(m => m.OrderTableModule)},
+            {path: 'order', loadChildren: () => import('../order-table/order-table.module').then(m => m.OrderTableModule)},
             {path: 'login', loadChildren: () => import('../account-login/account-login.module').then(m => m.AccountLoginModule)},
             {path: 'setup', loadChildren: () => import('./components/setup/setup.module').then(m => m.SetupModule)},
             {path: 'theming', loadChildren: () => import('./components/theming/theming.module').then(m => m.ThemingModule)},

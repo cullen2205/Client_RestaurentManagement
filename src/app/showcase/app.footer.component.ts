@@ -3,145 +3,65 @@ import {Component} from '@angular/core';
 @Component({
     selector: "app-footer",
     template: `
-        <div class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <ul class="footer_box">
-                            <h4>Products</h4>
-                            <li><a href="#">Mens</a></li>
-                            <li><a href="#">Womens</a></li>
-                            <li><a href="#">Youth</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <ul class="footer_box">
-                            <h4>About</h4>
-                            <li><a href="#">Careers and internships</a></li>
-                            <li><a href="#">Sponserships</a></li>
-                            <li><a href="#">team</a></li>
-                            <li><a href="#">Catalog Request/Download</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <ul class="footer_box">
-                            <h4>Customer Support</h4>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Shipping and Order Tracking</a></li>
-                            <li><a href="#">Easy Returns</a></li>
-                            <li><a href="#">Warranty</a></li>
-                            <li><a href="#">Replacement Binding Parts</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <ul class="footer_box">
-                            <h4>Newsletter</h4>
-                            <div class="footer_search">
-                                <form>
-                                    <input
-                                        type="text"
-                                        value="Enter your email"
-                                        onfocus="this.value = '';"
-                                        onblur="if (this.value == '') {this.value = 'Enter your email';}"
-                                    />
-                                    <input type="submit" value="Go" />
-                                </form>
-                            </div>
-                            <ul class="social">
-                                <li class="facebook">
-                                    <a href="#"><span> </span></a>
-                                </li>
-                                <li class="twitter">
-                                    <a href="#"><span> </span></a>
-                                </li>
-                                <li class="instagram">
-                                    <a href="#"><span> </span></a>
-                                </li>
-                                <li class="pinterest">
-                                    <a href="#"><span> </span></a>
-                                </li>
-                                <li class="youtube">
-                                    <a href="#"><span> </span></a>
-                                </li>
-                            </ul>
-                        </ul>
+    <footer id="footer" class="bs-docs-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="info-bot">
+                        <div class="nameCtybot">Công ty Cổ phần CAM</div>
+                        <div>Địa chỉ: Số 9 Đào Duy Anh, Phường Phương Mai, Quận Đống Đa, Thành phố Hà Nội</div>
+                        <div>Mã số thuế: 0108796725</div>
+                        <div>Người ĐDPL: Phan Thanh Tùng</div>
+                        <div>Ngày hoạt động: 25/06/2019</div>
+                        <div>Giấy phép kinh doanh: 0108796725</div>
                     </div>
                 </div>
-                <div class="row footer_bottom">
-                    <div class="copy">
-                        <p>
-                            &copy; {{currentYear}}
-                            <a href="http://facebook.com/nemmta" target="_blank"
-                                >Nemran., JSC</a
-                            >
-                        </p>
+                <div class="col-12 col-md-6">
+                    <div class="box-footer-r">
+                        <div>
+                            <a href="javascript:if(confirm(%27https://www.facebook.com/Lauphanbuffet  \n\nThis file was not retrieved by Teleport Ultra, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?%27))window.location=%27https://www.facebook.com/Lauphanbuffet%27"
+                                tppabs="https://www.facebook.com/Lauphanbuffet" target="_blank"><img src="../../assets/kassets/dashboard/icon-fb.svg" tppabs="https://lauphan.com/WebLauPhan/theme/icon-fb.svg"></a>
+                        </div>
+                        <div>
+                            <a href="javascript:if(confirm(%27https://www.instagram.com/lau.phan/  \n\nThis file was not retrieved by Teleport Ultra, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?%27))window.location=%27https://www.instagram.com/lau.phan/%27"
+                                tppabs="https://www.instagram.com/lau.phan/" target="_blank"><img src="../../assets/kassets/dashboard/icon-ins.svg" tppabs="https://lauphan.com/WebLauPhan/theme/icon-ins.svg"></a>
+                        </div>
+                        <div>
+                            <a href="javascript:if(confirm(%27https://www.tiktok.com/@lau.phan  \n\nThis file was not retrieved by Teleport Ultra, because it is addressed on a domain or path outside the boundaries set for its Starting Address.  \n\nDo you want to open it from the server?%27))window.location=%27https://www.tiktok.com/@lau.phan%27"
+                                tppabs="https://www.tiktok.com/@lau.phan" target="_blank"><img src="../../assets/kassets/dashboard/icon-tiktok.svg" tppabs="https://lauphan.com/WebLauPhan/theme/icon-tiktok.svg"></a>
+                        </div>
                     </div>
-                    <dl id="sample" class="dropdown">
-                        <dt>
-                            <a href="javascript:;"><span>Change Region</span></a>
-                        </dt>
-                        <dd>
-                            <ul>
-                                <li>
-                                    <a href="#"
-                                        >Australia<img
-                                            class="flag"
-                                            src="../../../../assets/kassets/images/as.png"
-                                            alt=""
-                                        /><span class="value">AS</span></a
-                                    >
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        >Sri Lanka<img
-                                            class="flag"
-                                            src="../../../../assets/kassets/images/srl.png"
-                                            alt=""
-                                        /><span class="value">SL</span></a
-                                    >
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        >Newziland<img
-                                            class="flag"
-                                            src="../../../../assets/kassets/images/nz.png"
-                                            alt=""
-                                        /><span class="value">NZ</span></a
-                                    >
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        >Pakistan<img
-                                            class="flag"
-                                            src="../../../../assets/kassets/images/pk.png"
-                                            alt=""
-                                        /><span class="value">Pk</span></a
-                                    >
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        >United Kingdom<img
-                                            class="flag"
-                                            src="../../../../assets/kassets/images/uk.png"
-                                            alt=""
-                                        /><span class="value">UK</span></a
-                                    >
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        >United States<img
-                                            class="flag"
-                                            src="../../../../assets/kassets/images/us.png"
-                                            alt=""
-                                        /><span class="value">US</span></a
-                                    >
-                                </li>
-                            </ul>
-                        </dd>
-                    </dl>
                 </div>
             </div>
         </div>
+    </footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <div class=""></div>
+            </div>
+            <div class="col-12">
+                <div id="loginOTP" style="display:none">
+                    <div class="login">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="title-pu">Nhập Số Điện Thoại</div>
+                                    <div class="OTPcode">Mã OTP đăng nhập sẽ được gửi tới bạn qua SMS</div>
+                                    <div class="form-login-cam">
+                                        <input type="text" class="form-control" id="sdt" placeholder="Số điện thoại">
+                                    </div>
+                                    <div class="send-otp">
+                                        <button type="button" class="bnt-sendotp">Gửi OTP</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     `,
   styleUrls: [
     '../../assets/kassets/css/googleapis.css',
