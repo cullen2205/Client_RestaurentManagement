@@ -3,7 +3,7 @@ import {NgModule,Component,Input,AfterContentInit,OnDestroy,Output,EventEmitter,
 import {CdkVirtualScrollViewport, ScrollingModule} from '@angular/cdk/scrolling';
 import {Optional} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {TreeNode} from 'primeng/api';
+import {PrimeNGConfig, TranslationKeys, TreeNode} from 'primeng/api';
 import {SharedModule} from 'primeng/api';
 import {PrimeTemplate} from 'primeng/api';
 import {TreeDragDropService} from 'primeng/api';
@@ -520,7 +520,7 @@ export class UITreeNode implements OnInit {
             <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
             <div *ngIf="filter" class="p-tree-filter-container">
                 <input #filter type="text" autocomplete="off" class="p-tree-filter p-inputtext p-component" [attr.placeholder]="filterPlaceholder"
-                    (keydown.enter)="$event.preventDefault()" (input)="_filter($event)">
+                    (keydown.enter)="$event.preventDefault()" (input)="_filter($event.target.value)">
                     <span class="p-tree-filter-icon pi pi-search"></span>
             </div>
             <ng-container *ngIf="!virtualScroll; else virtualScrollList">
@@ -539,7 +539,12 @@ export class UITreeNode implements OnInit {
                     </ul>
                 </cdk-virtual-scroll-viewport>
             </ng-template>
-            <div class="p-tree-empty-message" *ngIf="!loading && (value == null || value.length === 0)">{{emptyMessage}}</div>
+            <div class="p-tree-empty-message" *ngIf="!loading && (getRootNode() == null || getRootNode().length === 0)">
+                <ng-container *ngIf="!emptyMessageTemplate; else emptyFilter">
+                    {{emptyMessageLabel}}
+                </ng-container>
+                <ng-container #emptyFilter *ngTemplateOutlet="emptyMessageTemplate"></ng-container>
+            </div>
             <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
         </div>
         <div [ngClass]="{'p-tree p-tree-horizontal p-component':true,'p-tree-selectable':selectionMode}"  [ngStyle]="style" [class]="styleClass" *ngIf="horizontal">
@@ -550,7 +555,12 @@ export class UITreeNode implements OnInit {
             <table *ngIf="value&&value[0]">
                 <p-treeNode [node]="value[0]" [root]="true"></p-treeNode>
             </table>
-            <div class="p-tree-empty-message" *ngIf="!loading && (value == null || value.length === 0)">{{emptyMessage}}</div>
+            <div class="p-tree-empty-message" *ngIf="!loading && (getRootNode() == null || getRootNode().length === 0)">
+                <ng-container *ngIf="!emptyMessageTemplate; else emptyFilter">
+                    {{emptyMessageLabel}}
+                </ng-container>
+                <ng-container #emptyFilter *ngTemplateOutlet="emptyMessageTemplate"></ng-container>
+            </div>
             <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
         </div>
     `,
@@ -606,7 +616,7 @@ export class Tree implements OnInit,AfterContentInit,OnChanges,OnDestroy,Blockab
 
     @Input() loadingIcon: string = 'pi pi-spinner';
 
-    @Input() emptyMessage: string = 'No records found';
+    @Input() emptyMessage: string = '';
 
     @Input() ariaLabel: string;
 
@@ -644,11 +654,15 @@ export class Tree implements OnInit,AfterContentInit,OnChanges,OnDestroy,Blockab
 
     @ViewChild(CdkVirtualScrollViewport) virtualScrollBody: CdkVirtualScrollViewport;
 
+    @ViewChild('filter') filterViewChild: ElementRef;
+
     serializedValue: any[];
 
     headerTemplate: TemplateRef<any>;
 
     footerTemplate: TemplateRef<any>;
+
+    emptyMessageTemplate: TemplateRef<any>;
 
     public templateMap: any;
 
@@ -672,7 +686,7 @@ export class Tree implements OnInit,AfterContentInit,OnChanges,OnDestroy,Blockab
 
     public filteredNodes: TreeNode[];
 
-    constructor(public el: ElementRef, @Optional() public dragDropService: TreeDragDropService) {}
+    constructor(public el: ElementRef, @Optional() public dragDropService: TreeDragDropService, public config: PrimeNGConfig) {}
 
     ngOnInit() {
         if (this.droppableNodes) {
@@ -711,6 +725,10 @@ export class Tree implements OnInit,AfterContentInit,OnChanges,OnDestroy,Blockab
         return this.layout == 'horizontal';
     }
 
+    get emptyMessageLabel(): string {
+        return this.emptyMessage || this.config.getTranslation(TranslationKeys.EMPTY_MESSAGE);
+    }
+
     ngAfterContentInit() {
         if (this.templates.length) {
             this.templateMap = {};
@@ -720,6 +738,10 @@ export class Tree implements OnInit,AfterContentInit,OnChanges,OnDestroy,Blockab
             switch (item.getType()) {
                 case 'header':
                     this.headerTemplate = item.template;
+                break;
+
+                case 'empty':
+                    this.emptyMessageTemplate = item.template;
                 break;
 
                 case 'footer':
@@ -1162,8 +1184,8 @@ export class Tree implements OnInit,AfterContentInit,OnChanges,OnDestroy,Blockab
         }
     }
 
-    _filter(event) {
-        let filterValue = event.target.value;
+    _filter(value) {
+        let filterValue = value;
         if (filterValue === '') {
             this.filteredNodes = null;
         }
@@ -1187,6 +1209,14 @@ export class Tree implements OnInit,AfterContentInit,OnChanges,OnDestroy,Blockab
             filter: filterValue,
             filteredValue: this.filteredNodes
         });
+    }
+
+    resetFilter() {
+        this.filteredNodes = null;
+
+        if (this.filterViewChild && this.filterViewChild.nativeElement) {
+            this.filterViewChild.nativeElement.value = '';
+        }
     }
 
     findFilteredNodes(node, paramsWithoutNode) {
