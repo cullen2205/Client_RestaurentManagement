@@ -1,0 +1,98 @@
+/*1620426908000*/
+body {
+	    background-color: #cdcdcd;
+}
+.news-endow {
+	    padding-bottom: 50px;
+}
+.title-category {
+    font-size: 30px;
+    color: #162938;
+    font-family: RobotoSlab-Bold;
+    text-transform: uppercase;
+    padding-bottom: 31px;
+    padding-top: 31px;
+    text-align: center;
+}
+.main-content-newsendow {
+	background-color: white;
+    padding: 8px;
+    border-radius: 15px;
+    box-shadow: 0 0 2.2px rgb(0 0 0/ 22%), 0 6.7px 5.3px rgb(0 0 0/ 15%), 0 12.5px 10px rgb(0 0 0/ 0%), 0 22.3px 17.9px rgb(0 0 0/ 0%), 0 41.8px 33.4px rgb(0 0 0/ 0%), 0 100px 80px rgb(0 0 0/ 0%)
+}
+.img-newsendow img {
+	 border-radius: 15px;
+	 width: 100%;
+}
+.content-endow-text {
+	padding-top: 20px;
+}
+.text-endow {
+	padding: 15px;
+}
+.tilte-newsendow {
+	    font-size: 25px;
+    font-family: 'RobotoSlab-Regular';
+    padding-top: 5px;
+}
+.border-bottom-header-ud:after {
+    content: '';
+    position: absolute;
+    width: 8%;
+    bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.border-bottom-header-style .border-bottom-header-ud:after {
+	border-bottom: 3px solid #e84a1b;
+}
+.border-bottom-header-style .border-bottom-header-ud a {
+	font-family: 'RobotoSlab-Bold' !important;
+}
+.related {
+    padding-top: 40px;
+    padding-bottom: 47px;
+}
+.title-related {
+	font-size: 20px;
+    text-transform: uppercase;
+    font-family: 'RobotoSlab-Medium';
+    float: left;
+}
+.box-news-lauphan {
+	background-color: white;
+    padding: 6px;
+    border-radius: 14px;
+        margin-top: 20px;
+}
+.main-related-text {
+	padding: 15px;
+}
+.title-summary {
+font-size: 17px;
+    font-family: 'RobotoSlab-Regular';
+}
+.summary {
+    padding-top: 11px;
+    font-size: 13px;	
+}
+.details {
+	padding-top: 35px;
+    font-size: 13px;
+    text-align: center;
+    font-family: 'RobotoSlab-Regular';
+}
+.seeall {
+	float: right;
+}
+.seeall a {
+	    border: 1px solid #ff6a00;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 20px;
+    background-color: #ff6a00;
+    color: white;
+    font-family: 'RobotoSlab-Regular';
+    padding: 6px 30px;
+}

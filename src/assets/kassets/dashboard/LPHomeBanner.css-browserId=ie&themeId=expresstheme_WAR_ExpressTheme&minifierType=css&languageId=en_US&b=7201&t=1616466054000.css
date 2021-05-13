@@ -1,0 +1,212 @@
+/*1620426908000*/
+.carousel-control-prev-icon {
+	background-image: url("arrow-letf.svg")/*tpa=https://phanexpress.com/WebLauPhan/banner/arrow-letf.svg*/ !important;
+}
+
+.carousel-control-next-icon {
+	background-image: url("arrow-right.svg")/*tpa=https://phanexpress.com/WebLauPhan/banner/arrow-right.svg*/ !important;
+}
+
+.phan-express {
+	font-family: RobotoSlab-Regular;
+	padding-top: 13px;
+	text-transform: uppercase;
+}
+
+.main-login {
+	display: none;
+}
+
+.btn-lp a {
+	margin-bottom: 26px;
+	color: white;
+}
+
+.btn-lp img {
+	margin-left: 10px;
+}
+
+#carouselExampleIndicators {
+	z-index: 10;
+}
+
+.carousel-indicators {
+	position: absolute;
+	right: 0;
+	left: 0;
+	bottom: -40px;
+	z-index: 15;
+	display: flex;
+	justify-content: center;
+	padding-left: 0;
+	margin-right: 15%;
+	margin-left: 15%;
+	list-style: none;
+}
+
+.carousel-indicators li {
+	box-sizing: content-box;
+	flex: 0 1 auto;
+	width: 10px;
+	height: 10px;
+	margin-right: 5px;
+	margin-left: 5px;
+	text-indent: -999px;
+	cursor: pointer;
+	background-color: #FF7215;
+	background-clip: padding-box;
+	opacity: .5;
+	transition: opacity 0.6s ease;
+	border: 1px solid #ff7216;
+	border-radius: 10px;
+}
+
+.carousel-inner {
+	border-radius: 18px;
+}
+.btn-lp a:hover {
+	text-decoration: none;
+	color: white;
+}
+
+.info-profile-line-1 {
+	display: flex;
+}
+
+.info-profile-line-2 {
+	display: flex;
+	margin-top: 28px;
+}
+
+.uesername {
+	font-family: RobotoSlab-Regular;
+	font-size: 20px;
+}
+
+.name {
+	text-transform: uppercase;
+}
+
+.p-coin {
+	font-family: RobotoSlab-Regular;
+	font-size: 20px;
+	padding-top: 7px;
+}
+
+.info-profile {
+	padding-top: 50px;
+}
+
+.info-acc {
+	text-align: center;
+	width: 160px;
+}
+
+.text-item {
+	padding-top: 20px;
+}
+
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	background: no-repeat 50%/100% 100%;
+}
+
+@media only screen and (max-width: 768px) {
+	.main-banner {
+		color: white;
+		padding-top: 30px;
+	}
+	.phan-express {
+		font-size: 30px;
+	}
+	.welcome {
+		font-size: 16px;
+		padding-top: 13px;
+	}
+	.LP-banner {
+		background: url(banner-mb.png)/*tpa=https://phanexpress.com/WebLauPhan/banner/banner-mb.png*/;
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		background-color: #dfdfdf;
+	}
+	.btn-datmua {
+		border: 1px solid #e84a1b;
+		background: #e84a1b;
+		height: 52px;
+		border-radius: 45px;
+		display: flex;
+		font-size: 16px;
+		justify-content: center;
+		width: 270px;
+		align-items: center;
+	}
+	.btn-lp {
+		padding-top: 50px;
+		font-family: RobotoSlab-Regular;
+		margin: auto;
+		width: 275px;
+	}
+	.slogan {
+		font-size: 16px;
+		padding-top: 13px;
+		letter-spacing: 1.9px;
+	}
+}
+
+@media only screen and (min-width: 769px) {
+	.LP-banner {
+		background: url(banner.png)/*tpa=https://phanexpress.com/WebLauPhan/banner/banner.png*/;
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		background-color: #dfdfdf;
+		height: 788px;
+	}
+	.phan-express {
+		font-size: 45px;
+	}
+	.welcome {
+		font-size: 30px;
+		padding-top: 13px;
+	}
+	.main-banner {
+		color: white;
+		max-width: 1030px;
+		margin: auto;
+		padding-top: 30px;
+	}
+	.btn-datmua {
+		border: 1px solid #e84a1b;
+		background: #e84a1b;
+		height: 52px;
+		border-radius: 45px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 275px;
+	}
+	.btn-lp {
+		padding-top: 50px;
+		font-size: 20px;
+		font-family: RobotoSlab-Regular;
+		padding-bottom: 30px;
+	}
+	.slogan {
+		font-size: 20px;
+		padding-top: 13px;
+		letter-spacing: 1.9px;
+	}
+}
+.border-bottom-header-tc:after {
+    content: '';
+    position: absolute;
+    width: 12%;
+    bottom: 15px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}

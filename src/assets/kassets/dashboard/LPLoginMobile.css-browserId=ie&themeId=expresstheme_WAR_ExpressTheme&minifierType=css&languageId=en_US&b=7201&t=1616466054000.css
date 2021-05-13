@@ -1,0 +1,19 @@
+/*1620426908000*/
+#user-logout-mobile{cursor: pointer; color: white !important;}
+.os_info_user_login {
+	color: white;
+	text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 37px;	
+}
+.os_name_user_login {
+	font-family: 'RobotoSlab-Bold';
+}
+.os_p_coin {
+	font-family: 'RobotoSlab-Regular';
+}
+    
+.os_pcoin_amount {
+	font-family: 'RobotoSlab-Regular';
+}    

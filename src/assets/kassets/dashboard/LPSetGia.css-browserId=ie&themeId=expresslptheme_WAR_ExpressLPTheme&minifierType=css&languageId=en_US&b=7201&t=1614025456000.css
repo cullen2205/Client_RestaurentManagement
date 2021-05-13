@@ -1,0 +1,74 @@
+/*1620426908000*/
+.box-set-gia {
+	padding-top: 50px;
+}
+.box-gia {
+	border-left: 9px solid #b93c3c;
+    height: 103pt;
+    padding-left: 10pt;
+}
+.gia-lauphan {
+    font-family: SansitaOne-Regular;
+    font-size: 35pt;
+    text-transform: uppercase;
+    line-height: 50px;
+}
+.gia-lauphan span {
+	color: #ff6a00;
+    font-size: 50pt;
+}
+.box-gia-lauphan {
+	border-left: 9px solid #df5800;
+    height: 103pt;
+    padding-left: 10pt;
+}
+.gia {
+	font-family: SansitaOne-Regular;
+	font-size: 35pt;
+	text-transform: uppercase;
+	line-height: 50px;
+}
+.gia span {
+	color: #b93c3c;
+	font-size: 50pt;
+}
+.sologan-gia {
+	font-size: 14pt;
+	font-family: 'RobotoSlab-Regular';
+}
+
+.somon {
+	font-family: 'RobotoSlab-Regular';
+	color: #ff6a00;
+	font-size: 14pt;
+	padding-top: 15px;
+}
+.setgia-img {
+    padding-top: 35pt;
+    position: relative;
+}
+.detail {
+	    bottom: 25px;
+    height: 46px;
+    border: 1px solid black;
+    background: black;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 211px;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+.detail a {
+	color: white;
+    font-family: 'RobotoSlab-Regular';
+}
+@media only screen and (min-width: 769px) {
+}
+
+@media only screen and (max-width: 768px) {
+}
+

@@ -1,0 +1,269 @@
+/*1620426908000*/
+#loading-time{display: none; position: absolute;left: 0; right: 0; text-align: center; z-index: 2;}
+#loading-time img{width: 40px}
+.form-cam-order{position: relative;}
+#address{padding-top: 30px;font-size: 14px}
+.btn-loading{display: none}
+.btn-loading img{max-width: 35px}
+#btn-datban-loading{display: none}
+#orderOverload{display: none; text-align: center}
+#orderSuccess{display: none}
+.validate-error{color: red;font-size: 16px;padding-top: 10px;}
+.title-cam-order {
+	font-family: 'RobotoSlab-Medium';
+}
+
+.form-cam-order-lp {
+	border-radius: 13px;
+	background-color: white;
+	box-shadow: 0 0 2.2px rgb(0 0 0/ 56%), 0 6.7px 5.3px rgb(0 0 0/ 34%), 0
+		12.5px 10px rgb(0 0 0/ 0%), 0 22.3px 17.9px rgb(0 0 0/ 0%), 0 41.8px
+		33.4px rgb(0 0 0/ 0%), 0 100px 80px rgb(0 0 0/ 0%);
+	padding: 20px;
+}
+
+.order-cam-logo {
+	display: flex;
+	padding-bottom: 30px;
+	padding-top: 35px;
+}
+
+.form-cam-order label {
+	font-family: 'RobotoSlab-Bold';
+}
+
+.btn-lau-2 {
+	border: 1px solid white;
+	border-radius: 20px;
+	height: 36px;
+	width: 132px;
+	font-family: 'RobotoSlab-Bold';
+	color: white;
+	background-color: #b93c3c;
+}
+
+.btn-lau-1 {
+	padding-right: 20px;
+	border: 1px solid white;
+	border-radius: 20px;
+	height: 36px;
+	width: 132px;
+	font-family: 'RobotoSlab-Bold';
+	color: white;
+	background-color: #b7b7b7;
+}
+
+.form-control {
+	border: none;
+	border-bottom: 1px solid;
+	border-radius: 0px !important;
+}
+
+.address {
+	font-size: 14px;
+	padding-top: 20px;
+}
+
+.btn-datmua {
+	border: 1px solid #e84a1b;
+	background: #e84a1b;
+	height: 52px;
+	border-radius: 45px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	font-family: RobotoSlab-Bold;
+	color: white
+}
+
+.date-order {
+	display: flex;
+	padding-top: 55px;
+}
+
+.ngay {
+	width: 142px;
+	margin-right: 70px;
+}
+
+.gio {
+	width: 142px;
+}
+
+.pd-top-order {
+	padding-top: 55px;
+}
+
+.btn-lp {
+	padding-top: 22px;
+}
+
+.form-control:focus {
+	color: #495057;
+	background-color: #FFF;
+	border-color: black;
+	box-shadow: none;
+	outline: none;
+}
+
+@media only screen and (min-width: 769px) {
+	.lp-order-page {
+		background-image: url(bg-order.png)/*tpa=https://phanexpress.com/WebLauPhan/order/bg-order.png*/;
+		height: 548px;
+		background-size: cover;
+		background-repeat: no-repeat;
+		margin-bottom: 500px;
+	}
+	.note-order {
+		font-family: RobotoSlab-Bold;
+		padding-top: 50px;
+		padding-bottom: 576px
+	}
+	.title-order {
+		font-size: 20px;
+		text-transform: uppercase;
+		font-family: 'RobotoSlab-Bold';
+		color: white;
+		padding-top: 94px;
+		padding-bottom: 60px;
+	}
+	.direct {
+		text-align: center;
+		font-size: 14px;
+		color: #e84a1b;
+		font-family: 'RobotoSlab-Regular';
+		padding-top: 55px;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.note-order {
+		font-family: RobotoSlab-Bold;
+		padding-top: 50px;
+		padding-bottom: 50px
+	}
+	.form-cam-order-lp {
+		margin: 0px;
+	}
+	.title-order {
+		font-size: 20px;
+		text-transform: uppercase;
+		font-family: 'RobotoSlab-Bold';
+		color: white;
+		padding-top: 60px;
+		padding-bottom: 30px;
+	}
+	.lp-order-page {
+		background-image: url(bg.png)/*tpa=https://phanexpress.com/WebLauPhan/banner/bg.png*/;
+		background-repeat: no-repeat;
+	}
+	.direct {
+		text-align: center;
+		font-size: 14px;
+		color: #e84a1b;
+		font-family: 'RobotoSlab-Regular';
+		padding-top: 35px;
+		padding-bottom: 35px;
+	}
+	.pd-mb {
+		padding-top: 55px;
+	}
+}
+
+.border-bottom-header-db:after {
+	content: '';
+	position: absolute;
+	width: 9%;
+	bottom: 15px;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+}
+
+.border-bottom-header-style .border-bottom-header-db:after {
+	border-bottom: 3px solid #e84a1b;
+}
+
+.border-bottom-header-style .border-bottom-header-db a {
+	font-family: 'RobotoSlab-Bold' !important;
+}
+
+#orderSuccess {
+	border-radius: 13px;
+	text-align: center;
+}
+
+.title-pu {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-family: 'RobotoSlab-Bold';
+}
+
+.fancybox-close-small {
+	display: none;
+}
+
+.btn-close {
+	border: 1px solid #ff6a00;
+	background: #ff6a00;
+	color: white;
+	font-size: 14px;
+	font-family: 'RobotoSlab-Medium';
+	border-radius: 25px;
+	width: 140px;
+}
+
+.text-pu {
+	padding-bottom: 20px;
+	font-family: 'RobotoSlab-Regular';
+}
+
+.add-gbcolor1 {
+	background-color: #e84a1b;
+}
+
+.rm-gbcolor {
+	background-color: #b7b7b7;
+}
+
+.add-gbcolor2 {
+	background-color: #b93c3c;
+}
+
+#btn1 {
+	padding-top:3px;
+	border: 1px solid white;
+    border-radius: 20px;
+    height: 36px;
+    width: 132px;
+    font-family: 'RobotoSlab-Bold';
+    color: white;
+    background-color: #b7b7b7;
+}
+
+#btn2 {
+	padding-top:3px;
+	border: 1px solid white;
+    border-radius: 20px;
+    height: 36px;
+    width: 132px;
+    font-family: 'RobotoSlab-Bold';
+    color: white;
+    background-color: #b7b7b7;
+}
+
+#btn1 a{
+	 padding-left: 12px;
+	 font-size: 14px;
+	 color: white;
+}
+
+#btn2 a {
+	padding-left: 12px;
+	 font-size: 14px;
+	 color: white;
+}
+.order-cam-logo a img {
+	margin-top: -3px;
+}

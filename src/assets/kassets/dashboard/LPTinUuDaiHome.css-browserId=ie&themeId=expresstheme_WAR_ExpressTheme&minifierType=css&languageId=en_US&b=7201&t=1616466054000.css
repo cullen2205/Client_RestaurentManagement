@@ -1,0 +1,120 @@
+/*1620426908000*/
+.title-category {
+	font-size: 20px;
+	color: #162938;
+	font-family: RobotoSlab-Bold;
+	text-transform: uppercase;
+	padding-bottom: 32px;
+	text-align: center;
+}
+
+.box-news-lauphan {
+	position: relative;
+	background-color: white;
+	border-radius: 14px;
+	margin-bottom: 35px;
+	box-shadow: 0 0 2.2px rgb(0 0 0/ 22%), 0 6.7px 5.3px rgb(0 0 0/ 15%), 0
+		12.5px 10px rgb(0 0 0/ 0%), 0 22.3px 17.9px rgb(0 0 0/ 0%), 0 41.8px
+		33.4px rgb(0 0 0/ 0%), 0 100px 80px rgb(0 0 0/ 0%);
+}
+
+.img-news {
+	padding: 6px 6px 0px 6px;
+}
+
+.img-news img {
+	border-radius: 10px;
+    height: 130px;
+    width: 100%;	
+}
+.img-news-circle {
+	position: absolute;
+    top: 90px;
+}
+.title-summary {
+	padding-top: 30px;
+	font-size: 17px;
+	font-family: RobotoSlab-Regular;
+	padding-left: 15px;
+	color: #162938;
+	    min-height: 80px;
+}
+
+.summary {
+	font-size: 14px;
+	padding-left: 15px;
+	padding-top: 11px;
+	padding-right: 18px;
+	color: #162938;
+}
+
+.details {
+	font-size: 13px;
+	font-family: RobotoSlab-Regular;
+	padding-top: 20px;
+	padding-bottom: 19px;
+	color: #162938;
+	padding-left: 15px;
+}
+.details a {
+	color: #162938;
+}
+.title-summary a {
+	color: #162938;
+}
+@media only screen and (max-width: 768px) {
+	.img-news img {
+		width: 100%;
+	}
+	.news-home-lauphan {
+		background-color: #dfdfdf;
+		padding-top: 40px;
+	}
+	.seemore a {
+		text-align: center;
+		border: 1px solid white;
+		background-color: white;
+		border-radius: 30px;
+		height: 50px;
+		justify-content: center;
+		align-items: center;
+		display: flex;
+		width: 290px;
+		font-family: 'RobotoSlab-Regular';
+		color: #6f6d6d;
+		margin: auto;
+	}
+	.seemore {
+		padding-bottom: 15px;
+	}
+}
+
+@media only screen and (min-width: 769px) {
+	.seemore a {
+		text-align: center;
+		border: 1px solid white;
+		background-color: white;
+		border-radius: 20px;
+		height: 41px;
+		justify-content: center;
+		align-items: center;
+		display: flex;
+		width: 311px;
+		font-family: 'RobotoSlab-Regular';
+		color: #6f6d6d;
+	}
+	.seemore {
+		justify-content: center;
+		align-items: center;
+		padding-bottom: 20px;
+		float: right;
+		margin-top: -65px;
+	}
+	.news-home-lauphan {
+	    background: url(Union.png)/*tpa=https://phanexpress.com/WebLauPhan/banner/Union.png*/;
+	    background-position: center center;
+	    background-repeat: no-repeat;
+	    background-size: 100% 100%;
+	    padding-top: 159px;
+	}
+}

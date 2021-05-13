@@ -1,0 +1,270 @@
+/*1620426908000*/
+.brand-img{max-width: 120px}
+.title-category {
+	font-size: 20px;
+	color: #162938;
+	font-family: RobotoSlab-Bold;
+	text-transform: uppercase;
+	padding-bottom: 25px;
+	padding-top: 25px;
+	text-align: center;
+}
+
+.text-content-trademark {
+	max-width: 555px;
+	margin: auto;
+	text-align: center;
+	color: white;
+	font-size: 15px;
+	font-family: 'RobotoSlab-Regular';
+	padding: 20px;
+}
+
+.trademark-text-content-1 {
+	font-size: 15px;
+	color: #162938;
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+.trademark-main-content-1 {
+	margin-bottom: 30px;
+}
+
+.btn-trademark a {
+	margin-right: 14px;
+	box-shadow: 0 0 2.2px rgb(0 0 0/ 22%), 0 6.7px 5.3px rgb(0 0 0/ 15%), 0
+		12.5px 10px rgb(0 0 0/ 0%), 0 22.3px 17.9px rgb(0 0 0/ 0%), 0 41.8px
+		33.4px rgb(0 0 0/ 0%), 0 100px 80px rgb(0 0 0/ 0%);
+}
+
+.btn-res {
+	border: 1px solid white;
+	color: #e84a1b;
+	height: 33px;
+	border-radius: 45px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: white;
+	font-size: 14px;
+	font-family: RobotoSlab-Regular;
+	width: 133px;
+}
+
+.btn-pay {
+	border: 1px solid white;
+	background: white;
+	color: #e84a1b;
+	height: 33px;
+	border-radius: 45px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	text-align: center;
+	font-size: 14px;
+	font-family: RobotoSlab-Regular;
+	width: 133px;
+}
+
+.btn-pay img {
+	padding-left: 10px;
+}
+
+.title-app-banner {
+	font-size: 20px;
+	font-family: RobotoSlab-Bold;
+	padding-bottom: 37px;
+	padding-top: 33px;
+}
+
+.text-content-app-banner {
+	font-size: 14px;
+	font-family: 'RobotoSlab-Regular';
+}
+
+.img-app {
+	display: flex;
+	margin-top: 47px;
+}
+
+.img-app  div {
+	padding-right: 20px;
+}
+
+.trademark-box-left-1 {
+	box-shadow: 0 0 2.2px rgb(0 0 0/ 56%), 0 6.7px 5.3px rgb(0 0 0/ 34%), 0
+		12.5px 10px rgb(0 0 0/ 0%), 0 22.3px 17.9px rgb(0 0 0/ 0%), 0 41.8px
+		33.4px rgb(0 0 0/ 0%), 0 100px 80px rgb(0 0 0/ 0%);
+}
+
+.trademark-box-right-1 {
+	box-shadow: 0 0 2.2px rgb(0 0 0/ 56%), 0 6.7px 5.3px rgb(0 0 0/ 34%), 0
+		12.5px 10px rgb(0 0 0/ 0%), 0 22.3px 17.9px rgb(0 0 0/ 0%), 0 41.8px
+		33.4px rgb(0 0 0/ 0%), 0 100px 80px rgb(0 0 0/ 0%);
+}
+
+.trademark-box-left-2 {
+	box-shadow: 0 0 2.2px rgb(0 0 0/ 56%), 0 6.7px 5.3px rgb(0 0 0/ 34%), 0
+		12.5px 10px rgb(0 0 0/ 0%), 0 22.3px 17.9px rgb(0 0 0/ 0%), 0 41.8px
+		33.4px rgb(0 0 0/ 0%), 0 100px 80px rgb(0 0 0/ 0%);
+}
+
+.trademark-box-right-2 {
+	box-shadow: 0 0 2.2px rgb(0 0 0/ 56%), 0 6.7px 5.3px rgb(0 0 0/ 34%), 0
+		12.5px 10px rgb(0 0 0/ 0%), 0 22.3px 17.9px rgb(0 0 0/ 0%), 0 41.8px
+		33.4px rgb(0 0 0/ 0%), 0 100px 80px rgb(0 0 0/ 0%);
+}
+.qr_os img {
+	width: 80px;
+}
+@media only screen and (max-width: 768px) {
+	.trademark-box{margin-bottom: 20px}
+	.desktop {
+		display: none;
+	}
+	.main-thuong-hieu {
+		background-color: #dfdfdf;
+		padding-bottom: 40px;
+	}
+	.banner-trademark {
+		background: url(bannertrade-mb.png)/*tpa=https://lauphan.com/WebLauPhan/thuonghieu/bannertrade-mb.png*/;
+		background-color: #dfdfdf;
+		background-size: cover;
+		background-repeat: no-repeat;
+		color: white;
+	}
+	.img-trademark {
+		padding-bottom: 10px;
+		padding-top: 10px;
+		text-align: center;
+		height: 130px;
+	}
+	.app-payment {
+		font-size: 20px;
+	}
+	.trademark-box-left-1 {
+		background-color: #b93c3c;
+		margin-bottom: 20px;
+	}
+	.trademark-box-right-1 {
+		background-color: #ff7216;
+		margin-bottom: 20px;
+	}
+	.trademark-box-left-2 {
+		background-color: #11243e;
+		margin-bottom: 20px;
+	}
+	.trademark-box-right-2 {
+		background-color: #f9b51c;
+		margin-bottom: 20px;
+	}
+	.img-phone-banner {
+		padding-top: 35px;
+	}
+	.text-content-trademark {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.text-cms {
+		font-size: 20px;
+		font-family: RobotoSlab-Bold;
+		color: white;
+		text-transform: uppercase;
+	}
+	.mobile-trademrk-content {
+		display: flex;
+	}
+	.mobile-trademrk-content-left {
+		width: 50%;
+		text-align: center;
+	}
+	.mobile-trademrk-content-right {
+		width: 50%;
+	}
+	.title-app-banner-mb {
+		font-size: 14px;
+		font-family: 'RobotoSlab-Bold';
+		text-align: center;
+		padding-bottom: 20px;
+		padding-top: 20px;
+	}
+	.mobile-trademrk-content-left div {
+		padding-bottom: 11px;
+	}
+	.btn-trademark {
+		display: flex;
+		justify-content: center;
+		padding-bottom: 30px;
+		margin-top: 30px;
+	}
+}
+
+@media only screen and (min-width: 769px) {
+	.trademark-box{margin-bottom: 30px}
+	.mobile {
+		display: none;
+	}
+	.banner-trademark {
+		background: url(bannertrade.jpg)/*tpa=https://lauphan.com/WebLauPhan/thuonghieu/bannertrade.jpg*/;
+		color: white;
+		background-position: center top;
+		background-size: cover;
+		margin-top: 100px;
+		height: 602px;
+	}
+	.img-trademark {
+		text-align: center;
+		height: 130px;
+		padding-top: 10px;
+	}
+	.main-banner-trademark {
+		padding-top: 200px;
+	}
+	.text-content-trademark {
+		height: 190px;
+	}
+	.text-cms {
+		font-size: 22px;
+		font-family: RobotoSlab-Bold;
+		color: white;
+		text-transform: uppercase;
+	}
+	.app-payment {
+		font-size: 20px;
+		font-size: 30px;
+	}
+	.trademark-home-lauphan-1 {
+		display: flex;
+	}
+	.trademark-box-left-1 {
+		background-color: #b93c3c;
+		margin-bottom: 30px;
+	}
+	.trademark-box-right-1 {
+		background-color: #ff7216;
+		margin-bottom: 30px;
+	}
+	.trademark-home-lauphan-2 {
+		display: flex;
+	}
+	.trademark-box-left-2 {
+		background-color: #11243e;
+		margin-bottom: 30px;
+	}
+	.trademark-box-right-2 {
+		background-color: #f9b51c;
+		margin-bottom: 30px;
+	}
+	.img-phone-banner {
+		padding-top: 35px;
+		padding-left: 160px;
+	}
+	.btn-trademark {
+		display: flex;
+		justify-content: center;
+		padding-bottom: 30px;
+		margin-top: 80px;
+	}
+}

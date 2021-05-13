@@ -1,0 +1,192 @@
+/*1620426908000*/
+.form-control {
+	border: none;
+	border-bottom: 1px solid;
+	border-radius: 0px !important;
+}
+#address{padding-top: 30px;font-size: 14px}
+
+.title-chose {
+	font-family: 'RobotoSlab-Medium';
+}
+
+.chose-thuong-hieu {
+	display: flex;
+	padding-top: 25px;
+}
+
+.form-chose-coso {
+	padding-top: 30px;
+}
+
+.form-chose-coso label {
+	font-family: 'RobotoSlab-Medium';
+}
+
+.seeadd {
+	transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+	box-sizing: border-box;
+	appearance: none;
+	border: 1px solid #d6d6d6;
+	border-radius: 25px;
+	color: white;
+	cursor: pointer;
+	display: flex;
+	align-self: center;
+	line-height: 1;
+	text-decoration: none;
+	text-align: center;
+	width: 100%;
+	background-color: #d6d6d6;
+	font-family: 'RobotoSlab-Medium';
+	justify-content: center;
+	height: 45px;
+	align-items: center;
+}
+
+.btn:hover, .btn:focus {
+	color: #fff;
+	outline: 0;
+}
+
+.seeadd:hover {
+	box-shadow: 0 0 40px 40px #e84a1b inset;
+}
+
+.seeadd {
+	-webkit-transition: box-shadow 300ms ease-in-out, color 300ms
+		ease-in-out;
+	transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.form-control:focus {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border-color: black;
+}
+#localShow {
+	    text-align: center;
+	    padding-top: 32px;
+	    padding-bottom:32px;
+}
+.address {
+    text-align: center;
+    font-size: 14px;
+    font-family: 'RobotoSlab-Regular';
+    margin-top: 25px;
+    padding-bottom: 25px;	
+}
+
+@media only screen and (min-width: 769px) {
+	.lp-address-page {
+		background-image: url(bg-add.png)/*tpa=https://phanexpress.com/WebLauPhan/order/bg-add.png*/;
+		height: 788px;
+		background-size: cover;
+		background-repeat: no-repeat;
+		margin-bottom: 500px;
+	}
+	.title-address {
+		font-size: 20px;
+		text-transform: uppercase;
+		font-family: 'RobotoSlab-Bold';
+		color: white;
+		padding-top: 94px;
+		padding-bottom: 60px
+	}
+	.main-content-address {
+		display: flex;
+		background-color: white;
+		border-radius: 15px;
+		padding: 10px;
+		box-shadow: 0 0 2.2px rgb(0 0 0/ 56%), 0 6.7px 5.3px rgb(0 0 0/ 34%), 0
+			12.5px 10px rgb(0 0 0/ 0%), 0 22.3px 17.9px rgb(0 0 0/ 0%), 0 41.8px
+			33.4px rgb(0 0 0/ 0%), 0 100px 80px rgb(0 0 0/ 0%);
+	}
+	.main-content-address-left {
+		width: 35%;
+		padding: 35px;
+	}
+	.main-map {
+		width: 65%;
+	}
+	.btn-submit-add {
+		padding-top: 30px;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.lp-address-page {
+		background-image: url(bg-add-mb.png)/*tpa=https://phanexpress.com/WebLauPhan/order/bg-add-mb.png*/;
+		height: auto;
+		background-size: 100%;
+		background-repeat: no-repeat;
+		margin-bottom: 150px;
+	}
+	.title-address {
+		font-size: 20px;
+		text-transform: uppercase;
+		font-family: 'RobotoSlab-Bold';
+		color: white;
+		padding-top: 55px;
+		padding-bottom: 30px;
+	}
+	.main-content-address {
+		background-color: white;
+		border-radius: 15px;
+		padding: 10px;
+		box-shadow: 0 0 2.2px rgb(0 0 0/ 56%), 0 6.7px 5.3px rgb(0 0 0/ 34%), 0
+			12.5px 10px rgb(0 0 0/ 0%), 0 22.3px 17.9px rgb(0 0 0/ 0%), 0 41.8px
+			33.4px rgb(0 0 0/ 0%), 0 100px 80px rgb(0 0 0/ 0%);
+	}
+	.btn-submit-add {
+		padding-bottom: 30px;
+		padding-top: 50px;
+	}
+}
+
+.border-bottom-header-dc:after {
+	content: '';
+	position: absolute;
+	width: 8%;
+	bottom: 15px;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+}
+
+#btn1 {
+	padding-top:3px;
+	border: 1px solid white;
+    border-radius: 20px;
+    height: 36px;
+    width: 132px;
+    font-family: 'RobotoSlab-Bold';
+    color: white;
+    background-color: #b7b7b7;
+}
+
+#btn2 {
+	padding-top:3px;
+	border: 1px solid white;
+    border-radius: 20px;
+    height: 36px;
+    width: 132px;
+    font-family: 'RobotoSlab-Bold';
+    color: white;
+    background-color: #b7b7b7;
+}
+
+#btn1 a{
+	 padding-left: 12px;
+	 font-size: 14px;
+	 color: white;
+}
+
+#btn2 a {
+	padding-left: 12px;
+	 font-size: 14px;
+	 color: white;
+}
+.chose-thuong-hieu a img {
+	margin-top: -3px;
+}
