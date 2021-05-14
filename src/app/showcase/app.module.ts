@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,6 +32,7 @@ import { AppConfigComponent } from './app.config.component';
 import { AppFooterComponent } from './app.footer.component';
 import { AppInputStyleSwitchModule } from './app.inputstyleswitch.component';
 import { AppDemoActionsModule } from './app.demoactions.component';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
     declarations: [
@@ -68,8 +69,21 @@ import { AppDemoActionsModule } from './app.demoactions.component';
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
-        CarService,CountryService,EventService,NodeService,IconService,CustomerService,PhotoService,VersionService,AppConfigService, ProductService
+        CarService,
+        CountryService,
+        EventService,
+        NodeService,
+        IconService,
+        CustomerService,
+        PhotoService,
+        VersionService,
+        AppConfigService,
+        ProductService,
+        MessageService,
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    schemas:[
+        CUSTOM_ELEMENTS_SCHEMA
+    ],
 })
 export class AppModule { }

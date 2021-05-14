@@ -1,34 +1,54 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { Declare } from '../declare';
 
 
-interface NameCode {
-  name: string,
-  code: string
+interface Center {
+    code?: string,
+    ngayThem?: Date,
+    ngayChinhSua?: Date,
+    nguoiThem?: string,
+    nguoiChinhSua?: string,
+    suDung?: number,
+    hinhAnh?: string,
+    ten?: string,
+    diaChi?: string,
+    kieuChiNhanh?: number
 }
 
 @Component({
-  selector: 'app-order-table',
   templateUrl: './order-table.component.html',
   styleUrls: ['./order-table.component.scss'],
+  providers:[
+    MessageService,
+  ],
 })
 
 export class OrderTableComponent implements OnInit {
-  selected: NameCode;
-  listSelect: NameCode[];
-  constructor(private elementRef: ElementRef) {
-    this.listSelect = [
-      { name: "Cơ sở Nguyễn Trãi", code: "NT" },
-      { name: "Cơ sở Hoàng Quốc Việt", code: "HQV" },
-      { name: "Cơ sở Nguyễn Trí Thanh", code: "NTT" },
-      { name: "Cơ sở Lê Lợi", code: "LL" },
-      { name: "Cơ sở Cầu giấy", code: "CG" },
-    ];
+  selected: Center;
+  centers: Center[];
+  constructor(private elementRef: ElementRef, private messageService: MessageService, private http: HttpClient) {
+  }
+
+  getCenter() {
+      var result = this.http.get<Center[]>(Declare.serverApiPath + 'v1.0/ChiNhanh/GetAll').toPromise().then(
+          (data: Center[]) => {
+            this.centers = data;
+          }
+      );
+  }
+
+  showToast(){
+    this.messageService.add({ severity:'success', summary: 'Success', detail: 'hi mina' });
   }
 
   ngOnInit() {
+    this.getCenter();
+
     var s = document.createElement("script");
     s.type = "text/javascript";
-    s.textContent = `
+    s.text = `
     $("#newUserInfo-Birthday").mask("99/99/9999");
     $.validator.addMethod(
         "DOBFormatValidate",

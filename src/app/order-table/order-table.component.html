@@ -1,3 +1,4 @@
+<p-toast position="bottom-right"></p-toast>
 <div id="wrapper-content">
     <div class="portlet-boundary portlet-boundary_LPLogin_ portlet-static portlet-static-end decorate" id="p_p_id_LPLogin_INSTANCE_#portlet_">
         <span id="p_LPLogin_INSTANCE_#portlet"></span>
@@ -102,32 +103,9 @@
                                                             <div class="col-12">
                                                                 <div class="newUserInfo-input-div">
                                                                     <select class="form-control newUserInfo-input" id="newUserInfo-District" name="newUserInfoDistrict">
-                                                                                    <option value="1">Hoàn Kiếm</option>
-
-                                                                                    <option value="2">Đống Đa</option>
-
-                                                                                    <option value="3">Hoàng Mai</option>
-
-                                                                                    <option value="4">Ba Đình</option>
-
-                                                                                    <option value="5">Hai Bà Trưng</option>
-
-                                                                                    <option value="6">Thanh Xuân</option>
-
-                                                                                    <option value="7">Long Biên</option>
-
-                                                                                    <option value="8">Nam Từ Liêm</option>
-
-                                                                                    <option value="9">Bắc Từ Liêm</option>
-
-                                                                                    <option value="10">Tây Hồ</option>
-
-                                                                                    <option value="11">Cầu Giấy</option>
-
-                                                                                    <option value="12">Hà Đông</option>
-
-                                                                                    <option value="13">Khác</option>
-                                                                                </select>
+                                                                        <option value="-1">Chọn</option>
+                                                                        <option *ngFor="let i of centers" [ngValue]="i.code">{{i.ten}}</option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                             <div class="col-12">
@@ -190,20 +168,9 @@
                                                         <div class="form-cam-order">
                                                             <label>Cơ sở</label>
                                                             <select id="selectCoso" class="form-control">
-                                                                            <option value="-1">Chọn</option>
-
-                                                                            <option value="5dec91ac20d9c652b9a3bf6a">Lẩu Phan Giải Phóng</option>
-
-                                                                            <option value="5b86181d441ef51234e765da">Lẩu Phan Hoàng Quốc Việt</option>
-
-                                                                            <option value="5cae031766f14c11c86e9794">Lẩu Phan Láng Hạ </option>
-
-                                                                            <option value="5dca1597752ff73fc8851a31">Lẩu Phan Phùng Khoang</option>
-
-                                                                            <option value="5cae02ce66f14c11c86e9792">Lẩu Phan Thượng Đình </option>
-
-                                                                            <option value="5b7b8b04af75930ac0ca879c">Lẩu Phan Đào Duy Anh</option>
-                                                                        </select>
+                                                                <option value="-1">Chọn</option>
+                                                                <option *ngFor="let i of centers" [ngValue]="i.code">{{i.ten}}</option>
+                                                            </select>
                                                             <div class="validate-error" id="messageLocation"></div>
                                                             <div id="address"></div>
                                                             <div class="direct">
@@ -452,7 +419,7 @@
                                                         <div class="validate-error" id="messageSDT"></div>
 
                                                         <div class="btn-lp">
-                                                            <button class="btn-datmua" id="btn-datban">Đặt bàn</button>
+                                                            <button (click)="showToast()" class="btn-datmua" id="btn-datban">Đặt bàn</button>
                                                             <button class="btn-datmua btn-loading" id="btn-datban-loading">
                                                                 <img src="../../assets/kassets/dashboard/loading.svg" tppabs="https://phanexpress.com/WebLauPhan/common/loading.svg" />
                                                             </button>
