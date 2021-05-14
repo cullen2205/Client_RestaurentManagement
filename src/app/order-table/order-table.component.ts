@@ -1,3 +1,4 @@
+import { Time } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
@@ -26,18 +27,26 @@ interface Center {
 })
 
 export class OrderTableComponent implements OnInit {
-  selected: Center = {};
+  selected: any = -1;
   centers: Center[] = [];
+  peopleRange: number[] = [];
+  timeRange: Time[] = [];
   constructor(private elementRef: ElementRef, private messageService: MessageService, private http: HttpClient) {
-
+    
   }
 
   getCenter() {
-      var result = this.http.get<Center[]>(Declare.serverApiPath + 'v1.0/ChiNhanh/GetAll').toPromise().then(
+      var result = this.http.get(Declare.serverApiPath + 'v2.0/Order').toPromise().then(
           (data: any) => {
             switch (data.status) {
                 case 200:
-                    this.centers = data.data;
+                    this.centers = data.data.centers;
+                    for (let index = data.data.peopleRange[0]; index <= data.data.peopleRange[1]; index++) {
+                        this.peopleRange.push(index);
+                    }
+                    for (let index = data.data.times.length-1; index >= 0; index--) {
+                        this.timeRange.push(data.data.times[index]);
+                    }
                     break;
                 case 400:
                     this.messageService.add({ severity:'error', summary: 'Error', detail: data.message });
@@ -52,7 +61,6 @@ export class OrderTableComponent implements OnInit {
   }
 
   showToast(){
-    console.log(this.selected.ten);
     this.messageService.add({severity:'success', summary: 'Success', detail: 'Message Content'});
   }
 
