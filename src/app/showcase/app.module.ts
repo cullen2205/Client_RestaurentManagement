@@ -4,7 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ButtonModule } from 'primeng/button';
@@ -54,6 +55,8 @@ import { MessageService } from 'primeng/api';
         AppFooterComponent,
     ],
     imports: [
+        CommonModule,
+        BrowserModule,
         FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
