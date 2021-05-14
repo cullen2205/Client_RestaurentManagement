@@ -26,26 +26,41 @@ interface Center {
 })
 
 export class OrderTableComponent implements OnInit {
-  selected: Center;
-  centers: Center[];
+  selected: Center = {};
+  centers: Center[] = [];
   constructor(private elementRef: ElementRef, private messageService: MessageService, private http: HttpClient) {
+
   }
 
   getCenter() {
       var result = this.http.get<Center[]>(Declare.serverApiPath + 'v1.0/ChiNhanh/GetAll').toPromise().then(
-          (data: Center[]) => {
-            this.centers = data;
+          (data: any) => {
+            switch (data.status) {
+                case 200:
+                    this.centers = data.data;
+                    break;
+                case 400:
+                    this.messageService.add({ severity:'error', summary: 'Error', detail: data.message });
+                    break;
+                default:
+                    break;
+            }
           }
-      );
+      ).catch((e)=>{
+        this.messageService.add({ severity:'error', summary: 'Error', detail: 'Đã có lỗi khi cố gắng kết nối tới server.\nNếu liên tục xảy ra, xin hãy liên hệ tới bộ phận quản lý.' });
+      });
   }
 
   showToast(){
-    this.messageService.add({ severity:'success', summary: 'Success', detail: 'hi mina' });
+    console.log(this.selected.ten);
+    this.messageService.add({severity:'success', summary: 'Success', detail: 'Message Content'});
   }
 
   ngOnInit() {
     this.getCenter();
+  }
 
+  settingScripts(){
     var s = document.createElement("script");
     s.type = "text/javascript";
     s.text = `
@@ -54,7 +69,7 @@ export class OrderTableComponent implements OnInit {
         "DOBFormatValidate",
         function(value, element) {
             return value.match(
-                /(?:(?:(?:0[1-9]|1\d|2[0-8])\/(?:0[1-9]|1[0-2])|(?:29|30)\/(?:0[13-9]|1[0-2])|31\/(?:0[13578]|1[02]))\/[1-9]\d{3}|29\/02(?:\/[1-9]\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00))/
+                /(?:(?:(0[1-9]|1\d|2[0-8])\/(?:0[1-9]|1[0-2])|(?:29|30)\/(?:0[13-9]|1[0-2])|31\/(?:0[13578]|1[02]))\/[1-9]\d{3}|29\/02(?:\/[1-9]\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00))/
             );
         },
         "Ngày sinh không hợp lệ"
@@ -652,5 +667,4 @@ export class OrderTableComponent implements OnInit {
     }`;
     this.elementRef.nativeElement.appendChild(s);
   }
-
 }

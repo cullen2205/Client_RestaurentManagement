@@ -1,4 +1,4 @@
-<p-toast position="bottom-right"></p-toast>
+<p-toast position="top-right"></p-toast>
 <div id="wrapper-content">
     <div class="portlet-boundary portlet-boundary_LPLogin_ portlet-static portlet-static-end decorate" id="p_p_id_LPLogin_INSTANCE_#portlet_">
         <span id="p_LPLogin_INSTANCE_#portlet"></span>
@@ -112,8 +112,8 @@
                                                                 <div class="text-center">
                                                                     <button type="button" class="bnt-sendotp" id="newUserInfo-submit">TIẾP TỤC</button>
                                                                     <button type="button" class="bnt-sendotp btn-loading" id="newUserInfo-loading">
-                                                                                    <img src="../../assets/kassets/dashboard/loading.svg" tppabs="https://phanexpress.com/WebLauPhan/common/loading.svg" />
-                                                                                </button>
+                                                                        <img src="../../assets/kassets/dashboard/loading.svg" tppabs="https://phanexpress.com/WebLauPhan/common/loading.svg" />
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -167,9 +167,9 @@
                                                         </div>
                                                         <div class="form-cam-order">
                                                             <label>Cơ sở</label>
-                                                            <select id="selectCoso" class="form-control">
+                                                            <select [(ngModel)]="selected" id="selectCoso" class="form-control">
                                                                 <option value="-1">Chọn</option>
-                                                                <option *ngFor="let i of centers" [ngValue]="i.code">{{i.ten}}</option>
+                                                                <option *ngFor="let i of centers" [ngValue]="i">{{i.ten}}</option>
                                                             </select>
                                                             <div class="validate-error" id="messageLocation"></div>
                                                             <div id="address"></div>
@@ -402,8 +402,8 @@
                                                                         <img src="../../assets/kassets/dashboard/loading-icon.svg" tppabs="https://phanexpress.com/WebLauPhan/loading-icon.svg" />
                                                                     </div>
                                                                     <select id="selectHour" class="form-control">
-                                                                                    <option value="0">Chọn</option>
-                                                                                </select>
+                                                                        <option value="0">Chọn</option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                         </div>
