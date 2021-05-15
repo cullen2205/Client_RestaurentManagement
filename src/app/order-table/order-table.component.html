@@ -167,9 +167,9 @@
                                                         </div>
                                                         <div class="form-cam-order">
                                                             <label>Cơ sở</label>
-                                                            <select [(ngModel)]="selected" id="selectCoso" class="form-control">
+                                                            <select [(ngModel)]="requestForm.maChiNhanh" id="selectCoso" class="form-control">
                                                                 <option value="-1" selected>Chọn</option>
-                                                                <option *ngFor="let i of centers" [ngValue]="i">{{i.ten}}</option>
+                                                                <option *ngFor="let i of centers" [ngValue]="i.code">{{i.ten}}</option>
                                                             </select>
                                                             <div class="validate-error" id="messageLocation"></div>
                                                             <div id="address"></div>
@@ -184,7 +184,7 @@
                                                     <div class="col-12 col-md-4">
                                                         <div class="form-cam-order">
                                                             <label>Số người</label>
-                                                            <select id="selectSoNguoi" class="form-control">
+                                                            <select [(ngModel)]="requestForm.soNguoi" id="selectSoNguoi" class="form-control">
                                                                 <option *ngFor="let item of peopleRange">{{item}}</option>
                                                             </select>
                                                         </div>
@@ -192,7 +192,7 @@
                                                             <div class="ngay">
                                                                 <div class="form-cam-order">
                                                                     <label>Ngày</label>
-                                                                    <select id="selectDay" class="form-control">
+                                                                    <select [(ngModel)]="selectedDay" (ngModelChange)="dayChange($event)" id="selectDay" class="form-control">
                                                                         <option value="0" selected>Hôm nay</option>
                                                                         <option value="1">Ngày mai</option>
                                                                         <option value="2">Ngày kia</option>
@@ -205,9 +205,9 @@
                                                                     <div id="loading-time">
                                                                         <img src="../../assets/kassets/dashboard/loading-icon.svg" tppabs="https://phanexpress.com/WebLauPhan/loading-icon.svg" />
                                                                     </div>
-                                                                    <select id="selectHour" class="form-control">
+                                                                    <select [(ngModel)]="requestForm.ngayGio" id="selectHour" class="form-control">
                                                                         <option value="-1" selected>Chọn</option>
-                                                                        <option *ngFor="let item of timeRange">{{item | date:'HH:mm'}}</option>
+                                                                        <option *ngFor="let item of timeRange">{{item}}</option> <!--| date:'HH:mm'-->
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -216,15 +216,15 @@
                                                         <div class="form-cam-order pd-top-order"><label>Ghi chú</label> <input type="text" id="ghichu" class="form-control" /></div>
                                                     </div>
                                                     <div class="col-12 col-md-4">
-                                                        <div class="form-cam-order pd-mb"><label>Tên người đặt</label> <input id="nameOrder" type="text" placeholder="Nhập tên" class="form-control" value="" /></div>
+                                                        <div class="form-cam-order pd-mb"><label>Tên người đặt</label> <input id="nameOrder" type="text" placeholder="Nhập tên" class="form-control" [(ngModel)]="requestForm.tenNguoiDat" /></div>
                                                         <div class="validate-error" id="messageNameOrder"></div>
                                                         <div class="form-cam-order pd-top-order">
-                                                            <label>Số điện thoại</label> <input id="sdtOrder" type="text" placeholder="Nhập số điện thoại" class="form-control" onkeypress="return isNumberKey(event);" value="" />
+                                                            <label>Số điện thoại</label> <input id="sdtOrder" type="text" placeholder="Nhập số điện thoại" class="form-control" [(ngModel)]="requestForm.soDienThoai" />
                                                         </div>
                                                         <div class="validate-error" id="messageSDT"></div>
 
                                                         <div class="btn-lp">
-                                                            <button (click)="showToast()" class="btn-datmua" id="btn-datban">Đặt bàn</button>
+                                                            <button (click)="submit()" class="btn-datmua" id="btn-datban">Đặt bàn</button>
                                                             <button class="btn-datmua btn-loading" id="btn-datban-loading">
                                                                 <img src="../../assets/kassets/dashboard/loading.svg" tppabs="https://phanexpress.com/WebLauPhan/common/loading.svg" />
                                                             </button>
