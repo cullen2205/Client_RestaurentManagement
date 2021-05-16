@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy, CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -32,18 +32,21 @@ import { AppConfigComponent } from './app.config.component';
 import { AppFooterComponent } from './app.footer.component';
 import { AppInputStyleSwitchModule } from './app.inputstyleswitch.component';
 import { AppDemoActionsModule } from './app.demoactions.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppTopbarModule } from './app-topbar/app-topbar.module';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         AppNewsComponent,
-        AppTopBarComponent,
         AppMenuComponent,
         AppConfigComponent,
         AppFooterComponent
     ],
     imports: [
+        CommonModule,
+        BrowserModule,
         FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
@@ -56,6 +59,10 @@ import { AppDemoActionsModule } from './app.demoactions.component';
         TooltipModule,
         AppInputStyleSwitchModule,
         AppDemoActionsModule,
+        AppTopbarModule,
+    ],
+    exports:[
+        AppTopBarComponent,
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
