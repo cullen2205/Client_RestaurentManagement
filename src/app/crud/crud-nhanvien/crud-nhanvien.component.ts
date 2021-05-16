@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { NhanVien } from 'src/app/models/nhan-vien';
 import { NhanvienService } from 'src/app/services/nhanvien.service';
 
@@ -18,21 +18,19 @@ import { NhanvienService } from 'src/app/services/nhanvien.service';
 export class CrudNhanvienComponent implements OnInit {
 
     productDialog: boolean;
-
     products: NhanVien[];
-
     product: NhanVien;
-
     selectedProducts: NhanVien[];
-
     submitted: boolean;
-
     statuses: any[];
+    position: string;
+    exportColumns: any[];
 
     constructor(private dataService: NhanvienService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
     ngOnInit() {
         this.dataService.getAll().then(data => this.products = data);
+        this.exportColumns = this.products.map(col => ({code: col.code, imageUrl: col.image, name: col.name}));
 
         this.statuses = [
             { label: 'INSTOCK', value: 'instock' },
@@ -123,5 +121,61 @@ export class CrudNhanvienComponent implements OnInit {
             id += chars.charAt(Math.floor(Math.random() * chars.length));
         }
         return id;
+    }
+    
+
+    exportPdf() {
+        import("jspdf").then(jsPDF => {
+            import("jspdf-autotable").then(x => {
+                const doc = new jsPDF.default(0,0);
+                doc.autoTable(this.exportColumns, this.products);
+                doc.save('products.pdf');
+            })
+        })
+    }
+
+    exportExcel() {
+        import("xlsx").then(xlsx => {
+            const worksheet = xlsx.utils.json_to_sheet(this.products);
+            const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+            const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+            this.saveAsExcelFile(excelBuffer, "products");
+        });
+    }
+
+    saveAsExcelFile(buffer: any, fileName: string): void {
+        import("file-saver").then(FileSaver => {
+            let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+            let EXCEL_EXTENSION = '.xlsx';
+            const data: Blob = new Blob([buffer], {
+                type: EXCEL_TYPE
+            });
+            FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+        });
+    }
+
+    confirmPosition(position: string) {
+        this.position = position;
+        this.confirmationService.confirm({
+            message: 'Hãy chọn định dạng xuất ra?',
+            header: 'Chọn định dạng',
+            icon: 'pi pi-info-circle',
+            acceptIcon: '',
+            accept: () => {
+                this.exportExcel();
+                this.messageService.add({severity:'success', summary:'Success', detail:'Xuất định dạng thành công!'});
+            },
+            reject: (type) => {
+                switch(type) {
+                    case ConfirmEventType.REJECT:
+                        this.messageService.add({severity:'warn', summary:'Rejected', detail:'You have rejected'});
+                    break;
+                    case ConfirmEventType.CANCEL:
+                        this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
+                    break;
+                }
+            },
+            key: "positionDialog"
+        });
     }
 }

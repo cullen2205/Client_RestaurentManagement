@@ -10,7 +10,7 @@
 
             <ng-template pTemplate="right">
                 <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload>
-                <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+                <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="confirmPosition('top-right')"></button>
             </ng-template>
         </p-toolbar>
 
@@ -139,4 +139,5 @@
     </p-dialog>
 
     <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    <p-confirmDialog [style]="{width: '50vw'}" key="positionDialog" [position]="position" [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
 </div>
