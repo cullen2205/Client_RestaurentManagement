@@ -1,6 +1,4 @@
 export interface NhanVien {
-    category?: string;
-
     code?:	string;
     ngayThem?:	string;
     ngayChinhSua?:	string;

@@ -30,12 +30,12 @@ export class CrudNhanvienComponent implements OnInit {
 
     ngOnInit() {
         this.dataService.getAll().then(data => this.products = data);
-        this.exportColumns = this.products.map(col => ({code: col.code, imageUrl: col.hinhAnh, name: col.ten}));
+        this.exportColumns = this.products;
 
         this.statuses = [
-            { label: 'Không xác định', value: -1 },
-            { label: 'Không hoạt động', value: 0 },
-            { label: 'Sử dụng', value: 1 }
+            { label: 'Không xác định', suDung: -1 },
+            { label: 'Không hoạt động', suDung: 0 },
+            { label: 'Sử dụng', suDung: 1 }
         ];
     }
 
@@ -157,13 +157,13 @@ export class CrudNhanvienComponent implements OnInit {
     confirmPosition(position: string) {
         this.position = position;
         this.confirmationService.confirm({
-            message: 'Hãy chọn định dạng xuất ra?',
-            header: 'Chọn định dạng',
+            message: 'Bạn có chắc muốn xuất ra excel?',
+            header: 'Xác nhận tải về',
             icon: 'pi pi-info-circle',
             acceptIcon: '',
             accept: () => {
                 this.exportExcel();
-                this.messageService.add({severity:'success', summary:'Success', detail:'Xuất định dạng thành công!'});
+                this.messageService.add({severity:'success', summary:'Success', detail:'Thực hiện thành công!'});
             },
             reject: (type) => {
                 switch(type) {

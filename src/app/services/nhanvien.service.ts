@@ -68,7 +68,6 @@ export class NhanvienService {
         const nhanvien: NhanVien = {
             code: this.generateId(),
             ten: this.generateName(),
-            category: "Product Category",
             suDung: 1,
             kinhNghiemLamViec: this.generateRating()
         };

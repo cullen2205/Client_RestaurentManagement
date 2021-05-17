@@ -10,7 +10,8 @@
 
             <ng-template pTemplate="right">
                 <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload>
-                <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="confirmPosition('top-right')"></button>
+                <button pButton pRipple type="button" label="Xuất excel" class="p-button-help p-mr-2" icon="pi pi-upload" (click)="confirmPosition('top-right')"></button>
+                <button pButton pRipple type="button" label="Lưu toàn bộ" class="p-button-success p-mr-2" icon="pi pi-save"></button>
             </ng-template>
         </p-toolbar>
 
@@ -33,8 +34,14 @@
                     <th pSortableColumn="ten">Họ tên
                         <p-sortIcon field="ten"></p-sortIcon>
                     </th>
+                    <th pSortableColumn="soCMND">Số CMND
+                        <p-sortIcon field="soCMND"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="email">Email
+                        <p-sortIcon field="email"></p-sortIcon>
+                    </th>
                     <th>Hình ảnh</th>
-                    <th pSortableColumn="kinhNghiemLamViec">Kinh nghiệm làm việc
+                    <th pSortableColumn="kinhNghiemLamViec">Kinh nghiệm
                         <p-sortIcon field="kinhNghiemLamViec"></p-sortIcon>
                     </th>
                     <th pSortableColumn="suDung">Trạng thái
@@ -49,11 +56,13 @@
                         <p-tableCheckbox [value]="product"></p-tableCheckbox>
                     </td>
                     <td>{{product.ten}}</td>
+                    <td>{{product.soCMND}}</td>
+                    <td>{{product.email}}</td>
                     <td><img [src]="product.hinhAnh" [alt]="product.ten" width="100" class="p-shadow-4" /></td>
                     <td>
                         <p-rating [ngModel]="product.kinhNghiemLamViec" [readonly]="true" [cancel]="false"></p-rating>
                     </td>
-                    <td><span [class]="'product-badge status-' + (product.suDung ? product.suDung : '')">{{product.suDung}}</span></td>
+                    <td><span>{{product.suDung}}</span></td>
                     <td>
                         <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="edit(product)"></button>
                         <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteOne(product)"></button>
@@ -62,7 +71,7 @@
             </ng-template>
             <ng-template pTemplate="summary">
                 <div class="p-d-flex p-ai-center p-jc-between">
-                    In total there are {{products ? products.length : 0 }} products.
+                    In total there are {{products ? products.length : 0 }} records.
                 </div>
             </ng-template>
         </p-table>
@@ -70,25 +79,35 @@
 
     <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true" styleClass="p-fluid">
         <ng-template pTemplate="content">
-            <img [src]="'assets/showcase/images/demo/product/' + product.hinhAnh" [alt]="product.hinhAnh" class="product-image" *ngIf="product.hinhAnh">
+            <img [src]="product.hinhAnh" [alt]="product.hinhAnh" class="product-image" *ngIf="product.hinhAnh">
             <div class="p-field">
                 <label for="ten">Họ và tên</label>
                 <input type="text" pInputText id="ten" [(ngModel)]="product.ten" required autofocus />
                 <small class="p-error" *ngIf="submitted && !product.ten">Bắt buộc điền tên.</small>
             </div>
+            <div class="p-field">
+                <label for="soCMND">Số CMND</label>
+                <input type="text" pInputText id="soCMND" [(ngModel)]="product.soCMND" required autofocus />
+                <small class="p-error" *ngIf="submitted && !product.soCMND">Bắt buộc điền số CMND</small>
+            </div>
+            <div class="p-field">
+                <label for="email">Email</label>
+                <input type="text" pInputText id="email" [(ngModel)]="product.email" required autofocus />
+                <small class="p-error" *ngIf="submitted && !product.email">Bắt buộc điền email.</small>
+            </div>
 
             <div class="p-field">
                 <label for="suDung">Trạng thái</label>
-                <p-dropdown [(ngModel)]="product.suDung" inputId="suDung" [options]="statuses" placeholder="Select">
-                    <ng-template let-option pTemplate="item">
-                        <span [class]="'product-badge status-' + option.value">{{option.label}}</span>
+                <p-dropdown (value)="product.suDung" [(ngModel)]="product.suDung" (ngModelChange)="product.suDung=$event.suDung" optionLabel="label" inputId="suDung" [options]="statuses" placeholder="Select">
+                    <ng-template let-item pTemplate="item">
+                        <span>{{item.label}}</span>
                     </ng-template>
                 </p-dropdown>
             </div>
 
             <div class="p-formgrid p-grid">
                 <div class="p-field p-col">
-                    <label for="quantity">Kinh nghiệm làm việc</label>
+                    <label for="quantity">Kinh nghiệm</label>
                     <p-inputNumber id="quantity" [(ngModel)]="product.kinhNghiemLamViec"></p-inputNumber>
                 </div>
             </div>
