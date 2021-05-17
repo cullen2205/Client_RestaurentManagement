@@ -17,10 +17,10 @@ import { NhanvienService } from 'src/app/services/nhanvien.service';
 })
 export class CrudNhanvienComponent implements OnInit {
 
-    productDialog: boolean;
-    products: NhanVien[];
-    product: NhanVien;
-    selectedProducts: NhanVien[];
+    nhanVienDialog: boolean;
+    nhanViens: NhanVien[];
+    nhanVien: NhanVien;
+    selectedNhanViens: NhanVien[];
     submitted: boolean;
     statuses: any[];
     position: string;
@@ -29,8 +29,8 @@ export class CrudNhanvienComponent implements OnInit {
     constructor(private dataService: NhanvienService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
     ngOnInit() {
-        this.dataService.getAll().then(data => this.products = data);
-        this.exportColumns = this.products;
+        this.dataService.getAll().then(data => this.nhanViens = data);
+        this.exportColumns = this.nhanViens;
 
         this.statuses = [
             { label: 'Không xác định', suDung: -1 },
@@ -40,24 +40,24 @@ export class CrudNhanvienComponent implements OnInit {
     }
 
     openNew() {
-        this.product = {};
+        this.nhanVien = {};
         this.submitted = false;
-        this.productDialog = true;
+        this.nhanVienDialog = true;
     }
 
     edit(nhanVien: NhanVien) {
-        this.product = { ...nhanVien };
-        this.productDialog = true;
+        this.nhanVien = { ...nhanVien };
+        this.nhanVienDialog = true;
     }
 
     deleteMulti() {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete the selected products?',
+            message: 'Are you sure you want to delete the selected nhanViens?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.products = this.products.filter(val => !this.selectedProducts.includes(val));
-                this.selectedProducts = null;
+                this.nhanViens = this.nhanViens.filter(val => !this.selectedNhanViens.includes(val));
+                this.selectedNhanViens = null;
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
             }
         });
@@ -69,43 +69,43 @@ export class CrudNhanvienComponent implements OnInit {
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.products = this.products.filter(val => val.code !== nhanVien.code);
-                this.product = {};
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
+                this.nhanViens = this.nhanViens.filter(val => val.code !== nhanVien.code);
+                this.nhanVien = {};
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Xoá', life: 3000 });
             }
         });
     }
 
     hideDialog() {
-        this.productDialog = false;
+        this.nhanVienDialog = false;
         this.submitted = false;
     }
 
     save() {
         this.submitted = true;
 
-        if (this.product.ten.trim()) {
-            if (this.product.code) {
-                this.products[this.findIndexById(this.product.code)] = this.product;
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
+        if (this.nhanVien.ten.trim()) {
+            if (this.nhanVien.code) {
+                this.nhanViens[this.findIndexById(this.nhanVien.code)] = this.nhanVien;
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Cật nhật', life: 3000 });
             }
             else {
-                this.product.code = this.createId();
-                this.product.hinhAnh = 'product-placeholder.svg';
-                this.products.push(this.product);
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
+                this.nhanVien.code = this.createId();
+                this.nhanVien.hinhAnh = 'nhanVien-placeholder.svg';
+                this.nhanViens.push(this.nhanVien);
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Tạo mới', life: 3000 });
             }
 
-            this.products = [...this.products];
-            this.productDialog = false;
-            this.product = {};
+            this.nhanViens = [...this.nhanViens];
+            this.nhanVienDialog = false;
+            this.nhanVien = {};
         }
     }
 
     findIndexById(code: string): number {
         let index = -1;
-        for (let i = 0; i < this.products.length; i++) {
-            if (this.products[i].code === code) {
+        for (let i = 0; i < this.nhanViens.length; i++) {
+            if (this.nhanViens[i].code === code) {
                 index = i;
                 break;
             }
@@ -128,18 +128,18 @@ export class CrudNhanvienComponent implements OnInit {
         import("jspdf").then(jsPDF => {
             import("jspdf-autotable").then(x => {
                 const doc = new jsPDF.default(0,0);
-                doc.autoTable(this.exportColumns, this.products);
-                doc.save('products.pdf');
+                doc.autoTable(this.exportColumns, this.nhanViens);
+                doc.save('nhanViens.pdf');
             })
         })
     }
 
     exportExcel() {
         import("xlsx").then(xlsx => {
-            const worksheet = xlsx.utils.json_to_sheet(this.products);
+            const worksheet = xlsx.utils.json_to_sheet(this.nhanViens);
             const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
             const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-            this.saveAsExcelFile(excelBuffer, "products");
+            this.saveAsExcelFile(excelBuffer, "nhanViens");
         });
     }
 
@@ -163,7 +163,7 @@ export class CrudNhanvienComponent implements OnInit {
             acceptIcon: '',
             accept: () => {
                 this.exportExcel();
-                this.messageService.add({severity:'success', summary:'Success', detail:'Thực hiện thành công!'});
+                this.messageService.add({severity:'success', summary:'Success', detail:'Hoàn thành!'});
             },
             reject: (type) => {
                 switch(type) {
