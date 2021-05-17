@@ -51,9 +51,7 @@ export class NhanvienService {
     }
 
     async getAll() {
-        return this.http.get<any>(Declare.serverApiPath + 'v1.0/NhanVien/GetAll').toPromise()
-            .then(res => <NhanVien[]>res.data)
-            .then(data => { return data; });
+        return this.http.get<any>(Declare.serverApiPath + 'v1.0/NhanVien/GetAll').toPromise();
     }
 
     async put(record: NhanVien) {

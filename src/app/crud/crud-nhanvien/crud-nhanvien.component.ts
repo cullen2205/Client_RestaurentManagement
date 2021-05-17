@@ -30,7 +30,13 @@ export class CrudNhanvienComponent implements OnInit {
     constructor(private dataService: NhanvienService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
     ngOnInit() {
-        this.dataService.getAll().then(data => this.nhanViens = data).catch((e)=>{
+        this.dataService.getAll().then((data) => 
+        {
+            if(data.status == 200)
+                this.nhanViens = data.data;
+            else
+                this.messageService.add({severity:'error', summary:'Error', detail:'Đã có sự cố khi kết nối tới máy chủ, nếu lỗi liên tục xảy ra, xin hãy liên lạc với bộ phận hỗ trợ.'});
+        }).catch((e)=>{
             this.messageService.add({severity:'error', summary:'Error', detail:'Đã có sự cố khi kết nối tới máy chủ, nếu lỗi liên tục xảy ra, xin hãy liên lạc với bộ phận hỗ trợ.'});
         });
         this.exportColumns = this.nhanViens;
@@ -92,6 +98,7 @@ export class CrudNhanvienComponent implements OnInit {
     }
 
     async save() {
+        this.submitted = true;
         if (this.nhanVien.ten.trim()) {
             if (this.nhanVien.code) {
                 await this.dataService.put(this.nhanVien).then((data: any) => 
@@ -106,10 +113,10 @@ export class CrudNhanvienComponent implements OnInit {
             }
             else {
                 this.nhanVien.code = this.createId();
+                this.nhanVien.hinhAnh = 'nhanVien-placeholder.svg';
                 await this.dataService.post(this.nhanVien).then((data: any) => 
                 {
                     if(data.status == 200 && data.data > 0){
-                        this.nhanVien.hinhAnh = 'nhanVien-placeholder.svg';
                         this.nhanViens.push(this.nhanVien);
                         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Tạo mới', life: 3000 });
                     }
@@ -121,13 +128,12 @@ export class CrudNhanvienComponent implements OnInit {
             this.dialog = false;
             this.nhanVien = {};
         }
-        this.submitted = true;
     }
 
     findIndexById(code: string): number {
         let index = -1;
         for (let i = 0; i < this.nhanViens.length; i++) {
-            if (this.nhanViens[i].code === code) {
+            if (this.nhanViens[i].code == code) {
                 index = i;
                 break;
             }
