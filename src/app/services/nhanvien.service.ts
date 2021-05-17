@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Declare } from '../declare';
 import { NhanVien } from '../models/nhan-vien';
 
 @Injectable()
@@ -50,7 +51,7 @@ export class NhanvienService {
     }
 
     getAll() {
-        return this.http.get<any>('assets/showcase/data/products.json')
+        return this.http.get<any>(Declare.serverApiPath + 'v1.0/NhanVien/GetAll')
             .toPromise()
             .then(res => <NhanVien[]>res.data)
             .then(data => { return data; });
@@ -65,17 +66,14 @@ export class NhanvienService {
 
     generatePrduct(): NhanVien {
         const nhanvien: NhanVien = {
-            id: this.generateId(),
-            name: this.generateName(),
-            description: "Product Description",
-            price: this.generatePrice(),
-            quantity: this.generateQuantity(),
+            code: this.generateId(),
+            ten: this.generateName(),
             category: "Product Category",
-            inventoryStatus: this.generateStatus(),
-            rating: this.generateRating()
+            suDung: 1,
+            kinhNghiemLamViec: this.generateRating()
         };
 
-        nhanvien.image = nhanvien.name.toLocaleLowerCase().split(/[ ,]+/).join('-') + ".jpg";;
+        nhanvien.hinhAnh = nhanvien.ten.toLocaleLowerCase().split(/[ ,]+/).join('-') + ".jpg";;
         return nhanvien;
     }
 

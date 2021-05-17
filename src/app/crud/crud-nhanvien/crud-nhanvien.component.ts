@@ -30,12 +30,12 @@ export class CrudNhanvienComponent implements OnInit {
 
     ngOnInit() {
         this.dataService.getAll().then(data => this.products = data);
-        this.exportColumns = this.products.map(col => ({code: col.code, imageUrl: col.image, name: col.name}));
+        this.exportColumns = this.products.map(col => ({code: col.code, imageUrl: col.hinhAnh, name: col.ten}));
 
         this.statuses = [
-            { label: 'INSTOCK', value: 'instock' },
-            { label: 'LOWSTOCK', value: 'lowstock' },
-            { label: 'OUTOFSTOCK', value: 'outofstock' }
+            { label: 'Không xác định', value: -1 },
+            { label: 'Không hoạt động', value: 0 },
+            { label: 'Sử dụng', value: 1 }
         ];
     }
 
@@ -65,11 +65,11 @@ export class CrudNhanvienComponent implements OnInit {
 
     deleteOne(nhanVien: NhanVien) {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + nhanVien.name + '?',
+            message: 'Are you sure you want to delete ' + nhanVien.ten + '?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.products = this.products.filter(val => val.id !== nhanVien.id);
+                this.products = this.products.filter(val => val.code !== nhanVien.code);
                 this.product = {};
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
             }
@@ -84,14 +84,14 @@ export class CrudNhanvienComponent implements OnInit {
     save() {
         this.submitted = true;
 
-        if (this.product.name.trim()) {
-            if (this.product.id) {
-                this.products[this.findIndexById(this.product.id)] = this.product;
+        if (this.product.ten.trim()) {
+            if (this.product.code) {
+                this.products[this.findIndexById(this.product.code)] = this.product;
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
             }
             else {
-                this.product.id = this.createId();
-                this.product.image = 'product-placeholder.svg';
+                this.product.code = this.createId();
+                this.product.hinhAnh = 'product-placeholder.svg';
                 this.products.push(this.product);
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
             }
@@ -102,10 +102,10 @@ export class CrudNhanvienComponent implements OnInit {
         }
     }
 
-    findIndexById(id: string): number {
+    findIndexById(code: string): number {
         let index = -1;
         for (let i = 0; i < this.products.length; i++) {
-            if (this.products[i].id === id) {
+            if (this.products[i].code === code) {
                 index = i;
                 break;
             }
