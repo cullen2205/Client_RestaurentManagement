@@ -1,3 +1,4 @@
+import { DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { NhanVien } from 'src/app/models/nhan-vien';
@@ -17,7 +18,7 @@ import { NhanvienService } from 'src/app/services/nhanvien.service';
 })
 export class CrudNhanvienComponent implements OnInit {
 
-    nhanVienDialog: boolean;
+    dialog: boolean;
     nhanViens: NhanVien[];
     nhanVien: NhanVien;
     selectedNhanViens: NhanVien[];
@@ -29,7 +30,9 @@ export class CrudNhanvienComponent implements OnInit {
     constructor(private dataService: NhanvienService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
     ngOnInit() {
-        this.dataService.getAll().then(data => this.nhanViens = data);
+        this.dataService.getAll().then(data => this.nhanViens = data).catch((e)=>{
+            this.messageService.add({severity:'error', summary:'Error', detail:'Đã có sự cố khi kết nối tới máy chủ, nếu lỗi liên tục xảy ra, xin hãy liên lạc với bộ phận hỗ trợ.'});
+        });
         this.exportColumns = this.nhanViens;
 
         this.statuses = [
@@ -42,12 +45,12 @@ export class CrudNhanvienComponent implements OnInit {
     openNew() {
         this.nhanVien = {};
         this.submitted = false;
-        this.nhanVienDialog = true;
+        this.dialog = true;
     }
 
     edit(nhanVien: NhanVien) {
         this.nhanVien = { ...nhanVien };
-        this.nhanVienDialog = true;
+        this.dialog = true;
     }
 
     deleteMulti() {
@@ -68,38 +71,57 @@ export class CrudNhanvienComponent implements OnInit {
             message: 'Are you sure you want to delete ' + nhanVien.ten + '?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
-            accept: () => {
-                this.nhanViens = this.nhanViens.filter(val => val.code !== nhanVien.code);
-                this.nhanVien = {};
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Xoá', life: 3000 });
+            accept: async () => {
+                await this.dataService.deleteOne(nhanVien).then((data: any)=>{
+                    if(data.status == 200 && data.data > 0){
+                        this.nhanViens = this.nhanViens.filter(val => val.code !== nhanVien.code);
+                        this.nhanVien = {};
+                        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Xoá', life: 3000 });
+                    }
+                }).catch((e) =>
+                {
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Đã có lỗi khi cố gắng kết nối tới máy chủ, xin hãy thử lại sau.', life: 3000 });
+                });
             }
         });
     }
 
     hideDialog() {
-        this.nhanVienDialog = false;
+        this.dialog = false;
         this.submitted = false;
     }
 
-    save() {
-        this.submitted = true;
-
+    async save() {
         if (this.nhanVien.ten.trim()) {
             if (this.nhanVien.code) {
-                this.nhanViens[this.findIndexById(this.nhanVien.code)] = this.nhanVien;
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Cật nhật', life: 3000 });
+                await this.dataService.put(this.nhanVien).then((data: any) => 
+                {
+                    if(data.status == 200 && data.data > 0){
+                        this.nhanViens[this.findIndexById(this.nhanVien.code)] = this.nhanVien;
+                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Cật nhật', life: 3000 });
+                    }
+                }).catch((e)=>{
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: "Đã có lỗi khi cố gắng kết nối tới máy chủ. Vui lòng tải lại trang.", life: 3000 });
+                });
             }
             else {
                 this.nhanVien.code = this.createId();
-                this.nhanVien.hinhAnh = 'nhanVien-placeholder.svg';
-                this.nhanViens.push(this.nhanVien);
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Tạo mới', life: 3000 });
+                await this.dataService.post(this.nhanVien).then((data: any) => 
+                {
+                    if(data.status == 200 && data.data > 0){
+                        this.nhanVien.hinhAnh = 'nhanVien-placeholder.svg';
+                        this.nhanViens.push(this.nhanVien);
+                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Tạo mới', life: 3000 });
+                    }
+                }).catch((e)=>{
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: "Đã có lỗi khi cố gắng kết nối tới máy chủ. Vui lòng tải lại trang.", life: 3000 });
+                });
             }
-
             this.nhanViens = [...this.nhanViens];
-            this.nhanVienDialog = false;
+            this.dialog = false;
             this.nhanVien = {};
         }
+        this.submitted = true;
     }
 
     findIndexById(code: string): number {
@@ -115,11 +137,7 @@ export class CrudNhanvienComponent implements OnInit {
     }
 
     createId(): string {
-        let id = '';
-        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (var i = 0; i < 5; i++) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
+        let id = 'NV' + formatDate(new Date(), 'yyyyMMddHHmmss', 'en');
         return id;
     }
     

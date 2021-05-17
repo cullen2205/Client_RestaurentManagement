@@ -50,11 +50,22 @@ export class NhanvienService {
             .then(data => { return data; });
     }
 
-    getAll() {
-        return this.http.get<any>(Declare.serverApiPath + 'v1.0/NhanVien/GetAll')
-            .toPromise()
+    async getAll() {
+        return this.http.get<any>(Declare.serverApiPath + 'v1.0/NhanVien/GetAll').toPromise()
             .then(res => <NhanVien[]>res.data)
             .then(data => { return data; });
+    }
+
+    async put(record: NhanVien) {
+        return this.http.put<number>(Declare.serverApiPath + 'v1.0/NhanVien/Put', record).toPromise();
+    }
+
+    async post(record: NhanVien) {
+        return this.http.post<number>(Declare.serverApiPath + 'v1.0/NhanVien/Post', record).toPromise();
+    }
+
+    async deleteOne(record: NhanVien) {
+        return this.http.request('delete', Declare.serverApiPath + 'v1.0/NhanVien/Delete', { body: record }).toPromise();
     }
 
     getProductsWithOrdersSmall() {

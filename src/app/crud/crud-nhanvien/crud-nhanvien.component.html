@@ -77,7 +77,7 @@
         </p-table>
     </div>
 
-    <p-dialog [(visible)]="nhanVienDialog" [style]="{width: '450px'}" header="Chi tiết nhân viên" [modal]="true" styleClass="p-fluid">
+    <p-dialog [(visible)]="dialog" [style]="{width: '450px'}" header="Chi tiết nhân viên" [modal]="true" styleClass="p-fluid">
         <ng-template pTemplate="content">
             <img [src]="nhanVien.hinhAnh" [alt]="nhanVien.hinhAnh" class="product-image" *ngIf="nhanVien.hinhAnh">
             <div class="p-field">
