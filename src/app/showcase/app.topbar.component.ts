@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
                 <div class="col-12 col-md-1">
                     <div class="box-left-menu">
                         <div class="logo-cam">
-                            <a routerLink="/" tppabs="https://lauphan.com/"><img src="../../assets/kassets/dashboard/logo_phan.svg" tppabs="https://lauphan.com/WebLauPhan/theme/logo_phan.svg" class="img-fluid"></a>
+                            
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@ import { Subscription } from 'rxjs';
             <div class="menu-mobile">
                 <div class="showmenu">
                     <div class="logo-mobile">
-                        <a routerLink="/" tppabs="https://lauphan.com/"><img src="../../assets/kassets/dashboard/logo_phan.svg" tppabs="https://lauphan.com/WebLauPhan/theme/logo_phan.svg" class="img-fluid"></a>
+                        
                     </div>
                     <div class="show-nav"><span style="font-size:30px;cursor:pointer;color: white;" onclick="openNav()">&#9776;</span></div>
                 </div>

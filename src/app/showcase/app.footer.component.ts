@@ -8,11 +8,11 @@ import {Component} from '@angular/core';
             <div class="row">
                 <div class="col-12 col-md-6">
                     <div class="info-bot">
-                        <div class="nameCtybot">Công ty Cổ phần CAM</div>
-                        <div>Địa chỉ: Số 9 Đào Duy Anh, Phường Phương Mai, Quận Đống Đa, Thành phố Hà Nội</div>
+                        <div class="nameCtybot">Nhàn hàng Thiên Anh_Bufet lẩu</div>
+                        <div>Địa chỉ: Số 36 Hoàng Quốc Việt, Phường Nghĩa Tân, Quận Cầu Giấy, Thành phố Hà Nội</div>
                         <div>Mã số thuế: 0108796725</div>
-                        <div>Người ĐDPL: Phan Thanh Tùng</div>
-                        <div>Ngày hoạt động: 25/06/2019</div>
+                        <div>Người ĐDPL: Kiều Thu Thương</div>
+                        <div>Ngày hoạt động: 25/04/2021</div>
                         <div>Giấy phép kinh doanh: 0108796725</div>
                     </div>
                 </div>
