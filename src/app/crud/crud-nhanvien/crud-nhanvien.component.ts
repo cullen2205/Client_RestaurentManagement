@@ -1,7 +1,7 @@
 import { DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
-import { NhanVien } from 'src/app/models/nhan-vien';
+import { NhanVien } from 'src/app/models/nhanvien';
 import { NhanvienService } from 'src/app/services/nhanvien.service';
 
 @Component({

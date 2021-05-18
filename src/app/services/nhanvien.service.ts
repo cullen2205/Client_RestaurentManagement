@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Declare } from '../declare';
-import { NhanVien } from '../models/nhan-vien';
+import { NhanVien } from '../models/nhanvien';
 
 @Injectable()
 export class NhanvienService {

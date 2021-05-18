@@ -1,3 +1,3 @@
 export class Declare {
-    public static serverApiPath: string = "https://192.168.31.103:44398/api/";
+    public static serverApiPath: string = "https://192.168.31.103:44399/api/";
 }
