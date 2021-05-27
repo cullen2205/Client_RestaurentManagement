@@ -70,5 +70,8 @@
     "web-animations-js": "^2.3.2",
     "xlsx": "^0.15.1",
     "zone.js": "~0.10.2"
+  },
+  "dependencies": {
+    "@aspnet/signalr": "^1.0.27"
   }
 }
