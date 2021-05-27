@@ -1,0 +1,24 @@
+<p-toast position="top-right"></p-toast>
+<div class="content-section implementation">
+    <div class="card">
+        <p-pickList [source]="sources" [target]="targets" sourceHeader="Chưa xác nhận" targetHeader="Đã xác nhận" [dragdrop]="true" [responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="ngayThem" sourceFilterPlaceholder="Search by date"
+            targetFilterPlaceholder="Search by date" (onMoveToTarget)="updateState($event, 2)" (onMoveToSource)="updateState($event, 1)">
+            <ng-template let-record pTemplate="item">
+                <div class="product-item">
+                    <div class="product-container">
+                        <img src="assets/showcase/images/demo/product/game-controller.jpg" [alt]="record.soNguoi" class="product-image" />
+                    </div>
+                    <div class="product-list-detail">
+                        <h5 class="p-mb-2">{{ record.ngayThem | date: 'HH:mm dd-MM-yyyy' }}</h5>
+                        <i class="pi pi-tag product-category-icon"></i>
+                        <span class="product-category">{{ record.status }}</span>
+                    </div>
+                    <div class="product-list-action">
+                        <h6 class="p-mb-2">${{record.ghiChu}}</h6>
+                        <span [class]="'product-badge status-' + record.status">{{record.status}}</span>
+                    </div>
+                </div>
+            </ng-template>
+        </p-pickList>
+    </div>
+</div>

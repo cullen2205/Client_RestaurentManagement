@@ -5,7 +5,6 @@ export interface HoaDon {
     nguoiThem?:	string,
     nguoiChinhSua?:	string,
     suDung?:	number,
-    
     ngayGio?:	Date,
     ma_KhachHang?:	string,
     ma_ChiNhanh?:	string,
@@ -14,4 +13,6 @@ export interface HoaDon {
     hinhThucThanhToan?:	string,
     thongTinThanhToan?:	string,
     ghiChu?:	string,
+
+    status?: string,
 }
