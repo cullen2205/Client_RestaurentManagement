@@ -13,7 +13,7 @@ export class SignalRService {
 
   public constructor(private http: HttpClient, private messageService: MessageService) {
     this.hubConnection = new signalR.HubConnectionBuilder().withAutomaticReconnect()
-      .withUrl(Declare.serverPath + 'order')
+      .withUrl(Declare.realtimeServer + 'order')
       .build();
     this.hubConnection.start().catch((err) => console.log(err.toString()));
   }

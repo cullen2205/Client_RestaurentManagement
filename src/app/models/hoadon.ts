@@ -15,4 +15,5 @@ export interface HoaDon {
     ghiChu?:	string,
 
     status?: string,
+    show?: string,
 }
