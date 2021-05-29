@@ -117,7 +117,7 @@ export class OrderTableComponent implements OnInit {
     if(!this.validate())
       return;
     
-    var path = Declare.serverApiPath + "v2.0/Order";
+    var path = Declare.realtimeServer + "api/v2.0/Order/PostOrder";
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(this.requestForm);
     
