@@ -59,7 +59,7 @@ export class OrderTableComponent implements OnInit {
   }
 
   getCenter() {
-    var result = this.http.get(Declare.serverApiPath + 'v2.0/Order').toPromise().then(
+    var result = this.http.get(Declare.serverApiPath + 'v2.0/Order/OrderPage').toPromise().then(
       (data: any) => {
         this.responsePage = data;
         switch (data.status) {
