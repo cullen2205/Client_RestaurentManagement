@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Declare } from '../declare';
-import { List } from 'linqts';
 import { map } from 'rxjs/operators';
 import { InputNumberModule } from 'primeng/inputnumber';
 
