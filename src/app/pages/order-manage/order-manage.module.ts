@@ -7,6 +7,10 @@ import { AppCodeModule } from 'src/app/showcase/app.code.component';
 import { AppDemoActionsModule } from 'src/app/showcase/app.demoactions.component';
 import { OrderManageRoutes } from './order-manage.routing';
 import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { TableModule } from 'primeng/table';
+
 
 @NgModule({
   imports: [
@@ -17,6 +21,9 @@ import { ToastModule } from 'primeng/toast';
     AppCodeModule,
     AppDemoActionsModule,
     ToastModule,
+    ButtonModule,
+    DynamicDialogModule,
+    TableModule,
   ],
   declarations: [OrderManageComponent]
 })

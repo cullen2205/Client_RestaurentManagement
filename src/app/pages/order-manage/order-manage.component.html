@@ -2,7 +2,7 @@
 <div class="content-section implementation">
     <div class="card">
         <p-pickList [source]="sources" [target]="targets" sourceHeader="Chưa xác nhận" targetHeader="Đã xác nhận" [dragdrop]="true" [responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="ngayThem" sourceFilterPlaceholder="Search by date"
-            targetFilterPlaceholder="Search by date" (onMoveToTarget)="updateState($event, 2)" (onMoveToSource)="updateState($event, 1)" (onMoveAllToTarget)="updateState($event, 2)" (onMoveAllToSource)="updateState($event, 1)">
+            targetFilterPlaceholder="Search by date" (onSourceSelect)="show()" (onTargetSelect)="show()" (onMoveToTarget)="updateState($event, 2)" (onMoveToSource)="updateState($event, 1)" (onMoveAllToTarget)="updateState($event, 2)" (onMoveAllToSource)="updateState($event, 1)">
             <ng-template let-record pTemplate="item">
                 <div class="product-item">
                     <div class="product-container">
