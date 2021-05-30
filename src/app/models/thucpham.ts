@@ -13,4 +13,6 @@ export interface ThucPham {
     giaNhap?:	number,
     giaBan?:	number,
     moTa?:	string,
+
+    soLuongGoi?: number,
 }

@@ -10,6 +10,7 @@ import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { TableModule } from 'primeng/table';
+import { SelectFood } from './select-food';
 
 
 @NgModule({
@@ -25,6 +26,13 @@ import { TableModule } from 'primeng/table';
     DynamicDialogModule,
     TableModule,
   ],
-  declarations: [OrderManageComponent]
+  declarations: [
+    OrderManageComponent,
+    SelectFood,
+  ],
+  exports:[
+    OrderManageComponent,
+    SelectFood,
+  ]
 })
 export class OrderManageModule { }

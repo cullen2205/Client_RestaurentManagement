@@ -1,15 +1,37 @@
 <p-toast position="top-right"></p-toast>
 <div class="content-section implementation">
+    <h2>Xác nhận đơn đặt bàn</h2>
     <div class="card">
-        <p-pickList [source]="sources" [target]="targets" sourceHeader="Chưa xác nhận" targetHeader="Đã xác nhận" [dragdrop]="true" [responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="ngayThem" sourceFilterPlaceholder="Search by date"
-            targetFilterPlaceholder="Search by date" (onSourceSelect)="show()" (onTargetSelect)="show()" (onMoveToTarget)="updateState($event, 2)" (onMoveToSource)="updateState($event, 1)" (onMoveAllToTarget)="updateState($event, 2)" (onMoveAllToSource)="updateState($event, 1)">
+        <p-pickList [source]="nonComfirms" [target]="comfirms" sourceHeader="Đơn đặt trên web" targetHeader="Đã xác nhận bàn" [dragdrop]="true" [responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="ngayThem" sourceFilterPlaceholder="Search by date"
+            targetFilterPlaceholder="Search by date" (onMoveToTarget)="updateState($event, 2)" (onMoveToSource)="updateState($event, 1)">
             <ng-template let-record pTemplate="item">
                 <div class="product-item">
                     <div class="product-container">
                         <img src="assets/showcase/images/demo/product/game-controller.jpg" class="product-image" />
                     </div>
                     <div class="product-list-detail">
-                        <h5 class="p-mb-2">Giờ đặt: {{ record.ngayThem | date: 'HH:mm dd-MM-yy' }}</h5>
+                        <h5 class="p-mb-2">Giờ: {{ record.ngayGio | date: 'HH:mm dd-MM-yy' }}</h5>
+                        <span class="product-category">Ghi chú: {{ record.ghiChu }}</span>
+                    </div>
+                    <div class="product-list-action">
+                        <h6 class="p-mb-2">Số người: {{record.soNguoi}}</h6>
+                        <span [class]="'product-badge status-' + (record.status | lowercase)">{{record.show}}</span>
+                    </div>
+                </div>
+            </ng-template>
+        </p-pickList>
+    </div>
+    <h2>Xác nhận đặt đồ</h2>
+    <div class="card">
+        <p-pickList [source]="comfirms" [target]="orders" sourceHeader="Đã xác nhận bàn" targetHeader="Đang dùng / Đã lên đồ" [dragdrop]="true" [responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="ngayThem" sourceFilterPlaceholder="Search by date"
+            targetFilterPlaceholder="Search by date" (onTargetSelect)="show($event)" (onMoveToTarget)="updateState($event, 3)" (onMoveToSource)="updateState($event, 3)">
+            <ng-template let-record pTemplate="item">
+                <div class="product-item">
+                    <div class="product-container">
+                        <img src="assets/showcase/images/demo/product/game-controller.jpg" class="product-image" />
+                    </div>
+                    <div class="product-list-detail">
+                        <h5 class="p-mb-2">Giờ đặt: {{ record.ngayGio | date: 'HH:mm dd-MM-yy' }}</h5>
                         <span class="product-category">Ghi chú: {{ record.ghiChu }}</span>
                     </div>
                     <div class="product-list-action">

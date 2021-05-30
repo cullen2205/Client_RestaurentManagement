@@ -5,7 +5,7 @@ import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Declare } from 'src/app/declare';
 import { HoaDon } from 'src/app/models/hoadon';
-import { ProductListDemo } from 'src/app/showcase/components/dynamicdialog/productlistdemo';
+import { SelectFood } from './select-food';
 
 @Component({
   selector: 'app-order-manage',
@@ -19,9 +19,10 @@ import { ProductListDemo } from 'src/app/showcase/components/dynamicdialog/produ
 export class OrderManageComponent implements OnInit, OnDestroy {
   hubConnection: signalR.HubConnection;
   status: string[] = ['OUTOFSTOCK', 'INSTOCK', 'LOWSTOCK'];
-  shows: string[] = ['Đã xác nhận', 'Chưa xác nhận', 'LOWSTOCK'];
-  sources: HoaDon[];
-  targets: HoaDon[];
+  shows: string[] = ['Đã xác nhận', 'Chưa xác nhận', 'Đang sử dụng'];
+  nonComfirms: HoaDon[];
+  comfirms: HoaDon[];
+  orders: HoaDon[];
   ref: DynamicDialogRef;
   
   constructor(
@@ -47,25 +48,29 @@ export class OrderManageComponent implements OnInit, OnDestroy {
     this.hubConnection.on('sync', (data) => {
       if(data)
         this.messageService.add({ severity: 'success', summary: 'Success', detail: "Đã cập nhật!" });
-      this.sources = (data as HoaDon[]).filter(m => m.trangThai == 1).map((m)=>{
+      this.nonComfirms = (data as HoaDon[]).filter(m => m.trangThai == 1).map((m)=>{
         m.status = this.status[1];
         m.show = this.shows[1];
         return m;
       });
-      this.targets = (data as HoaDon[]).filter(m => m.trangThai == 2).map((m)=>{
+      this.comfirms = (data as HoaDon[]).filter(m => m.trangThai == 2).map((m)=>{
         m.status = this.status[0];
         m.show = this.shows[0];
+        return m;
+      });
+      this.orders = (data as HoaDon[]).filter(m => m.trangThai == 3).map((m)=>{
+        m.status = this.status[2];
+        m.show = this.shows[2];
         return m;
       });
     });
   }
 
-  async show() {
-    this.ref = this.dialogService.open(ProductListDemo, {
-        header: 'Choose a Product',
-        width: '70%',
-        contentStyle: {"max-height": "500px", "overflow": "auto"},
-        baseZIndex: 10000
+  async show(data: any) {
+    this.ref = this.dialogService.open(SelectFood, {
+      header: 'Chọn thực đơn',
+      width: '70%',
+      data: data.items
     });
   }
 
@@ -81,10 +86,15 @@ export class OrderManageComponent implements OnInit, OnDestroy {
         data.items.status = this.status[0];
         data.items.show = this.shows[0];
         break;
+      case 3:
+        data.items.trangThai = 3;
+        data.items.status = this.status[2];
+        data.items.show = this.shows[2];
+        break;
       default:
         return;
     }
-    let allData = this.sources.concat(this.targets);
+    let allData = this.nonComfirms.concat(this.comfirms).concat(this.orders);
     await this.PutOrderSync(allData).catch((e) => {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: e });
     });
@@ -93,14 +103,19 @@ export class OrderManageComponent implements OnInit, OnDestroy {
   async reloadScreen(){
     this.http.get(Declare.serverApiPath + 'v2.0/Order/GetOrders').toPromise().then((data: any) => {
       if(data && data.status == 200){
-        this.sources = (data.data as HoaDon[]).filter(m => m.trangThai == 1).map((m)=>{
+        this.nonComfirms = (data.data as HoaDon[]).filter(m => m.trangThai == 1).map((m)=>{
           m.status = this.status[1];
           m.show = this.shows[1];
           return m;
         });
-        this.targets = (data.data as HoaDon[]).filter(m => m.trangThai == 2).map((m)=>{
+        this.comfirms = (data.data as HoaDon[]).filter(m => m.trangThai == 2).map((m)=>{
           m.status = this.status[0];
           m.show = this.shows[0];
+          return m;
+        });
+        this.orders = (data.data as HoaDon[]).filter(m => m.trangThai == 3).map((m)=>{
+          m.status = this.status[2];
+          m.show = this.shows[2];
           return m;
         });
       }
