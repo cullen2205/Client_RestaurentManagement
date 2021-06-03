@@ -1,3 +1,5 @@
+import { CTHoaDon } from "./cthoadon";
+
 export interface ThucPham {
     code?:	string,
     ngayThem?:	Date,

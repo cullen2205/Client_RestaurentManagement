@@ -66,6 +66,7 @@ export class OrderManageComponent implements OnInit, OnDestroy {
     });
   }
 
+  /// hiển thị dialog chọn chi tiết món
   async show(data: any) {
     this.ref = this.dialogService.open(SelectFood, {
       header: 'Chọn thực đơn',
@@ -74,6 +75,7 @@ export class OrderManageComponent implements OnInit, OnDestroy {
     });
   }
 
+  /// cập nhật trạng thái đặt bàn
   async updateState(data: any, status: number){
     switch (status) { // 1 = khách hàng đặt trên web, 2 = Đã xác nhận đặt chỗ, 5 = Đã thanh toán, 6 = Huỷ bỏ
       case 1:

@@ -1,3 +1,5 @@
+import { CTHoaDon } from "./cthoadon";
+
 export interface HoaDon {
     code?:	string,
     ngayThem?:	Date,
@@ -16,4 +18,5 @@ export interface HoaDon {
 
     status?: string,
     show?: string,
+    details?: CTHoaDon[],
 }
