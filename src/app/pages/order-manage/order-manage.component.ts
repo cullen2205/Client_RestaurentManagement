@@ -18,11 +18,12 @@ import { SelectFood } from './select-food';
 })
 export class OrderManageComponent implements OnInit, OnDestroy {
   hubConnection: signalR.HubConnection;
-  status: string[] = ['OUTOFSTOCK', 'INSTOCK', 'LOWSTOCK'];
-  shows: string[] = ['Đã xác nhận', 'Chưa xác nhận', 'Đang sử dụng'];
+  status: string[] = ['OUTOFSTOCK', 'INSTOCK', 'LOWSTOCK', 'OUTOFSTOCK'];
+  shows: string[] = ['Đã xác nhận', 'Chưa xác nhận', 'Đang sử dụng', 'Đã thanh toán'];
   nonComfirms: HoaDon[];
   comfirms: HoaDon[];
   orders: HoaDon[];
+  pays: HoaDon[];
   ref: DynamicDialogRef;
   
   constructor(
@@ -63,6 +64,11 @@ export class OrderManageComponent implements OnInit, OnDestroy {
         m.show = this.shows[2];
         return m;
       });
+      this.pays = (data as HoaDon[]).filter(m => m.trangThai == 5).map((m)=>{
+        m.status = this.status[3];
+        m.show = this.shows[3];
+        return m;
+      });
     });
   }
 
@@ -93,10 +99,15 @@ export class OrderManageComponent implements OnInit, OnDestroy {
         data.items.status = this.status[2];
         data.items.show = this.shows[2];
         break;
+      case 5:
+        data.items.trangThai = 5;
+        data.items.status = this.status[3];
+        data.items.show = this.shows[3];
+        break;
       default:
         return;
     }
-    let allData = this.nonComfirms.concat(this.comfirms).concat(this.orders);
+    let allData = this.nonComfirms.concat(this.comfirms).concat(this.orders).concat(this.pays);
     await this.PutOrderSync(allData).catch((e) => {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: e });
     });
@@ -118,6 +129,11 @@ export class OrderManageComponent implements OnInit, OnDestroy {
         this.orders = (data.data as HoaDon[]).filter(m => m.trangThai == 3).map((m)=>{
           m.status = this.status[2];
           m.show = this.shows[2];
+          return m;
+        });
+        this.pays = (data.data as HoaDon[]).filter(m => m.trangThai == 5).map((m)=>{
+          m.status = this.status[3];
+          m.show = this.shows[3];
           return m;
         });
       }
