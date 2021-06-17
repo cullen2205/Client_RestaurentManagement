@@ -1,4 +1,5 @@
 import { CTHoaDon } from "./cthoadon";
+import { KhachHang } from "./khachhang";
 
 export interface HoaDon {
     code?:	string,
@@ -19,4 +20,5 @@ export interface HoaDon {
     status?: string,
     show?: string,
     details?: CTHoaDon[],
+    khachHang?: KhachHang,
 }
