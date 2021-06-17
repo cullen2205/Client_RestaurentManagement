@@ -1,6 +1,6 @@
 <div class="layout-sidebar" [ngClass]="{'active': active}">
     <a [routerLink]="['/']" class="logo">
-        <span>Nhà hàng Thiên Anh</span>
+        <img alt="logo" class="ng-tns-c39-1" src="assets/showcase/images/logo.png">
     </a>
     <div class="layout-sidebar-filter p-fluid p-input-filled">
         <p-autoComplete [group]="true" [(ngModel)]="selectedRoute" [minLength]="2" [suggestions]="filteredRoutes" scrollHeight="300px" (onSelect)="onSelect($event)" placeholder="Search by name..." (completeMethod)="filterGroupedRoute($event)" field="label">

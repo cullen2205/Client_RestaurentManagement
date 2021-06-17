@@ -26,22 +26,19 @@ import { AppConfigService } from './service/appconfigservice';
 import { ProductService } from './service/productservice';
 
 import { AppNewsComponent } from './app.news.component';
-import { AppTopBarComponent } from './app.topbar.component';
-import { AppConfigComponent } from './app.config.component';
-import { AppFooterComponent } from './app.footer.component';
 import { AppInputStyleSwitchModule } from './app.inputstyleswitch.component';
 import { AppDemoActionsModule } from './app.demoactions.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppTopbarModule } from './app-topbar/app-topbar.module';
 import { AppFooterModule } from './app-footer/app-footer.module';
 import { AppMenuModule } from './app-menu/app-menu.module';
+import { AppConfigModule } from './app-config/app-config.module';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         AppNewsComponent,
-        AppConfigComponent,
     ],
     imports: [
         CommonModule,
@@ -61,10 +58,23 @@ import { AppMenuModule } from './app-menu/app-menu.module';
         AppTopbarModule,
         AppFooterModule,
         AppMenuModule,
+        AppConfigModule,
     ],
     providers: [
-        { provide: LocationStrategy, useClass: HashLocationStrategy },
-        CarService,CountryService,EventService,NodeService,IconService,CustomerService,PhotoService,VersionService,AppConfigService, ProductService
+        { 
+            provide: LocationStrategy, 
+            useClass: HashLocationStrategy 
+        },
+        CarService,
+        CountryService,
+        EventService,
+        NodeService,
+        IconService,
+        CustomerService,
+        PhotoService,
+        VersionService,
+        AppConfigService,
+        ProductService,
     ],
     bootstrap: [AppComponent],
     schemas: [
