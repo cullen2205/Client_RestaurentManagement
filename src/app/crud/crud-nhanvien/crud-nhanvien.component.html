@@ -1,124 +1,132 @@
-<div class="content-section implementation">
-    <p-toast></p-toast>
+<div class="layout-wrapper">
+    <app-topbar></app-topbar>
+    <app-menu></app-menu>
+    <app-config></app-config>
 
-    <div class="card">
-        <p-toolbar styleClass="p-mb-4">
-            <ng-template pTemplate="left">
-                <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
-                <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteMulti()" [disabled]="!selectedNhanViens || !selectedNhanViens.length"></button>
-            </ng-template>
+    <div class="layout-content">
+        <div class="content-section implementation">
+            <p-toast></p-toast>
 
-            <ng-template pTemplate="right">
-                <!-- <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload> -->
-                <button pButton pRipple type="button" label="Xuất excel" class="p-button-help p-mr-2" icon="pi pi-upload" (click)="confirmPosition('top-right')"></button>
-                <!-- <button pButton pRipple type="button" label="Lưu toàn bộ" class="p-button-success p-mr-2" icon="pi pi-save"></button> -->
-            </ng-template>
-        </p-toolbar>
-
-        <p-table #dt [value]="nhanViens" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']" [(selection)]="selectedNhanViens" [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [showCurrentPageReport]="true">
-            <ng-template pTemplate="caption">
-                <div class="p-d-flex p-ai-center p-jc-between">
-                    <h5 class="p-m-0">Quản lý nhân viên</h5>
-                    <span class="p-input-icon-left">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
-                    </span>
-                </div>
-            </ng-template>
-            <ng-template pTemplate="header">
-                <tr>
-                    <th style="width: 3rem">
-                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                    </th>
-                    <th pSortableColumn="ten">Họ tên
-                        <p-sortIcon field="ten"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="soCMND">Số CMND
-                        <p-sortIcon field="soCMND"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="email">Email
-                        <p-sortIcon field="email"></p-sortIcon>
-                    </th>
-                    <th>Hình ảnh</th>
-                    <th pSortableColumn="kinhNghiemLamViec">Kinh nghiệm
-                        <p-sortIcon field="kinhNghiemLamViec"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="suDung">Trạng thái
-                        <p-sortIcon field="suDung"></p-sortIcon>
-                    </th>
-                    <th></th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-nhanVien>
-                <tr>
-                    <td>
-                        <p-tableCheckbox [value]="nhanVien"></p-tableCheckbox>
-                    </td>
-                    <td>{{nhanVien.ten}}</td>
-                    <td>{{nhanVien.soCMND}}</td>
-                    <td>{{nhanVien.email}}</td>
-                    <td><img [src]="nhanVien.hinhAnh" [alt]="nhanVien.ten" width="100" class="p-shadow-4" /></td>
-                    <td>
-                        <p-rating [ngModel]="nhanVien.kinhNghiemLamViec" [readonly]="true" [cancel]="false"></p-rating>
-                    </td>
-                    <td><span>{{nhanVien.suDung}}</span></td>
-                    <td>
-                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="edit(nhanVien)"></button>
-                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteOne(nhanVien)"></button>
-                    </td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="summary">
-                <div class="p-d-flex p-ai-center p-jc-between">
-                    In total there are {{nhanViens ? nhanViens.length : 0 }} records.
-                </div>
-            </ng-template>
-        </p-table>
-    </div>
-
-    <p-dialog [(visible)]="dialog" [style]="{width: '450px'}" header="Chi tiết nhân viên" [modal]="true" styleClass="p-fluid">
-        <ng-template pTemplate="content">
-            <img [src]="nhanVien.hinhAnh" [alt]="nhanVien.hinhAnh" class="product-image" *ngIf="nhanVien.hinhAnh">
-            <div class="p-field">
-                <label for="ten">Họ và tên</label>
-                <input type="text" pInputText id="ten" [(ngModel)]="nhanVien.ten" required autofocus />
-                <small class="p-error" *ngIf="submitted && !nhanVien.ten">Bắt buộc điền tên.</small>
-            </div>
-            <div class="p-field">
-                <label for="soCMND">Số CMND</label>
-                <input type="text" pInputText id="soCMND" [(ngModel)]="nhanVien.soCMND" required autofocus />
-                <small class="p-error" *ngIf="submitted && !nhanVien.soCMND">Bắt buộc điền số CMND</small>
-            </div>
-            <div class="p-field">
-                <label for="email">Email</label>
-                <input type="text" pInputText id="email" [(ngModel)]="nhanVien.email" required autofocus />
-                <small class="p-error" *ngIf="submitted && !nhanVien.email">Bắt buộc điền email.</small>
-            </div>
-
-            <div class="p-field">
-                <label for="suDung">Trạng thái</label>
-                <p-dropdown (value)="nhanVien.suDung" [(ngModel)]="nhanVien.suDung" (ngModelChange)="nhanVien.suDung=$event.suDung" optionLabel="label" inputId="suDung" [options]="statuses" placeholder="Select">
-                    <ng-template let-item pTemplate="item">
-                        <span>{{item.label}}</span>
+            <div class="card">
+                <p-toolbar styleClass="p-mb-4">
+                    <ng-template pTemplate="left">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+                        <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteMulti()" [disabled]="!selectedNhanViens || !selectedNhanViens.length"></button>
                     </ng-template>
-                </p-dropdown>
+
+                    <ng-template pTemplate="right">
+                        <!-- <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload> -->
+                        <button pButton pRipple type="button" label="Xuất excel" class="p-button-help p-mr-2" icon="pi pi-upload" (click)="confirmPosition('top-right')"></button>
+                        <!-- <button pButton pRipple type="button" label="Lưu toàn bộ" class="p-button-success p-mr-2" icon="pi pi-save"></button> -->
+                    </ng-template>
+                </p-toolbar>
+
+                <p-table #dt [value]="nhanViens" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']" [(selection)]="selectedNhanViens" [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true">
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">Quản lý nhân viên</h5>
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th pSortableColumn="ten">Họ tên
+                                <p-sortIcon field="ten"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="soCMND">Số CMND
+                                <p-sortIcon field="soCMND"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="email">Email
+                                <p-sortIcon field="email"></p-sortIcon>
+                            </th>
+                            <th>Hình ảnh</th>
+                            <th pSortableColumn="kinhNghiemLamViec">Kinh nghiệm
+                                <p-sortIcon field="kinhNghiemLamViec"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="suDung">Trạng thái
+                                <p-sortIcon field="suDung"></p-sortIcon>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-nhanVien>
+                        <tr>
+                            <td>
+                                <p-tableCheckbox [value]="nhanVien"></p-tableCheckbox>
+                            </td>
+                            <td>{{nhanVien.ten}}</td>
+                            <td>{{nhanVien.soCMND}}</td>
+                            <td>{{nhanVien.email}}</td>
+                            <td><img [src]="nhanVien.hinhAnh" [alt]="nhanVien.ten" width="100" class="p-shadow-4" /></td>
+                            <td>
+                                <p-rating [ngModel]="nhanVien.kinhNghiemLamViec" [readonly]="true" [cancel]="false"></p-rating>
+                            </td>
+                            <td><span>{{nhanVien.suDung}}</span></td>
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="edit(nhanVien)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteOne(nhanVien)"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            In total there are {{nhanViens ? nhanViens.length : 0 }} records.
+                        </div>
+                    </ng-template>
+                </p-table>
             </div>
 
-            <div class="p-formgrid p-grid">
-                <div class="p-field p-col">
-                    <label for="quantity">Kinh nghiệm</label>
-                    <p-inputNumber id="quantity" [(ngModel)]="nhanVien.kinhNghiemLamViec"></p-inputNumber>
-                </div>
-            </div>
-        </ng-template>
+            <p-dialog [(visible)]="dialog" [style]="{width: '450px'}" header="Chi tiết nhân viên" [modal]="true" styleClass="p-fluid">
+                <ng-template pTemplate="content">
+                    <img [src]="nhanVien.hinhAnh" [alt]="nhanVien.hinhAnh" class="product-image" *ngIf="nhanVien.hinhAnh">
+                    <div class="p-field">
+                        <label for="ten">Họ và tên</label>
+                        <input type="text" pInputText id="ten" [(ngModel)]="nhanVien.ten" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !nhanVien.ten">Bắt buộc điền tên.</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="soCMND">Số CMND</label>
+                        <input type="text" pInputText id="soCMND" [(ngModel)]="nhanVien.soCMND" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !nhanVien.soCMND">Bắt buộc điền số CMND</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="email">Email</label>
+                        <input type="text" pInputText id="email" [(ngModel)]="nhanVien.email" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !nhanVien.email">Bắt buộc điền email.</small>
+                    </div>
 
-        <ng-template pTemplate="footer">
-            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
-        </ng-template>
-    </p-dialog>
+                    <div class="p-field">
+                        <label for="suDung">Trạng thái</label>
+                        <p-dropdown (value)="nhanVien.suDung" [(ngModel)]="nhanVien.suDung" (ngModelChange)="nhanVien.suDung=$event.suDung" optionLabel="label" inputId="suDung" [options]="statuses" placeholder="Select">
+                            <ng-template let-item pTemplate="item">
+                                <span>{{item.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
 
-    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
-    <p-confirmDialog [style]="{width: '50vw'}" key="positionDialog" [position]="position" [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
+                    <div class="p-formgrid p-grid">
+                        <div class="p-field p-col">
+                            <label for="quantity">Kinh nghiệm</label>
+                            <p-inputNumber id="quantity" [(ngModel)]="nhanVien.kinhNghiemLamViec"></p-inputNumber>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+                </ng-template>
+            </p-dialog>
+
+            <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+            <p-confirmDialog [style]="{width: '50vw'}" key="positionDialog" [position]="position" [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
+        </div>
+    </div>
 </div>

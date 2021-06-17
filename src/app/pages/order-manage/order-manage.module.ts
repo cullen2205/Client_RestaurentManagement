@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OrderManageComponent } from './order-manage.component';
 import { PickListModule } from 'src/app/components/picklist/picklist';
@@ -11,6 +11,10 @@ import { ButtonModule } from 'primeng/button';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { TableModule } from 'primeng/table';
 import { SelectFood } from './select-food';
+import { AppMenuModule } from 'src/app/showcase/app-menu/app-menu.module';
+import { AppConfigModule } from 'src/app/showcase/app-config/app-config.module';
+import { AppFooterModule } from 'src/app/showcase/app-footer/app-footer.module';
+import { AppTopbarModule } from 'src/app/showcase/app-topbar/app-topbar.module';
 
 
 @NgModule({
@@ -25,6 +29,11 @@ import { SelectFood } from './select-food';
     ButtonModule,
     DynamicDialogModule,
     TableModule,
+    
+    AppMenuModule,
+    AppConfigModule,
+    AppFooterModule,
+    AppTopbarModule,
   ],
   declarations: [
     OrderManageComponent,
@@ -33,6 +42,9 @@ import { SelectFood } from './select-food';
   exports:[
     OrderManageComponent,
     SelectFood,
-  ]
+  ],
+  schemas:[
+    CUSTOM_ELEMENTS_SCHEMA,
+  ],
 })
 export class OrderManageModule { }
