@@ -1,159 +1,450 @@
-<div class="container" x-data="{ rightSide: false, leftSide: false }">
-
-    <div class="main">
-        <div class="search-bar">
-            <input type="text" placeholder="Search" />
-            <button class="right-side-button" (onclick)="rightSide = !rightSide">
-         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-      </button>
-        </div>
-        <div class="main-container">
-            <div class="profile">
-                <div class="profile-avatar">
-                    <img src="https://images.genius.com/2326b69829d58232a2521f09333da1b3.1000x1000x1.jpg" alt="" class="profile-img">
-                    <div class="profile-name">Quan Ha</div>
-                </div>
-                <img src="https://images.unsplash.com/photo-1508247967583-7d982ea01526?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt="" class="profile-cover">
-                <div class="profile-menu">
-                    <a class="profile-menu-link active">Timeline</a>
-                    <a class="profile-menu-link">About</a>
-                    <a class="profile-menu-link">Friends</a>
-                    <a class="profile-menu-link">Photos</a>
-                    <a class="profile-menu-link">More</a>
-                </div>
-            </div>
-            <div class="timeline">
-                <div class="timeline-left">
-                    <div class="intro box">
-                        <div class="intro-title">
-                            Introduction
-                            <button class="intro-menu"></button>
-                        </div>
-                        <div class="info">
-                            <div class="info-item">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 503.889 503.889" fill="currentColor">
-                  <path d="M453.727 114.266H345.151V70.515c0-20.832-16.948-37.779-37.78-37.779H196.517c-20.832 0-37.78 16.947-37.78 37.779v43.751H50.162C22.502 114.266 0 136.769 0 164.428v256.563c0 27.659 22.502 50.161 50.162 50.161h403.565c27.659 0 50.162-22.502 50.162-50.161V164.428c0-27.659-22.503-50.162-50.162-50.162zm-262.99-43.751a5.786 5.786 0 015.78-5.779h110.854a5.786 5.786 0 015.78 5.779v43.751H190.737zM32 164.428c0-10.015 8.147-18.162 18.162-18.162h403.565c10.014 0 18.162 8.147 18.162 18.162v23.681c0 22.212-14.894 42.061-36.22 48.27l-167.345 48.723a58.482 58.482 0 01-32.76 0L68.22 236.378C46.894 230.169 32 210.321 32 188.109zm421.727 274.725H50.162c-10.014 0-18.162-8.147-18.162-18.161V253.258c8.063 6.232 17.254 10.927 27.274 13.845 184.859 53.822 175.358 52.341 192.67 52.341 17.541 0 7.595 1.544 192.67-52.341 10.021-2.918 19.212-7.613 27.274-13.845v167.733c.001 10.014-8.147 18.162-18.161 18.162z" /></svg>                                Product Designer at <a href="#">Bravebist</a>
-                            </div>
-                            <div class="info-item">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-                  <path d="M9 22V12h6v10" />
-                </svg> Live in <a href="#">Hanoi, Vietnam</a>
-                            </div>
-                            <div class="info-item">
-                                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-                  <path d="M437 75C388.7 26.6 324.4 0 256 0S123.3 26.6 75 75C26.6 123.3 0 187.6 0 256s26.6 132.7 75 181c48.3 48.4 112.6 75 181 75s132.7-26.6 181-75c48.4-48.3 75-112.6 75-181s-26.6-132.7-75-181zM252.4 481.9c-52-.9-103.7-19.5-145.2-55.8L256 277.2l21.7 21.8a165.9 165.9 0 00-35.7 87c-3.5 30.5 0 63.3 10.4 95.9zM299 320.3l105.7 105.8a224.8 224.8 0 01-121.3 54.1C262 419.5 268 360.3 299 320.3zm21.2-21.2c40-31 99.2-37 160-15.6A224.8 224.8 0 01426 404.8zM482 252.4a231.7 231.7 0 00-96-10.4 165.9 165.9 0 00-87 35.7L277.3 256l148.9-148.8c36.3 41.5 55 93.2 55.8 145.2zm-290.2-39.5c-40 31-99.2 37-160 15.6A224.8 224.8 0 0186 107.2zm-84.5-127a224.8 224.8 0 01121.3-54.1C250 92.5 244 151.7 213 191.7zM270 126c3.5-30.5 0-63.3-10.4-95.9 52 .9 103.7 19.5 145.2 55.8L256 234.8 234.3 213a165.9 165.9 0 0035.7-87zM30 259.6a242 242 0 0072.7 11.7c7.8 0 15.6-.5 23.2-1.3a165.9 165.9 0 0087-35.7l21.8 21.7L85.9 404.8a225.3 225.3 0 01-55.8-145.2z" /></svg>                                Player name <a href="#">Quan Ha</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="event box">
-                        <div class="event-wrapper">
-                            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" class="event-img" />
-                            <div class="event-date">
-                                <div class="event-month">Jan</div>
-                                <div class="event-day">01</div>
-                            </div>
-                            <div class="event-title">Winter Wonderland</div>
-                            <div class="event-subtitle">01st Jan, 2019 07:00AM</div>
-                        </div>
-                    </div>
-                    <div class="pages box">
-                        <div class="intro-title">
-                            Your pages
-                            <button class="intro-menu"></button>
-                        </div>
-                        <div class="user">
-                            <img src="https://images.unsplash.com/photo-1549068106-b024baf5062d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0f" alt="" class="user-img">
-                            <div class="username">Chandelio</div>
-                        </div>
-                        <div class="user">
-                            <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=d5849d81af587a09dbcf3f11f6fa122f" alt="" class="user-img">
-                            <div class="username">Janet Jolie</div>
-                        </div>
-                        <div class="user">
-                            <img src="https://images.unsplash.com/photo-1546539782-6fc531453083?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ" alt="" class="user-img">
-                            <div class="username">Patrick Watsons</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-right">
-                    <div class="status box">
-                        <div class="status-menu">
-                            <a class="status-menu-item active" href="#">Status</a>
-                            <a class="status-menu-item" href="#">Photos</a>
-                            <a class="status-menu-item" href="#">Videos</a>
-                        </div>
-                        <div class="status-main">
-                            <img src="https://images.genius.com/2326b69829d58232a2521f09333da1b3.1000x1000x1.jpg" class="status-img">
-                            <textarea class="status-textarea" placeholder="Write something to Quan Ha.."></textarea>
-                        </div>
-                        <div class="status-actions">
-                            <a href="#" class="status-action">
-                                <svg viewBox="-42 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M333.7 123.3c0 33.9-12.2 63.2-36.2 87.2-24 24-53.3 36.1-87.1 36.1h-.1c-33.9 0-63.2-12.1-87.1-36.1-24-24-36.2-53.3-36.2-87.2 0-33.9 12.2-63.2 36.2-87.2 24-24 53.2-36 87-36.1h.2c33.8 0 63.2 12.2 87.1 36.1 24 24 36.2 53.3 36.2 87.2zm0 0" fill="#ffbb85" />
-                  <path d="M427.2 424c0 26.7-8.5 48.3-25.3 64.3-16.5 15.7-38.4 23.7-65 23.7H90.2c-26.6 0-48.5-8-65-23.7C8.5 472.3 0 450.7 0 423.9c0-10.2.3-20.4 1-30.2a302.7 302.7 0 0112.1-64.9c3.3-10.3 7.8-20.5 13.4-30.3 5.8-10.2 12.5-19 20.1-26.3a89 89 0 0129-18.2c11.2-4.4 23.7-6.7 37-6.7 5.2 0 10.3 2.2 20 8.5l21 13.5c6.6 4.3 15.7 8.3 27 11.9a107.7 107.7 0 0033 5.3c11 0 22-1.8 33-5.3 11.2-3.6 20.3-7.6 27-12l21-13.4c9.7-6.3 14.7-8.5 20-8.5 13.3 0 25.7 2.3 37 6.7a89 89 0 0128.9 18.2c7.6 7.3 14.4 16.1 20.2 26.3 5.5 9.8 10 20 13.3 30.3a305.5 305.5 0 0112.1 64.9c.7 9.8 1 20 1 30.2zm0 0" fill="#6aa9ff" />
-                  <path d="M210.4 246.6h-.1V0c34 0 63.3 12.2 87.2 36.1 24 24 36.2 53.3 36.2 87.2 0 33.9-12.2 63.2-36.2 87.2-24 24-53.3 36.1-87.1 36.1zm0 0" fill="#f5a86c" />
-                  <path d="M427.2 424c0 26.7-8.5 48.3-25.3 64.3-16.5 15.7-38.4 23.7-65 23.7H210.2V286.5h3.3c11 0 22-1.8 33-5.3 11.2-3.6 20.3-7.6 27-12l21-13.4c9.7-6.3 14.7-8.5 20-8.5 13.3 0 25.7 2.3 37 6.7a89 89 0 0128.9 18.2c7.6 7.3 14.4 16.1 20.2 26.3 5.5 9.8 10 20 13.3 30.3a305.5 305.5 0 0112.1 64.9c.7 9.8 1 20 1 30.2zm0 0" fill="#2682ff" />
-                </svg> People
-                            </a>
-                            <a href="#" class="status-action">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path d="M87.084 192c-.456-5.272-.688-10.6-.688-16C86.404 78.8 162.34 0 256.004 0s169.6 78.8 169.6 176c0 5.392-.232 10.728-.688 16h.688c0 96.184-169.6 320-169.6 320s-169.6-223.288-169.6-320h.68zm168.92 32c36.392 1.024 66.744-27.608 67.84-64-1.096-36.392-31.448-65.024-67.84-64-36.392-1.024-66.744 27.608-67.84 64 1.096 36.392 31.448 65.024 67.84 64z" fill="#e21b1b" />
-                </svg> Check in
-                            </a>
-                            <a href="#" class="status-action">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <circle cx="256" cy="256" r="256" fill="#ffca28" />
-                  <g fill="#6d4c41">
-                    <path d="M399.68 208.32c-8.832 0-16-7.168-16-16 0-17.632-14.336-32-32-32s-32 14.368-32 32c0 8.832-7.168 16-16 16s-16-7.168-16-16c0-35.296 28.704-64 64-64s64 28.704 64 64c0 8.864-7.168 16-16 16zM207.68 208.32c-8.832 0-16-7.168-16-16 0-17.632-14.368-32-32-32s-32 14.368-32 32c0 8.832-7.168 16-16 16s-16-7.168-16-16c0-35.296 28.704-64 64-64s64 28.704 64 64c0 8.864-7.168 16-16 16z" />
-                  </g>
-                  <path d="M437.696 294.688c-3.04-4-7.744-6.368-12.736-6.368H86.4c-5.024 0-9.728 2.336-12.736 6.336-3.072 4.032-4.032 9.184-2.688 14.016C94.112 390.88 170.08 448.32 255.648 448.32s161.536-57.44 184.672-139.648c1.376-4.832.416-9.984-2.624-13.984z" fill="#fafafa" />
-                </svg> Mood
-                            </a>
-                            <button class="status-share">Share</button>
-                        </div>
-                    </div>
-                    <div class="album box">
-                        <div class="status-main">
-                            <img src="https://images.genius.com/2326b69829d58232a2521f09333da1b3.1000x1000x1.jpg" class="status-img" />
-                            <div class="album-detail">
-                                <div class="album-title"><strong>Quan Ha</strong> create new <span>album</span></div>
-                                <div class="album-date">6 hours ago</div>
-                            </div>
-                            <button class="intro-menu"></button>
-                        </div>
-                        <div class="album-content">When the bass drops, so do my problems.
-                            <div class="album-photos">
-                                <img src="https://images.unsplash.com/photo-1508179719682-dbc62681c355?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2378&q=80" alt="" class="album-photo" />
-                                <div class="album-right">
-                                    <img src="https://images.unsplash.com/photo-1502872364588-894d7d6ddfab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80" alt="" class="album-photo" />
-                                    <img src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt="" class="album-photo" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="album-actions">
-                            <a href="#" class="album-action">
-                                <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
-                </svg> 87
-                            </a>
-                            <a href="#" class="album-action">
-                                <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1" viewBox="0 0 24 24">
-                  <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-                </svg> 20
-                            </a>
-                            <a href="#" class="album-action">
-                                <svg stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1" viewBox="0 0 24 24">
-                  <path d="M17 1l4 4-4 4" />
-                  <path d="M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4" />
-                  <path d="M21 13v2a4 4 0 01-4 4H3" />
-                </svg> 13
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="app-container">
+  <div class="app-header">
+    <div class="app-header-left">
+      <span class="app-icon"></span>
+      <p class="app-name">Portfolio</p>
+      <div class="search-wrapper">
+        <input class="search-input" type="text" placeholder="Search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-search" viewBox="0 0 24 24">
+          <defs></defs>
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="M21 21l-4.35-4.35"></path>
+        </svg>
+      </div>
     </div>
-
+    <div class="app-header-right">
+      <button class="mode-switch" title="Switch Theme">
+        <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
+          <defs></defs>
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+        </svg>
+      </button>
+      <button class="add-btn" title="Add New Project">
+        <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+          <line x1="12" y1="5" x2="12" y2="19" />
+          <line x1="5" y1="12" x2="19" y2="12" /></svg>
+      </button>
+      <button class="notification-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+          <path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg>
+      </button>
+      <button class="profile-btn">
+        <img src="https://gravatar.com/avatar/baa9cb56bceda1d1cb70a64b6627adba" />
+        <span>Gaurav S.</span>
+      </button>
+    </div>
+    <button class="messages-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>
+    </button>
+  </div>
+  <div class="app-content">
+    <div class="app-sidebar">
+      <a href="" class="app-sidebar-link active">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" /></svg>
+      </a>
+      <a href="" class="app-sidebar-link">
+        <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-pie-chart" viewBox="0 0 24 24">
+          <defs />
+          <path d="M21.21 15.89A10 10 0 118 2.83M22 12A10 10 0 0012 2v10z" />
+        </svg>
+      </a>
+      <a href="" class="app-sidebar-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+          <line x1="16" y1="2" x2="16" y2="6" />
+          <line x1="8" y1="2" x2="8" y2="6" />
+          <line x1="3" y1="10" x2="21" y2="10" /></svg>
+      </a>
+      <a href="" class="app-sidebar-link">
+        <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-settings" viewBox="0 0 24 24">
+          <defs />
+          <circle cx="12" cy="12" r="3" />
+          <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
+        </svg>
+      </a>
+    </div>
+    <div class="projects-section">
+      <div class="projects-section-header">
+        <p>Projects</p>
+        <p class="time">December, 12</p>
+      </div>
+      <div class="projects-section-line">
+        <div class="projects-status">
+          <div class="item-status">
+            <span class="status-number">45</span>
+            <span class="status-type">In Progress</span>
+          </div>
+          <div class="item-status">
+            <span class="status-number">24</span>
+            <span class="status-type">Upcoming</span>
+          </div>
+          <div class="item-status">
+            <span class="status-number">62</span>
+            <span class="status-type">Total Projects</span>
+          </div>
+        </div>
+        <div class="view-actions">
+          <button class="view-btn list-view" title="List View">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list">
+              <line x1="8" y1="6" x2="21" y2="6" />
+              <line x1="8" y1="12" x2="21" y2="12" />
+              <line x1="8" y1="18" x2="21" y2="18" />
+              <line x1="3" y1="6" x2="3.01" y2="6" />
+              <line x1="3" y1="12" x2="3.01" y2="12" />
+              <line x1="3" y1="18" x2="3.01" y2="18" /></svg>
+          </button>
+          <button class="view-btn grid-view active" title="Grid View">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
+              <rect x="3" y="3" width="7" height="7" />
+              <rect x="14" y="3" width="7" height="7" />
+              <rect x="14" y="14" width="7" height="7" />
+              <rect x="3" y="14" width="7" height="7" /></svg>
+          </button>
+        </div>
+      </div>
+      <div class="project-boxes jsGridView">
+        <div class="project-box-wrapper">
+          <div class="project-box" style="background-color: #fee4cb;">
+            <div class="project-box-header">
+              <span>December 10, 2020</span>
+              <div class="more-wrapper">
+                <button class="project-btn-more">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                    <circle cx="12" cy="12" r="1" />
+                    <circle cx="12" cy="5" r="1" />
+                    <circle cx="12" cy="19" r="1" /></svg>
+                </button>
+          </div>
+        </div>
+        <div class="project-box-content-header">
+          <p class="box-content-header">Web Designing</p>
+          <p class="box-content-subheader">Prototyping</p>
+        </div>
+        <div class="box-progress-wrapper">
+          <p class="box-progress-header">Progress</p>
+          <div class="box-progress-bar">
+            <span class="box-progress" style="width: 60%; background-color: #ff942e"></span>
+          </div>
+          <p class="box-progress-percentage">60%</p>
+        </div>
+        <div class="project-box-footer">
+          <div class="participants">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant">
+            <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="participant">
+            <button class="add-participant" style="color: #ff942e;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </button>
+          </div>
+          <div class="days-left" style="color: #ff942e;">
+            2 Days Left
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="project-box-wrapper">
+      <div class="project-box" style="background-color: #e9e7fd;">
+        <div class="project-box-header">
+          <span>December 10, 2020</span>
+          <div class="more-wrapper">
+            <button class="project-btn-more">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                <circle cx="12" cy="12" r="1" />
+                <circle cx="12" cy="5" r="1" />
+                <circle cx="12" cy="19" r="1" /></svg>
+            </button>
+          </div>
+        </div>
+        <div class="project-box-content-header">
+          <p class="box-content-header">Testing</p>
+          <p class="box-content-subheader">Prototyping</p>
+        </div>
+        <div class="box-progress-wrapper">
+          <p class="box-progress-header">Progress</p>
+          <div class="box-progress-bar">
+            <span class="box-progress" style="width: 50%; background-color: #4f3ff0"></span>
+          </div>
+          <p class="box-progress-percentage">50%</p>
+        </div>
+        <div class="project-box-footer">
+          <div class="participants">
+            <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="participant">
+            <img src="https://images.unsplash.com/photo-1583195764036-6dc248ac07d9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2555&q=80" alt="participant">
+            <button class="add-participant" style="color: #4f3ff0;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </button>
+          </div>
+          <div class="days-left" style="color: #4f3ff0;">
+            2 Days Left
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="project-box-wrapper">
+      <div class="project-box">
+        <div class="project-box-header">
+          <span>December 10, 2020</span>
+          <div class="more-wrapper">
+            <button class="project-btn-more">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                <circle cx="12" cy="12" r="1" />
+                <circle cx="12" cy="5" r="1" />
+                <circle cx="12" cy="19" r="1" /></svg>
+            </button>
+          </div>
+        </div>
+        <div class="project-box-content-header">
+          <p class="box-content-header">Svg Animations</p>
+          <p class="box-content-subheader">Prototyping</p>
+        </div>
+        <div class="box-progress-wrapper">
+          <p class="box-progress-header">Progress</p>
+          <div class="box-progress-bar">
+            <span class="box-progress" style="width: 80%; background-color: #096c86"></span>
+          </div>
+          <p class="box-progress-percentage">80%</p>
+        </div>
+        <div class="project-box-footer">
+          <div class="participants">
+            <img src="https://images.unsplash.com/photo-1587628604439-3b9a0aa7a163?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjR8fHdvbWFufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="participant">
+            <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="participant">
+            <button class="add-participant" style="color: #096c86;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </button>
+          </div>
+          <div class="days-left" style="color: #096c86;">
+            2 Days Left
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="project-box-wrapper">
+      <div class="project-box" style="background-color: #ffd3e2;">
+        <div class="project-box-header">
+          <span>December 10, 2020</span>
+          <div class="more-wrapper">
+            <button class="project-btn-more">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                <circle cx="12" cy="12" r="1" />
+                <circle cx="12" cy="5" r="1" />
+                <circle cx="12" cy="19" r="1" /></svg>
+            </button>
+          </div>
+        </div>
+        <div class="project-box-content-header">
+          <p class="box-content-header">UI Development</p>
+          <p class="box-content-subheader">Prototyping</p>
+        </div>
+        <div class="box-progress-wrapper">
+          <p class="box-progress-header">Progress</p>
+          <div class="box-progress-bar">
+            <span class="box-progress" style="width: 20%; background-color: #df3670"></span>
+          </div>
+          <p class="box-progress-percentage">20%</p>
+        </div>
+        <div class="project-box-footer">
+          <div class="participants">
+            <img src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant">
+            <img src="https://images.unsplash.com/photo-1587628604439-3b9a0aa7a163?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjR8fHdvbWFufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="participant">
+            <button class="add-participant" style="color: #df3670;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </button>
+          </div>
+          <div class="days-left" style="color: #df3670;">
+            2 Days Left
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="project-box-wrapper">
+      <div class="project-box" style="background-color: #c8f7dc;">
+        <div class="project-box-header">
+          <span>December 10, 2020</span>
+          <div class="more-wrapper">
+            <button class="project-btn-more">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                <circle cx="12" cy="12" r="1" />
+                <circle cx="12" cy="5" r="1" />
+                <circle cx="12" cy="19" r="1" /></svg>
+            </button>
+          </div>
+        </div>
+        <div class="project-box-content-header">
+          <p class="box-content-header">Data Analysis</p>
+          <p class="box-content-subheader">Prototyping</p>
+        </div>
+        <div class="box-progress-wrapper">
+          <p class="box-progress-header">Progress</p>
+          <div class="box-progress-bar">
+            <span class="box-progress" style="width: 60%; background-color: #34c471"></span>
+          </div>
+          <p class="box-progress-percentage">60%</p>
+        </div>
+        <div class="project-box-footer">
+          <div class="participants">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant">
+            <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="participant">
+            <button class="add-participant" style="color: #34c471;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </button>
+          </div>
+          <div class="days-left" style="color: #34c471;">
+            2 Days Left
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="project-box-wrapper">
+      <div class="project-box" style="background-color: #d5deff;">
+        <div class="project-box-header">
+          <span>December 10, 2020</span>
+          <div class="more-wrapper">
+            <button class="project-btn-more">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                <circle cx="12" cy="12" r="1" />
+                <circle cx="12" cy="5" r="1" />
+                <circle cx="12" cy="19" r="1" /></svg>
+            </button>
+          </div>
+        </div>
+        <div class="project-box-content-header">
+          <p class="box-content-header">Web Designing</p>
+          <p class="box-content-subheader">Prototyping</p>
+        </div>
+        <div class="box-progress-wrapper">
+          <p class="box-progress-header">Progress</p>
+          <div class="box-progress-bar">
+            <span class="box-progress" style="width: 40%; background-color: #4067f9"></span>
+          </div>
+          <p class="box-progress-percentage">40%</p>
+        </div>
+        <div class="project-box-footer">
+          <div class="participants">
+            <img src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant">
+            <img src="https://images.unsplash.com/photo-1583195764036-6dc248ac07d9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2555&q=80" alt="participant">
+            <button class="add-participant" style="color: #4067f9;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </button>
+          </div>
+          <div class="days-left" style="color: #4067f9;">
+            2 Days Left
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="messages-section">
+  <button class="messages-close">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="15" y1="9" x2="9" y2="15" />
+      <line x1="9" y1="9" x2="15" y2="15" /></svg>
+  </button>
+  <div class="projects-section-header">
+    <p>Client Messages</p>
+  </div>
+  <div class="messages">
+    <div class="message-box">
+      <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="profile image">
+      <div class="message-content">
+        <div class="message-header">
+          <div class="name">Stephanie</div>
+          <div class="star-checkbox">
+            <input type="checkbox" id="star-1">
+            <label for="star-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+            </label>
+          </div>
+        </div>
+        <p class="message-line">
+          I got your first assignment. It was quite good. 🥳 We can continue with the next assignment.
+        </p>
+        <p class="message-line time">
+          Dec, 12
+        </p>
+      </div>
+    </div>
+    <div class="message-box">
+      <img src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="profile image">
+      <div class="message-content">
+        <div class="message-header">
+          <div class="name">Mark</div>
+          <div class="star-checkbox">
+            <input type="checkbox" id="star-2">
+            <label for="star-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+            </label>
+          </div>
+        </div>
+        <p class="message-line">
+          Hey, can tell me about progress of project? I'm waiting for your response.
+        </p>
+        <p class="message-line time">
+          Dec, 12
+        </p>
+      </div>
+    </div>
+    <div class="message-box">
+      <img src="https://images.unsplash.com/photo-1543965170-4c01a586684e?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NDZ8fG1hbnxlbnwwfDB8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="profile image">
+      <div class="message-content">
+        <div class="message-header">
+          <div class="name">David</div>
+          <div class="star-checkbox">
+            <input type="checkbox" id="star-3">
+            <label for="star-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+            </label>
+          </div>
+        </div>
+        <p class="message-line">
+          Awesome! 🤩 I like it. We can schedule a meeting for the next one.
+        </p>
+        <p class="message-line time">
+          Dec, 12
+        </p>
+      </div>
+    </div>
+    <div class="message-box">
+      <img src="https://images.unsplash.com/photo-1533993192821-2cce3a8267d1?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTl8fHdvbWFuJTIwbW9kZXJufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="profile image">
+      <div class="message-content">
+        <div class="message-header">
+          <div class="name">Jessica</div>
+          <div class="star-checkbox">
+            <input type="checkbox" id="star-4">
+            <label for="star-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+            </label>
+          </div>
+        </div>
+        <p class="message-line">
+          I am really impressed! Can't wait to see the final result.
+        </p>
+        <p class="message-line time">
+          Dec, 11
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 </div>
