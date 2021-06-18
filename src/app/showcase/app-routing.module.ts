@@ -6,6 +6,7 @@ import { HomeComponent } from './components/home/home.component';
     imports: [
         RouterModule.forRoot([
             {path: '', component: HomeComponent},
+            {path: 'dashboard', loadChildren: () => import('../pages/dashboard/dashboard.module').then(m => m.DashboardModule)},
             {path: 'admin', loadChildren: () => import('../crud/crud.module').then(m => m.CrudModule)},
             {path: 'order-manage', loadChildren: () => import('../pages/order-manage/order-manage.module').then(m => m.OrderManageModule)},
             {path: 'login', loadChildren: () => import('../pages/login/account-login.module').then(m => m.AccountLoginModule)},

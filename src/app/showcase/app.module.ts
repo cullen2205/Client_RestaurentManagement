@@ -33,6 +33,7 @@ import { AppTopbarModule } from './app-topbar/app-topbar.module';
 import { AppFooterModule } from './app-footer/app-footer.module';
 import { AppMenuModule } from './app-menu/app-menu.module';
 import { AppConfigModule } from './app-config/app-config.module';
+import { DashboardModule } from '../pages/dashboard/dashboard.module';
 
 @NgModule({
     declarations: [
@@ -59,6 +60,7 @@ import { AppConfigModule } from './app-config/app-config.module';
         AppFooterModule,
         AppMenuModule,
         AppConfigModule,
+        DashboardModule,
     ],
     providers: [
         { 
