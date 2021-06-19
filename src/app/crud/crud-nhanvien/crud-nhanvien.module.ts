@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TooltipModule } from 'primeng/tooltip';
-import { CrudNhanvienComponent } from './crud-nhanvien.component';
+import { CrudNhanVienComponent } from './crud-nhanvien.component';
 import { TableModule } from 'primeng/table';
 import { CalendarModule } from 'primeng/calendar';
 import { SliderModule } from 'primeng/slider';
@@ -64,10 +64,10 @@ import { AppTopbarModule } from 'src/app/showcase/app-topbar/app-topbar.module';
     AppTopbarModule,
   ],
   declarations: [
-    CrudNhanvienComponent,
+    CrudNhanVienComponent,
   ],
   exports:[
-    CrudNhanvienComponent,
+    CrudNhanVienComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

@@ -4,7 +4,7 @@ import { Declare } from '../declare';
 import { NhanVien } from '../models/nhanvien';
 
 @Injectable()
-export class NhanvienService {
+export class NhanVienService {
 
     status: string[] = ['OUTOFSTOCK', 'INSTOCK', 'LOWSTOCK'];
 

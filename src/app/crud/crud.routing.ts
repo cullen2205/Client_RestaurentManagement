@@ -10,7 +10,7 @@ import { CrudGiamGiaComboComponent } from './crud-giam-gia-combo/crud-giam-gia-c
 import { CrudHoaDonComponent } from './crud-hoa-don/crud-hoa-don.component';
 import { CrudKhachhangComponent } from './crud-khachhang/crud-khachhang.component';
 import { CrudNhaCungCapComponent } from './crud-nha-cung-cap/crud-nha-cung-cap.component';
-import { CrudNhanvienComponent } from './crud-nhanvien/crud-nhanvien.component';
+import { CrudNhanVienComponent } from './crud-nhanvien/crud-nhanvien.component';
 import { CrudPhanPhoiThucPhamComponent } from './crud-phan-phoi-thuc-pham/crud-phan-phoi-thuc-pham.component';
 import { CrudPhanQuyenComponent } from './crud-phan-quyen/crud-phan-quyen.component';
 import { CrudQuyenTruyCapComponent } from './crud-quyen-truy-cap/crud-quyen-truy-cap.component';
@@ -33,7 +33,7 @@ import { CrudThucPhamComponent } from './crud-thuc-pham/crud-thuc-pham.component
 			{ path: 'phan-quyen', component: CrudPhanQuyenComponent },
 			{ path: 'quyen-truy-cap', component: CrudQuyenTruyCapComponent },
 			{ path: 'thuc-pham', component: CrudThucPhamComponent },
-			{ path: 'nhan-vien', component: CrudNhanvienComponent },
+			{ path: 'nhan-vien', component: CrudNhanVienComponent },
 		])
 	],
 	exports: [

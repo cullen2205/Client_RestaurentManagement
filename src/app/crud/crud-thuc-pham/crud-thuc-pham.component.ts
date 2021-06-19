@@ -137,7 +137,7 @@ export class CrudThucPhamComponent implements OnInit {
     }
 
     createId(): string {
-        let id = 'NV' + formatDate(new Date(), 'yyyyMMddHHmmss', 'en');
+        let id = 'TP' + formatDate(new Date(), 'yyyyMMddHHmmss', 'en');
         return id;
     }
 

@@ -22,7 +22,7 @@
                     </ng-template>
                 </p-toolbar>
 
-                <p-table #dt [value]="nhanViens" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']" 
+                <p-table #dt [value]="nhanViens" [rows]="10" [paginator]="true" [globalFilterFields]="['ten','soCMND','email','kinhNghiemLamViec','ngaySinh']" 
                     [(selection)]="selectedNhanViens" [rowHover]="true" dataKey="code" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                     [showCurrentPageReport]="true">
                     <ng-template pTemplate="caption">

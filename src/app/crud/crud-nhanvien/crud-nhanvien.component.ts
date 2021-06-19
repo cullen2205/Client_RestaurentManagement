@@ -2,7 +2,7 @@ import { DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { NhanVien } from 'src/app/models/nhanvien';
-import { NhanvienService } from 'src/app/services/nhanvien.service';
+import { NhanVienService } from 'src/app/services/nhanvien.service';
 
 @Component({
     selector: 'app-crud-nhanvien',
@@ -11,10 +11,10 @@ import { NhanvienService } from 'src/app/services/nhanvien.service';
     providers: [
         MessageService,
         ConfirmationService,
-        NhanvienService,
+        NhanVienService,
     ]
 })
-export class CrudNhanvienComponent implements OnInit {
+export class CrudNhanVienComponent implements OnInit {
 
     dialog: boolean;
     nhanViens: NhanVien[];
@@ -25,7 +25,7 @@ export class CrudNhanvienComponent implements OnInit {
     position: string;
     exportColumns: any[];
 
-    constructor(private dataService: NhanvienService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
+    constructor(private dataService: NhanVienService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
     ngOnInit() {
         this.dataService.getAll().then((data) => {

@@ -8,6 +8,7 @@ export interface HoaDon {
     nguoiThem?:	string,
     nguoiChinhSua?:	string,
     suDung?:	number,
+    
     ngayGio?:	Date,
     ma_KhachHang?:	string,
     ma_ChiNhanh?:	string,

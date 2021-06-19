@@ -1,3 +1,118 @@
-<p>
-  crud-hoa-don works!
-</p>
+<div class="layout-wrapper">
+  <app-topbar></app-topbar>
+  <app-menu></app-menu>
+  <app-config></app-config>
+
+  <div class="layout-content">
+      <div class="content-section implementation">
+          <p-toast></p-toast>
+
+          <div class="card">
+              <p-toolbar styleClass="p-mb-4">
+                  <ng-template pTemplate="left">
+                      <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+                      <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" 
+                          (click)="deleteMulti()" [disabled]="!selectedHoaDons || !selectedHoaDons.length"></button>
+                  </ng-template>
+
+                  <ng-template pTemplate="right">
+                      <!-- <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload> -->
+                      <button pButton pRipple type="button" label="Xuất excel" class="p-button-help p-mr-2" icon="pi pi-upload" (click)="confirmPosition('top-right')"></button>
+                      <!-- <button pButton pRipple type="button" label="Lưu toàn bộ" class="p-button-success p-mr-2" icon="pi pi-save"></button> -->
+                  </ng-template>
+              </p-toolbar>
+
+              <p-table #dt [value]="hoaDons" [rows]="10" [paginator]="true" [globalFilterFields]="['ngayGio', 'status', 'soNguoi', 'hinhThucThanhToan', 'ghiChu']" 
+                  [(selection)]="selectedHoaDons" [rowHover]="true" dataKey="code" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                  [showCurrentPageReport]="true">
+                  <ng-template pTemplate="caption">
+                      <div class="p-d-flex p-ai-center p-jc-between">
+                          <h5 class="p-m-0">Quản lý hoá đơn</h5>
+                          <span class="p-input-icon-left">
+                              <i class="pi pi-search"></i>
+                              <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                          </span>
+                      </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                      <tr>
+                          <th style="width: 3rem">
+                              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                          </th>
+                          <th pSortableColumn="ngayGio">Ngày đặt bàn
+                              <p-sortIcon field="ngayGio"></p-sortIcon>
+                          </th>
+                          <th pSortableColumn="status">Trạng thái
+                              <p-sortIcon field="status"></p-sortIcon>
+                          </th>
+                          <th pSortableColumn="soNguoi">Số người
+                              <p-sortIcon field="soNguoi"></p-sortIcon>
+                          </th>
+                          <th pSortableColumn="hinhThucThanhToan">Hình thức thanh toán
+                              <p-sortIcon field="hinhThucThanhToan"></p-sortIcon>
+                          </th>
+                          <th pSortableColumn="ghiChu">Ghi chú
+                              <p-sortIcon field="ghiChu"></p-sortIcon>
+                          </th>
+                          <th></th>
+                      </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-hoaDon>
+                      <tr>
+                          <td>
+                              <p-tableCheckbox [value]="hoaDon"></p-tableCheckbox>
+                          </td>
+                          <td>{{hoaDon.ngayGio}}</td>
+                          <td>{{hoaDon.status}}</td>
+                          <td>{{hoaDon.soNguoi}}</td>
+                          <td>{{hoaDon.hinhThucThanhToan}}</td>
+                          <td>{{hoaDon.ghiChu}}</td>
+                          <td>
+                              <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="edit(hoaDon)"></button>
+                              <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteOne(hoaDon)"></button>
+                          </td>
+                      </tr>
+                  </ng-template>
+                  <ng-template pTemplate="summary">
+                      <div class="p-d-flex p-ai-center p-jc-between">
+                          In total there are {{hoaDons ? hoaDons.length : 0 }} records.
+                      </div>
+                  </ng-template>
+              </p-table>
+          </div>
+
+          <p-dialog [(visible)]="dialog" [style]="{width: '450px'}" header="Chi tiết hoá đơn" [modal]="true" styleClass="p-fluid">
+              <ng-template pTemplate="content">
+                  <div class="p-field">
+                      <label for="ngayGio">Ngày giờ</label>
+                      <input type="text" pInputText id="ngayGio" [(ngModel)]="hoaDon.ngayGio" readonly />
+                  </div>
+                  <div class="p-field">
+                      <label for="status">Trạng thái</label>
+                      <input type="text" pInputText id="status" [(ngModel)]="hoaDon.status" required autofocus />
+                  </div>
+                  <div class="p-field">
+                      <label for="soNguoi">Số người</label>
+                      <input type="text" pInputText id="soNguoi" [(ngModel)]="hoaDon.soNguoi" required autofocus />
+                  </div>
+                  <div class="p-field">
+                      <label for="hinhThucThanhToan">Hình thức thanh toán</label>
+                      <input type="text" pInputText id="hinhThucThanhToan" [(ngModel)]="hoaDon.hinhThucThanhToan" />
+                  </div>
+                  <div class="p-field">
+                      <label for="ghiChu">Ghi chú</label>
+                      <input type="text" pInputText id="ghiChu" [(ngModel)]="hoaDon.ghiChu" />
+                  </div>
+              </ng-template>
+
+              <ng-template pTemplate="footer">
+                  <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                  <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+              </ng-template>
+          </p-dialog>
+
+          <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+          <p-confirmDialog [style]="{width: '50vw'}" key="positionDialog" [position]="position" [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
+      </div>
+  </div>
+</div>

@@ -5,6 +5,7 @@ export interface NhanVien {
     nguoiThem?:	string;
     nguoiChinhSua?: string;
     suDung?:	number;
+    
     hinhAnh?:	string;
     ten?:	string;
     soCMND?:	string;
