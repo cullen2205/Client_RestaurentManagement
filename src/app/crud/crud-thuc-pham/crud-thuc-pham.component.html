@@ -1,3 +1,128 @@
-<p>
-  crud-thuc-pham works!
-</p>
+<div class="layout-wrapper">
+    <app-topbar></app-topbar>
+    <app-menu></app-menu>
+    <app-config></app-config>
+
+    <div class="layout-content">
+        <div class="content-section implementation">
+            <p-toast></p-toast>
+
+            <div class="card">
+                <p-toolbar styleClass="p-mb-4">
+                    <ng-template pTemplate="left">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+                        <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteMulti()" [disabled]="!selectedThucPhams || !selectedThucPhams.length"></button>
+                    </ng-template>
+
+                    <ng-template pTemplate="right">
+                        <button pButton pRipple type="button" label="Xuất excel" class="p-button-help p-mr-2" icon="pi pi-upload" (click)="confirmPosition('top-right')"></button>
+                        <!-- <button pButton pRipple type="button" label="Lưu toàn bộ" class="p-button-success p-mr-2" icon="pi pi-save"></button> -->
+                    </ng-template>
+                </p-toolbar>
+
+                <p-table #dt [value]="thucPhams" [rows]="10" [paginator]="true" 
+                    [globalFilterFields]="['ten','soLuong','donVi','moTa','giaNhap','giaBan']" 
+                    [(selection)]="selectedThucPhams" 
+                    [rowHover]="true" dataKey="code" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true">
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">Quản lý thực phẩm</h5>
+                            <span class="p-input-icon-left">
+                              <i class="pi pi-search"></i>
+                              <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                          </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th pSortableColumn="ten">Tên
+                                <p-sortIcon field="ten"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="soLuong">Số lượng
+                                <p-sortIcon field="soLuong"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="donVi">Đơn vị
+                                <p-sortIcon field="donVi"></p-sortIcon>
+                            </th>
+                            <th>Hình ảnh</th>
+                            <th pSortableColumn="giaNhap">Giá nhập
+                                <p-sortIcon field="giaNhap"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="giaBan">Giá bán
+                                <p-sortIcon field="giaBan"></p-sortIcon>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-thucPham>
+                        <tr>
+                            <td>
+                                <p-tableCheckbox [value]="thucPham"></p-tableCheckbox>
+                            </td>
+                            <td>{{thucPham.ten}}</td>
+                            <td>{{thucPham.soLuong}}</td>
+                            <td>{{thucPham.donVi}}</td>
+                            <td><img [src]="thucPham.hinhAnh" [alt]="thucPham.ten" width="100" class="p-shadow-4" /></td>
+                            <td>{{thucPham.giaNhap}}</td>
+                            <td>{{thucPham.giaBan}}</td>
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="edit(thucPham)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteOne(thucPham)"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            In total there are {{thucPhams ? thucPhams.length : 0 }} records.
+                        </div>
+                    </ng-template>
+                </p-table>
+            </div>
+
+            <p-dialog [(visible)]="dialog" [style]="{width: '450px'}" header="Chi tiết thực phẩm" [modal]="true" styleClass="p-fluid">
+                <ng-template pTemplate="content">
+                    <img [src]="thucPham.hinhAnh" [alt]="thucPham.hinhAnh" class="product-image" *ngIf="thucPham.hinhAnh">
+                    <div class="p-field">
+                        <label for="ten">Tên</label>
+                        <input type="text" pInputText id="ten" [(ngModel)]="thucPham.ten" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !thucPham.ten">Bắt buộc điền tên.</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="soLuong">Số lượng tồn</label>
+                        <input type="text" pInputText id="soLuong" [(ngModel)]="thucPham.soLuong" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !thucPham.soLuong">Bắt buộc điền số lượng</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="donVi">Đơn vị tính</label>
+                        <input type="text" pInputText id="donVi" [(ngModel)]="thucPham.donVi" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !thucPham.donVi">Bắt buộc điền đơn vị tính.</small>
+                    </div>
+
+                    <div class="p-field">
+                        <label for="giaNhap">Giá nhập</label>
+                        <input type="text" pInputText id="giaNhap" [(ngModel)]="thucPham.giaNhap" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !thucPham.giaNhap">Bắt buộc điền giá nhập.</small>
+                    </div>
+
+                    <div class="p-field">
+                        <label for="giaBan">Giá bán</label>
+                        <input type="text" pInputText id="giaBan" [(ngModel)]="thucPham.giaBan" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !thucPham.giaBan">Bắt buộc điền giá bán.</small>
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+                </ng-template>
+            </p-dialog>
+
+            <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+            <p-confirmDialog [style]="{width: '50vw'}" key="positionDialog" [position]="position" [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
+        </div>
+    </div>
+</div>

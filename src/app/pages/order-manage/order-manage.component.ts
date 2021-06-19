@@ -25,6 +25,8 @@ export class OrderManageComponent implements OnInit, OnDestroy {
   orders: HoaDon[];
   pays: HoaDon[];
   ref: DynamicDialogRef;
+  dialog: boolean = false;
+  position: string;
   
   constructor(
     private messageService: MessageService,
@@ -36,6 +38,10 @@ export class OrderManageComponent implements OnInit, OnDestroy {
       .withUrl(Declare.realtimeServer + 'order')
       .build();
     this.hubConnection.start().catch((err) => console.log(err.toString()));
+  }
+
+  openNew(){
+    this.dialog = true;
   }
 
   ngOnDestroy() {

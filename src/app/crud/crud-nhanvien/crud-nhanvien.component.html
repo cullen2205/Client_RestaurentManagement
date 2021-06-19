@@ -11,7 +11,8 @@
                 <p-toolbar styleClass="p-mb-4">
                     <ng-template pTemplate="left">
                         <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
-                        <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteMulti()" [disabled]="!selectedNhanViens || !selectedNhanViens.length"></button>
+                        <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" 
+                            (click)="deleteMulti()" [disabled]="!selectedNhanViens || !selectedNhanViens.length"></button>
                     </ng-template>
 
                     <ng-template pTemplate="right">
@@ -21,7 +22,8 @@
                     </ng-template>
                 </p-toolbar>
 
-                <p-table #dt [value]="nhanViens" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']" [(selection)]="selectedNhanViens" [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                <p-table #dt [value]="nhanViens" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']" 
+                    [(selection)]="selectedNhanViens" [rowHover]="true" dataKey="code" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                     [showCurrentPageReport]="true">
                     <ng-template pTemplate="caption">
                         <div class="p-d-flex p-ai-center p-jc-between">
@@ -50,9 +52,6 @@
                             <th pSortableColumn="kinhNghiemLamViec">Kinh nghiệm
                                 <p-sortIcon field="kinhNghiemLamViec"></p-sortIcon>
                             </th>
-                            <th pSortableColumn="suDung">Trạng thái
-                                <p-sortIcon field="suDung"></p-sortIcon>
-                            </th>
                             <th></th>
                         </tr>
                     </ng-template>
@@ -68,7 +67,6 @@
                             <td>
                                 <p-rating [ngModel]="nhanVien.kinhNghiemLamViec" [readonly]="true" [cancel]="false"></p-rating>
                             </td>
-                            <td><span>{{nhanVien.suDung}}</span></td>
                             <td>
                                 <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="edit(nhanVien)"></button>
                                 <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteOne(nhanVien)"></button>
@@ -100,15 +98,6 @@
                         <label for="email">Email</label>
                         <input type="text" pInputText id="email" [(ngModel)]="nhanVien.email" required autofocus />
                         <small class="p-error" *ngIf="submitted && !nhanVien.email">Bắt buộc điền email.</small>
-                    </div>
-
-                    <div class="p-field">
-                        <label for="suDung">Trạng thái</label>
-                        <p-dropdown (value)="nhanVien.suDung" [(ngModel)]="nhanVien.suDung" (ngModelChange)="nhanVien.suDung=$event.suDung" optionLabel="label" inputId="suDung" [options]="statuses" placeholder="Select">
-                            <ng-template let-item pTemplate="item">
-                                <span>{{item.label}}</span>
-                            </ng-template>
-                        </p-dropdown>
                     </div>
 
                     <div class="p-formgrid p-grid">

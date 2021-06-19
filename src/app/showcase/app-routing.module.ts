@@ -1,15 +1,16 @@
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './components/home/home.component';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
             {path: 'dashboard-demo', component: HomeComponent},
-            {path: '', loadChildren: () => import('../pages/dashboard/dashboard.module').then(m => m.DashboardModule)},
+            {path: 'dashboard', loadChildren: () => import('../pages/dashboard/dashboard.module').then(m => m.DashboardModule)},
             {path: 'admin', loadChildren: () => import('../crud/crud.module').then(m => m.CrudModule)},
             {path: 'order-manage', loadChildren: () => import('../pages/order-manage/order-manage.module').then(m => m.OrderManageModule)},
-            {path: 'login', loadChildren: () => import('../pages/login/account-login.module').then(m => m.AccountLoginModule)},
+            {path: '', loadChildren: () => import('../pages/login/account-login.module').then(m => m.AccountLoginModule)},
             {path: 'setup', loadChildren: () => import('./components/setup/setup.module').then(m => m.SetupModule)},
             {path: 'theming', loadChildren: () => import('./components/theming/theming.module').then(m => m.ThemingModule)},
             {path: 'icons', loadChildren: () => import('./components/icons/icons.module').then(m => m.IconsModule)},

@@ -15,6 +15,9 @@ import { AppMenuModule } from 'src/app/showcase/app-menu/app-menu.module';
 import { AppConfigModule } from 'src/app/showcase/app-config/app-config.module';
 import { AppFooterModule } from 'src/app/showcase/app-footer/app-footer.module';
 import { AppTopbarModule } from 'src/app/showcase/app-topbar/app-topbar.module';
+import { ToolbarModule } from 'primeng/toolbar';
+import { DialogModule } from 'primeng/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 @NgModule({
@@ -29,6 +32,9 @@ import { AppTopbarModule } from 'src/app/showcase/app-topbar/app-topbar.module';
     ButtonModule,
     DynamicDialogModule,
     TableModule,
+    ToolbarModule,
+    DialogModule,
+    ConfirmDialogModule,
     
     AppMenuModule,
     AppConfigModule,

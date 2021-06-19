@@ -7,6 +7,9 @@ import { MessageService, MenuItem } from 'primeng/api';
     styleUrls: ['./account-login.scss']
 })
 export class AccountLogin implements OnInit {
+    username: string = "hellllo";
+    password: string = "admin";
+
     constructor(private messageService: MessageService) {
     }
     ngOnInit(): void {
@@ -21,5 +24,13 @@ export class AccountLogin implements OnInit {
         signInButton.addEventListener('click', () => {
             container.classList.remove("right-panel-active");
         });
+    }
+
+    SignIn(){
+        console.log('sign in');
+    }
+
+    SignUp(){
+        console.log('sign up');
     }
 }

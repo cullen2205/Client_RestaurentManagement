@@ -2,10 +2,16 @@
     <app-topbar></app-topbar>
     <app-menu></app-menu>
     <app-config></app-config>
-
     <div class="layout-content">
         <p-toast position="top-right"></p-toast>
         <div class="content-section implementation">
+            <div class="card">
+                <p-toolbar styleClass="p-mb-6">
+                    <ng-template pTemplate="left">
+                        <button pButton pRipple label="Tạo mới hoá đơn" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+                    </ng-template>
+                </p-toolbar>
+            </div>
             <h2>Đơn đặt trên web -> Đã xác nhận bàn</h2>
             <div class="card">
                 <p-pickList [source]="nonComfirms" [target]="comfirms" sourceHeader="Đơn đặt trên web" targetHeader="Đã xác nhận bàn" [dragdrop]="true" [responsive]="true" [sourceStyle]="{'height':'30rem'}" [targetStyle]="{'height':'30rem'}" filterBy="ngayThem" sourceFilterPlaceholder="Tìm theo ngày"
@@ -69,6 +75,50 @@
                     </ng-template>
                 </p-pickList>
             </div>
+            <p-dialog [(visible)]="dialog" [style]="{width: '450px'}" header="Chi tiết nhân viên" [modal]="true" styleClass="p-fluid">
+                <ng-template pTemplate="content">
+                    <img [src]="nhanVien.hinhAnh" [alt]="nhanVien.hinhAnh" class="product-image" *ngIf="nhanVien.hinhAnh">
+                    <div class="p-field">
+                        <label for="ten">Họ và tên</label>
+                        <input type="text" pInputText id="ten" [(ngModel)]="nhanVien.ten" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !nhanVien.ten">Bắt buộc điền tên.</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="soCMND">Số CMND</label>
+                        <input type="text" pInputText id="soCMND" [(ngModel)]="nhanVien.soCMND" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !nhanVien.soCMND">Bắt buộc điền số CMND</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="email">Email</label>
+                        <input type="text" pInputText id="email" [(ngModel)]="nhanVien.email" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !nhanVien.email">Bắt buộc điền email.</small>
+                    </div>
+
+                    <div class="p-field">
+                        <label for="suDung">Trạng thái</label>
+                        <p-dropdown (value)="nhanVien.suDung" [(ngModel)]="nhanVien.suDung" (ngModelChange)="nhanVien.suDung=$event.suDung" optionLabel="label" inputId="suDung" [options]="statuses" placeholder="Select">
+                            <ng-template let-item pTemplate="item">
+                                <span>{{item.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+
+                    <div class="p-formgrid p-grid">
+                        <div class="p-field p-col">
+                            <label for="quantity">Kinh nghiệm</label>
+                            <p-inputNumber id="quantity" [(ngModel)]="nhanVien.kinhNghiemLamViec"></p-inputNumber>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+                </ng-template>
+            </p-dialog>
+
+            <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+            <p-confirmDialog [style]="{width: '50vw'}" key="positionDialog" [position]="position" [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
         </div>
         <app-footer></app-footer>
     </div>
