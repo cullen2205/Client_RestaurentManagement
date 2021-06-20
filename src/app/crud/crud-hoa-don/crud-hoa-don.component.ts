@@ -47,6 +47,8 @@ export class CrudHoaDonComponent implements OnInit {
 
     openNew() {
         this.hoaDon = {};
+        this.hoaDon.ngayGio = new Date();
+        this.hoaDon.trangThai = 2;
         this.submitted = false;
         this.dialog = true;
     }

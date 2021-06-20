@@ -28,7 +28,7 @@ export class SignalRService {
     return results;
   }
 
-  public async postOrderSync(hoaDons: HoaDon[]) {
-    return this.http.put(Declare.serverApiPath + 'v2.0/Order/PutSync', hoaDons).toPromise();
+  public async postOrderSync(hoaDon: HoaDon) {
+    return this.http.post(Declare.serverApiPath + 'v2.0/Order/PostOrder', hoaDon).toPromise();
   }
 }

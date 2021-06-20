@@ -18,6 +18,19 @@ import { AppTopbarModule } from 'src/app/showcase/app-topbar/app-topbar.module';
 import { ToolbarModule } from 'primeng/toolbar';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { FormsModule } from '@angular/forms';
+import { CalendarModule } from 'primeng/calendar';
+import { SliderModule } from 'primeng/slider';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { TooltipModule } from 'primeng/tooltip';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { RatingModule } from 'primeng/rating';
 
 
 @NgModule({
@@ -35,6 +48,18 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ToolbarModule,
     DialogModule,
     ConfirmDialogModule,
+    FormsModule,
+    CalendarModule,
+    SliderModule,
+    ContextMenuModule,
+    DropdownModule,
+    InputTextModule,
+    InputNumberModule,
+    InputTextareaModule,
+    ProgressBarModule,
+    TooltipModule,
+    RadioButtonModule,
+    RatingModule,
     
     AppMenuModule,
     AppConfigModule,
@@ -42,10 +67,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     AppTopbarModule,
   ],
   declarations: [
-    OrderManageComponent,
-    SelectFood,
-  ],
-  exports:[
     OrderManageComponent,
     SelectFood,
   ],
