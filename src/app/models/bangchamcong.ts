@@ -5,6 +5,7 @@ export interface BangChamCong {
     nguoiThem?:	string,
     nguoiChinhSua?:	string,
     suDung?:	number,
+    
     ma_ChiNhanh?:	string,
     ma_NhanVien?:	string,
     ngay?:	Date,

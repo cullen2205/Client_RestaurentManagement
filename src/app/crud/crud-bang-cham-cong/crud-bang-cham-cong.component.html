@@ -1,3 +1,121 @@
-<p>
-  crud-bang-cham-cong works!
-</p>
+<div class="layout-wrapper">
+    <app-topbar></app-topbar>
+    <app-menu></app-menu>
+    <app-config></app-config>
+
+    <div class="layout-content">
+        <div class="content-section implementation">
+            <p-toast></p-toast>
+
+            <div class="card">
+                <p-toolbar styleClass="p-mb-4">
+                    <ng-template pTemplate="left">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+                        <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteMulti()" [disabled]="!selectedBangChamCongs || !selectedBangChamCongs.length"></button>
+                    </ng-template>
+
+                    <ng-template pTemplate="right">
+                        <!-- <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload> -->
+                        <button pButton pRipple type="button" label="Xuất excel" class="p-button-help p-mr-2" icon="pi pi-upload" (click)="confirmPosition('top-right')"></button>
+                        <!-- <button pButton pRipple type="button" label="Lưu toàn bộ" class="p-button-success p-mr-2" icon="pi pi-save"></button> -->
+                    </ng-template>
+                </p-toolbar>
+
+                <p-table #dt [value]="BangChamCongs" [rows]="10" [paginator]="true" [globalFilterFields]="['ma_NhanVien','ngay','nghiCoPhep','gioDen','gioVe']" [(selection)]="selectedBangChamCongs" [rowHover]="true" dataKey="code" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true">
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">Quản lý bảng chấm công</h5>
+                            <span class="p-input-icon-left">
+                              <i class="pi pi-search"></i>
+                              <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                          </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th pSortableColumn="ma_NhanVien">Mã số nhân viên
+                                <p-sortIcon field="ma_NhanVien"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="ngay">Ngày
+                                <p-sortIcon field="ngay"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="nghiCoPhep">Nghỉ có phép
+                                <p-sortIcon field="nghiCoPhep"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="gioDen">Giờ đến
+                                <p-sortIcon field="gioDen"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="gioVe">Giờ về
+                                <p-sortIcon field="gioVe"></p-sortIcon>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-BangChamCong>
+                        <tr>
+                            <td>
+                                <p-tableCheckbox [value]="BangChamCong"></p-tableCheckbox>
+                            </td>
+                            <td>{{BangChamCong.ma_NhanVien}}</td>
+                            <td>{{BangChamCong.ngay}}</td>
+                            <td>{{BangChamCong.nghiCoPhep}}</td>
+                            <td>{{BangChamCong.gioDen}}</td>
+                            <td>{{BangChamCong.gioVe}}</td>
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="edit(BangChamCong)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteOne(BangChamCong)"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            In total there are {{BangChamCongs ? BangChamCongs.length : 0 }} records.
+                        </div>
+                    </ng-template>
+                </p-table>
+            </div>
+
+            <p-dialog [(visible)]="dialog" [style]="{width: '450px'}" header="Chi tiết bảng chấm công" [modal]="true" styleClass="p-fluid">
+                <ng-template pTemplate="content">
+                    <div class="p-field">
+                        <label for="ma_NhanVien">Mã số nhân viên</label>
+                        <input type="text" pInputText id="ma_NhanVien" [(ngModel)]="BangChamCong.ma_NhanVien" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !BangChamCong.ma_NhanVien">Bắt buộc điền mã số nhân viên.</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="ngay">Ngày</label>
+                        <input type="text" pInputText id="ngay" [(ngModel)]="BangChamCong.ngay" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !BangChamCong.ngay">Bắt buộc điền ngày</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="nghiCoPhep">Nghỉ có phép?</label>
+                        <input type="text" pInputText id="nghiCoPhep" [(ngModel)]="BangChamCong.nghiCoPhep" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !BangChamCong.nghiCoPhep">Bắt buộc điền nghỉ có phép.</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="gioDen">Giờ đến</label>
+                        <input type="text" pInputText id="gioDen" [(ngModel)]="BangChamCong.gioDen" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !BangChamCong.gioDen">Bắt buộc điền giờ đến</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="gioVe">Giờ về</label>
+                        <input type="text" pInputText id="gioVe" [(ngModel)]="BangChamCong.gioVe" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !BangChamCong.gioVe">Bắt buộc điền Giờ về.</small>
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+                </ng-template>
+            </p-dialog>
+
+            <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+            <p-confirmDialog [style]="{width: '50vw'}" key="positionDialog" [position]="position" [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
+        </div>
+    </div>
+</div>
