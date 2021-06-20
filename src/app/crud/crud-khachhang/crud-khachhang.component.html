@@ -1,3 +1,111 @@
-<p>
-  crud-khachhang works!
-</p>
+<div class="layout-wrapper">
+    <app-topbar></app-topbar>
+    <app-menu></app-menu>
+    <app-config></app-config>
+
+    <div class="layout-content">
+        <div class="content-section implementation">
+            <p-toast></p-toast>
+
+            <div class="card">
+                <p-toolbar styleClass="p-mb-4">
+                    <ng-template pTemplate="left">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+                        <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteMulti()" [disabled]="!selectedKhachHangs || !selectedKhachHangs.length"></button>
+                    </ng-template>
+
+                    <ng-template pTemplate="right">
+                        <!-- <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload> -->
+                        <button pButton pRipple type="button" label="Xuất excel" class="p-button-help p-mr-2" icon="pi pi-upload" (click)="confirmPosition('top-right')"></button>
+                        <!-- <button pButton pRipple type="button" label="Lưu toàn bộ" class="p-button-success p-mr-2" icon="pi pi-save"></button> -->
+                    </ng-template>
+                </p-toolbar>
+
+                <p-table #dt [value]="KhachHangs" [rows]="10" [paginator]="true" [globalFilterFields]="['ten','soDienThoai','soLanSuDung','xepHang']" [(selection)]="selectedKhachHangs" [rowHover]="true" dataKey="code" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true">
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">Quản lý khách hàng</h5>
+                            <span class="p-input-icon-left">
+                              <i class="pi pi-search"></i>
+                              <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                          </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th pSortableColumn="ten">Họ tên
+                                <p-sortIcon field="ten"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="soDienThoai">Số điện thoại
+                                <p-sortIcon field="soDienThoai"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="soLanSuDung">Số lần sử dụng
+                                <p-sortIcon field="soLanSuDung"></p-sortIcon>
+                            </th>
+                            <th>Hình ảnh</th>
+                            <th pSortableColumn="xepHang">Xếp hạng
+                                <p-sortIcon field="xepHang"></p-sortIcon>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-KhachHang>
+                        <tr>
+                            <td>
+                                <p-tableCheckbox [value]="KhachHang"></p-tableCheckbox>
+                            </td>
+                            <td>{{KhachHang.ten}}</td>
+                            <td>{{KhachHang.soDienThoai}}</td>
+                            <td>{{KhachHang.soLanSuDung}}</td>
+                            <td><img [src]="KhachHang.hinhAnh" [alt]="KhachHang.ten" width="100" class="p-shadow-4" /></td>
+                            <td>
+                                <p-rating [ngModel]="KhachHang.soLanSuDung" [readonly]="true" [cancel]="false"></p-rating>
+                            </td>
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="edit(KhachHang)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteOne(KhachHang)"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            In total there are {{KhachHangs ? KhachHangs.length : 0 }} records.
+                        </div>
+                    </ng-template>
+                </p-table>
+            </div>
+
+            <p-dialog [(visible)]="dialog" [style]="{width: '450px'}" header="Chi tiết khách hàng" [modal]="true" styleClass="p-fluid">
+                <ng-template pTemplate="content">
+                    <img [src]="KhachHang.hinhAnh" [alt]="KhachHang.hinhAnh" class="product-image" *ngIf="KhachHang.hinhAnh">
+                    <div class="p-field">
+                        <label for="ten">Họ và tên</label>
+                        <input type="text" pInputText id="ten" [(ngModel)]="KhachHang.ten" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !KhachHang.ten">Bắt buộc điền tên.</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="soDienThoai">Số điện thoại</label>
+                        <input type="text" pInputText id="soDienThoai" [(ngModel)]="KhachHang.soDienThoai" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !KhachHang.soDienThoai">Bắt buộc điền số điện thoại</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="email">Email</label>
+                        <input type="text" pInputText id="email" [(ngModel)]="KhachHang.email" />
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+                </ng-template>
+            </p-dialog>
+
+            <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+            <p-confirmDialog [style]="{width: '50vw'}" key="positionDialog" [position]="position" [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
+        </div>
+    </div>
+</div>
