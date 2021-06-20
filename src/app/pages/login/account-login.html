@@ -1,50 +1,9 @@
-<div class="center-screen">
-    <div class="container" id="container">
-        <div class="form-container sign-up-container">
-            <form>
-                <!-- [action]="SignUp()"-->
-                <h1>Create Account</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>or use your email for registration</span>
-                <input type="text" placeholder="Name" />
-                <input type="text" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <button (onclick)="SignUp()">Sign Up</button>
-            </form>
-        </div>
-        <div class="form-container sign-in-container">
-            <form>
-                <!--  [action]="SignIn()"-->
-                <h1>Sign in</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>or use your account</span>
-                <input type="text" placeholder="Email" [value]="username">
-                <input type="password" placeholder="Password" [value]="password" />
-                <a href="#/register" data-target="#pwdModal" data-toggle="modal">Forgot your password?</a>
-                <button (onclick)="SignIn()">Sign In</button>
-            </form>
-        </div>
-        <div class="overlay-container">
-            <div class="overlay">
-                <div class="overlay-panel overlay-left">
-                    <h1>Welcome Back!</h1>
-                    <p>To keep connected with us please login with your personal info</p>
-                    <button class="ghost" id="signIn">Sign In</button>
-                </div>
-                <div class="overlay-panel overlay-right">
-                    <h1>Hello, Friend!</h1>
-                    <p>Enter your personal details and start journey with us</p>
-                    <button class="ghost" id="signUp">Sign Up</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<div id="main" class="container"></div>
+<form id="ml-login">
+    <h2><span class="entypo-login"></span> Login</h2>
+    <button class="submit" (click)="SignIn()"><span class="entypo-lock"></span></button>
+    <span class="entypo-user inputUserIcon"></span>
+    <input type="text" class="user" placeholder="username" [(ngModel)]="username" />
+    <span class="entypo-key inputPassIcon"></span>
+    <input type="password" class="pass" placeholder="password" [(ngModel)]="password" />
+</form>

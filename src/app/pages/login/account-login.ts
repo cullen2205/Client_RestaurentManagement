@@ -13,8 +13,8 @@ import { Declare } from 'src/app/declare';
     styleUrls: ['./account-login.scss'],
 })
 export class AccountLogin implements OnInit {
-    username: string = "anonymous";
-    password: string = "admin";
+    username: string = "";
+    password: string = "";
 
     constructor(
         private messageService: MessageService,
@@ -22,26 +22,15 @@ export class AccountLogin implements OnInit {
         private http: HttpClient,) {
     }
     ngOnInit() {
-        let signUpButton = document.getElementById('signUp');
-        let signInButton = document.getElementById('signIn');
-        let container = document.getElementById('container');
-
-        signUpButton.addEventListener('click', () => {
-            container.classList.add("right-panel-active");
-        });
-
-        signInButton.addEventListener('click', () => {
-            container.classList.remove("right-panel-active");
-        });
     }
 
-    SignIn() {debugger
+    SignIn() {
         this.http.post(Declare.realtimeServer + 'Auth/Login', { username: this.username, password: this.password })
             .toPromise()
-            .then((res: any) => {debugger
+            .then((res: any) => {
                 if (res && res.status == 200) {
                     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Chào mừng ' + this.username, life: 3000 });
-                    this.router.navigate(['dashboard']);
+                    this.router.navigate(['/dashboard']);
                 }
                 else
                     this.messageService.add({ severity: 'error', summary: 'Wrong password', detail: 'Sai tên đăng nhập hoặc mật khẩu. Xin hãy thử lại.' });
