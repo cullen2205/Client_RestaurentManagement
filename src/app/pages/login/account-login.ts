@@ -25,7 +25,10 @@ export class AccountLogin implements OnInit {
     }
 
     async SignIn() {
-        await this.http.post(Declare.realtimeServer + 'Auth/Login', { username: this.username, password: this.password })
+        await this.http.post(
+            Declare.realtimeServer + 'Auth/Login'
+            , { username: this.username, password: this.password }
+            , { withCredentials: true })
             .toPromise()
             .then((res: any) => {
                 if (res.status && res.status == 200) {

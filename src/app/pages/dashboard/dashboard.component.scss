@@ -894,12 +894,6 @@ $colors: (green: var(--clients-bg-color),
 blue: var(--home-bg-color),
 red: var(--earnings-bg-color),
 orange: var(--traffic-bg-color));
-@each $key,
-$color in $colors {
-    .color-block.#{$key} {
-        background: $color;
-    }
-}
 
 .user-management {
     width: 100%;
