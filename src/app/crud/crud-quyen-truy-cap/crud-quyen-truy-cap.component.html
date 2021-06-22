@@ -1,3 +1,86 @@
-<p>
-  crud-quyen-truy-cap works!
-</p>
+<div class="layout-wrapper">
+    <app-topbar></app-topbar>
+    <app-menu></app-menu>
+    <app-config></app-config>
+
+    <div class="layout-content">
+        <div class="content-section implementation">
+            <p-toast></p-toast>
+
+            <div class="card">
+                <p-toolbar styleClass="p-mb-4">
+                    <ng-template pTemplate="left">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+                        <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteMulti()" [disabled]="!selectedQuyenTruyCaps || !selectedQuyenTruyCaps.length"></button>
+                    </ng-template>
+
+                    <ng-template pTemplate="right">
+                        <!-- <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload> -->
+                        <button pButton pRipple type="button" label="Xuất excel" class="p-button-help p-mr-2" icon="pi pi-upload" (click)="confirmPosition('top-right')"></button>
+                        <!-- <button pButton pRipple type="button" label="Lưu toàn bộ" class="p-button-success p-mr-2" icon="pi pi-save"></button> -->
+                    </ng-template>
+                </p-toolbar>
+
+                <p-table #dt [value]="QuyenTruyCaps" [rows]="10" [paginator]="true" [globalFilterFields]="['tenBang']" [(selection)]="selectedQuyenTruyCaps" [rowHover]="true" dataKey="code" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true">
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">Quản lý quyền truy cập</h5>
+                            <span class="p-input-icon-left">
+                              <i class="pi pi-search"></i>
+                              <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                          </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th pSortableColumn="tenBang">Tên bảng
+                                <p-sortIcon field="tenBang"></p-sortIcon>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-QuyenTruyCap>
+                        <tr>
+                            <td>
+                                <p-tableCheckbox [value]="QuyenTruyCap"></p-tableCheckbox>
+                            </td>
+                            <td>{{QuyenTruyCap.tenBang}}</td>
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="edit(QuyenTruyCap)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteOne(QuyenTruyCap)"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            In total there are {{QuyenTruyCaps ? QuyenTruyCaps.length : 0 }} records.
+                        </div>
+                    </ng-template>
+                </p-table>
+            </div>
+
+            <p-dialog [(visible)]="dialog" [style]="{width: '450px'}" header="Chi tiết quyền truy cập" [modal]="true" styleClass="p-fluid">
+                <ng-template pTemplate="content">
+                    <img [src]="QuyenTruyCap.hinhAnh" [alt]="QuyenTruyCap.hinhAnh" class="product-image" *ngIf="QuyenTruyCap.hinhAnh">
+                    <div class="p-field">
+                        <label for="tenBang">Tên bảng/Tên controller</label>
+                        <input type="text" pInputText id="tenBang" [(ngModel)]="QuyenTruyCap.tenBang" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !QuyenTruyCap.tenBang">Bắt buộc điền tên.</small>
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+                </ng-template>
+            </p-dialog>
+
+            <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+            <p-confirmDialog [style]="{width: '50vw'}" key="positionDialog" [position]="position" [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
+        </div>
+    </div>
+</div>
