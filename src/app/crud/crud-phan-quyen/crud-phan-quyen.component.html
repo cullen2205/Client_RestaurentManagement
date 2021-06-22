@@ -1,3 +1,112 @@
-<p>
-  crud-phan-quyen works!
-</p>
+<div class="layout-wrapper">
+    <app-topbar></app-topbar>
+    <app-menu></app-menu>
+    <app-config></app-config>
+
+    <div class="layout-content">
+        <div class="content-section implementation">
+            <p-toast></p-toast>
+
+            <div class="card">
+                <p-toolbar styleClass="p-mb-4">
+                    <ng-template pTemplate="left">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+                        <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteMulti()" [disabled]="!selectedPhanQuyens || !selectedPhanQuyens.length"></button>
+                    </ng-template>
+
+                    <ng-template pTemplate="right">
+                        <!-- <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload> -->
+                        <button pButton pRipple type="button" label="Xuất excel" class="p-button-help p-mr-2" icon="pi pi-upload" (click)="confirmPosition('top-right')"></button>
+                        <!-- <button pButton pRipple type="button" label="Lưu toàn bộ" class="p-button-success p-mr-2" icon="pi pi-save"></button> -->
+                    </ng-template>
+                </p-toolbar>
+
+                <p-table #dt [value]="PhanQuyens" [rows]="10" [paginator]="true" [globalFilterFields]="['ten','ma_QuyenTruyCap','ma_ChiNhanh','quyenTruyCap']" [(selection)]="selectedPhanQuyens" [rowHover]="true" dataKey="code" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true">
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">Quản lý phân quyền</h5>
+                            <span class="p-input-icon-left">
+                              <i class="pi pi-search"></i>
+                              <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                          </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th pSortableColumn="ma_NhanVien">Mã nhân viên
+                                <p-sortIcon field="ma_NhanVien"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="ma_QuyenTruyCap">Mã quyền truy cập
+                                <p-sortIcon field="ma_QuyenTruyCap"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="ma_ChiNhanh">Mã chi nhánh
+                                <p-sortIcon field="ma_ChiNhanh"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="quyenTruyCap">Quyền truy cập
+                                <p-sortIcon field="quyenTruyCap"></p-sortIcon>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-PhanQuyen>
+                        <tr>
+                            <td>
+                                <p-tableCheckbox [value]="PhanQuyen"></p-tableCheckbox>
+                            </td>
+                            <td>{{PhanQuyen.ma_NhanVien}}</td>
+                            <td>{{PhanQuyen.ma_QuyenTruyCap}}</td>
+                            <td>{{PhanQuyen.ma_ChiNhanh}}</td>
+                            <td>{{PhanQuyen.quyenTruyCap}}</td>
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="edit(PhanQuyen)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteOne(PhanQuyen)"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            In total there are {{PhanQuyens ? PhanQuyens.length : 0 }} records.
+                        </div>
+                    </ng-template>
+                </p-table>
+            </div>
+
+            <p-dialog [(visible)]="dialog" [style]="{width: '450px'}" header="Chi tiết phân quyền" [modal]="true" styleClass="p-fluid">
+                <ng-template pTemplate="content">
+                    <img [src]="PhanQuyen.hinhAnh" [alt]="PhanQuyen.hinhAnh" class="product-image" *ngIf="PhanQuyen.hinhAnh">
+                    <div class="p-field">
+                        <label for="ma_NhanVien">Mã nhân viên</label>
+                        <input type="text" pInputText id="ma_NhanVien" [(ngModel)]="PhanQuyen.ma_NhanVien" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !PhanQuyen.ma_NhanVien">Bắt buộc điền mã.</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="ma_QuyenTruyCap">Quyền truy cập</label>
+                        <input type="text" pInputText id="ma_QuyenTruyCap" [(ngModel)]="PhanQuyen.ma_QuyenTruyCap" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !PhanQuyen.ma_QuyenTruyCap">Bắt buộc điền Quyền truy cập</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="ma_ChiNhanh">Mã chi nhánh</label>
+                        <input type="text" pInputText id="ma_ChiNhanh" [(ngModel)]="PhanQuyen.ma_ChiNhanh" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !PhanQuyen.ma_ChiNhanh">Bắt buộc điền Mã chi nhánh.</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="quyenTruyCap">Quyền truy cậP</label>
+                        <input type="text" pInputText id="quyenTruyCap" [(ngModel)]="PhanQuyen.quyenTruyCap" />
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+                </ng-template>
+            </p-dialog>
+
+            <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+            <p-confirmDialog [style]="{width: '50vw'}" key="positionDialog" [position]="position" [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
+        </div>
+    </div>
+</div>
