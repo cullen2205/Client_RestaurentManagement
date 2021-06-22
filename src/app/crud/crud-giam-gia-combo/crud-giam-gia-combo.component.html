@@ -1,3 +1,130 @@
-<p>
-  crud-giam-gia-combo works!
-</p>
+<div class="layout-wrapper">
+    <app-topbar></app-topbar>
+    <app-menu></app-menu>
+    <app-config></app-config>
+
+    <div class="layout-content">
+        <div class="content-section implementation">
+            <p-toast></p-toast>
+
+            <div class="card">
+                <p-toolbar styleClass="p-mb-4">
+                    <ng-template pTemplate="left">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+                        <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteMulti()" [disabled]="!selectedGiamGiaCombos || !selectedGiamGiaCombos.length"></button>
+                    </ng-template>
+
+                    <ng-template pTemplate="right">
+                        <!-- <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-d-inline-block"></p-fileUpload> -->
+                        <button pButton pRipple type="button" label="Xuất excel" class="p-button-help p-mr-2" icon="pi pi-upload" (click)="confirmPosition('top-right')"></button>
+                        <!-- <button pButton pRipple type="button" label="Lưu toàn bộ" class="p-button-success p-mr-2" icon="pi pi-save"></button> -->
+                    </ng-template>
+                </p-toolbar>
+
+                <p-table #dt [value]="GiamGiaCombos" [rows]="10" [paginator]="true" [globalFilterFields]="['ma_Combo','ma_ThucPham','ma_ChiNhanh','soLuongMin','soLuongMax','donGia']" [(selection)]="selectedGiamGiaCombos" [rowHover]="true" dataKey="code" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true">
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            <h5 class="p-m-0">Quản lý nhân viên</h5>
+                            <span class="p-input-icon-left">
+                              <i class="pi pi-search"></i>
+                              <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                          </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th pSortableColumn="ma_Combo">Mã combo
+                                <p-sortIcon field="ma_Combo"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="ma_ThucPham">Mã thực phẩm
+                                <p-sortIcon field="ma_ThucPham"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="ma_ChiNhanh">Mã chi nhánh
+                                <p-sortIcon field="ma_ChiNhanh"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="soLuongMin">Số người tối thiểu
+                                <p-sortIcon field="soLuongMin"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="soLuongMax">Số người tối đa
+                                <p-sortIcon field="soLuongMax"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="donGia">Đơn giá áp dụng
+                                <p-sortIcon field="donGia"></p-sortIcon>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-GiamGiaCombo>
+                        <tr>
+                            <td>
+                                <p-tableCheckbox [value]="GiamGiaCombo"></p-tableCheckbox>
+                            </td>
+                            <td>{{GiamGiaCombo.ma_Combo}}</td>
+                            <td>{{GiamGiaCombo.ma_ThucPham}}</td>
+                            <td>{{GiamGiaCombo.ma_ChiNhanh}}</td>
+                            <td>{{GiamGiaCombo.soLuongMin}}</td>
+                            <td>{{GiamGiaCombo.soLuongMax}}</td>
+                            <td>{{GiamGiaCombo.donGia}}</td>
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="edit(GiamGiaCombo)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteOne(GiamGiaCombo)"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            In total there are {{GiamGiaCombos ? GiamGiaCombos.length : 0 }} records.
+                        </div>
+                    </ng-template>
+                </p-table>
+            </div>
+
+            <p-dialog [(visible)]="dialog" [style]="{width: '450px'}" header="Chi tiết nhân viên" [modal]="true" styleClass="p-fluid">
+                <ng-template pTemplate="content">
+                    <img [src]="GiamGiaCombo.hinhAnh" [alt]="GiamGiaCombo.hinhAnh" class="product-image" *ngIf="GiamGiaCombo.hinhAnh">
+                    <div class="p-field">
+                        <label for="ma_Combo">Mã combo</label>
+                        <input type="text" pInputText id="ma_Combo" [(ngModel)]="GiamGiaCombo.ma_Combo" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !GiamGiaCombo.ma_Combo">Bắt buộc điền mã combo.</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="ma_ThucPham">Mã thực phẩm</label>
+                        <input type="text" pInputText id="ma_ThucPham" [(ngModel)]="GiamGiaCombo.ma_ThucPham" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !GiamGiaCombo.ma_ThucPham">Bắt buộc điền mã thực phẩm</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="ma_ChiNhanh">Số CMND</label>
+                        <input type="text" pInputText id="ma_ChiNhanh" [(ngModel)]="GiamGiaCombo.ma_ChiNhanh" />
+                    </div>
+                    <div class="p-field">
+                        <label for="soLuongMin">Số người tối thiểu</label>
+                        <input type="text" pInputText id="soLuongMin" [(ngModel)]="GiamGiaCombo.soLuongMin" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !GiamGiaCombo.soLuongMin">Bắt buộc điền số người tối thiểu.</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="soLuongMax">Số người tối đa</label>
+                        <input type="text" pInputText id="soLuongMax" [(ngModel)]="GiamGiaCombo.soLuongMax" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !GiamGiaCombo.soLuongMax">Bắt buộc điền Số người tối đa.</small>
+                    </div>
+                    <div class="p-field">
+                        <label for="donGia">Đơn giá áp dụng</label>
+                        <input type="text" pInputText id="donGia" [(ngModel)]="GiamGiaCombo.donGia" required autofocus />
+                        <small class="p-error" *ngIf="submitted && !GiamGiaCombo.donGia">Bắt buộc điền Đơn giá áp dụng.</small>
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+                </ng-template>
+            </p-dialog>
+
+            <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+            <p-confirmDialog [style]="{width: '50vw'}" key="positionDialog" [position]="position" [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
+        </div>
+    </div>
+</div>
