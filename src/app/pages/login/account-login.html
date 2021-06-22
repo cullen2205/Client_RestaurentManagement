@@ -1,9 +1,10 @@
+<p-toast></p-toast>
 <div id="main" class="container"></div>
-<form id="ml-login">
+<form ngForm id="ml-login">
     <h2><span class="entypo-login"></span> Login</h2>
     <button class="submit" (click)="SignIn()"><span class="entypo-lock"></span></button>
     <span class="entypo-user inputUserIcon"></span>
-    <input type="text" class="user" placeholder="username" [(ngModel)]="username" />
+    <input type="text" class="user" placeholder="Username" [(ngModel)]="username" [ngModelOptions]="{standalone: true}" />
     <span class="entypo-key inputPassIcon"></span>
-    <input type="password" class="pass" placeholder="password" [(ngModel)]="password" />
+    <input type="password" class="pass" placeholder="Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" />
 </form>
